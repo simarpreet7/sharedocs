@@ -1,13 +1,13 @@
 
 var express=require("express")
-var app= express()
-path = require('path'),
-app.use('/public', express.static('public'));
+ var app= express()
+ path = require('path'),
+ app.use('/public', express.static('public'));
  
  
- app.get('/', function(req, res) {
-     res.render('index.ejs');
- });
+  app.get('/', function(req, res) {
+      res.render('index.ejs');
+  });
  
 
 
@@ -15,4 +15,5 @@ app.use('/public', express.static('public'));
 
 
 
-app.listen(3000)
+ app.listen(3000)
+

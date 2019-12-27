@@ -13,7 +13,12 @@ function changeSize() {
     document.execCommand("fontSize", false, mysize);
 }
 
-function f(){window.alert("work")}
+function f(){
+    var str=document.getElementById("editor1").innerHTML;
+    console.log(str)    
+    document.getElementById("editor1").innerHTML=str;
+
+}
 
 function checkDiv() {
     var editorText = document.getElementById("editor1").innerHTML;
