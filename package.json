@@ -1,0 +1,23 @@
+{
+  "name": "sharedocs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simarpreet7/sharedocs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/simarpreet7/sharedocs/issues"
+  },
+  "homepage": "https://github.com/simarpreet7/sharedocs#readme",
+  "dependencies": {
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.4"
+  }
+}

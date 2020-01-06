@@ -26,8 +26,8 @@ body {
 
 #container fieldset {
     position: sticky;
-    top: 0px;
-
+    top: 0px; 
+    /* display: flex; */
     margin: 2px auto 0px;
     width: 90%;
     height: 26px;

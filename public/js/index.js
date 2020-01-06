@@ -14,12 +14,9 @@ function changeSize() {
 }
 
 function f(){
-    var str=document.getElementById("editor1").innerHTML;
-    console.log(str)    
-    document.getElementById("editor1").innerHTML=str;
-
+    var x=document.getElementById("editor1").innerHTML;
+    document.getElementById("h").value=x;
 }
-
 function checkDiv() {
     var editorText = document.getElementById("editor1").innerHTML;
     if (editorText === "") {

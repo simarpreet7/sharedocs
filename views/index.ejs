@@ -15,8 +15,10 @@
 
 <body>
     <div id="container">
-        <fieldset>
+        <fieldset >
+
             <button class="fontStyle bold" onclick="document.execCommand('bold', false, null);" title="Bold"></button>
+          
             <button class="fontStyle italic" onclick="document.execCommand('italic', false, null);" title="Italics"></button>
             <button class="fontStyle underline" onclick="document.execCommand('underline', false, null);"></button>
             <select id="input-font" class="input" onchange="changeFont (this);">
@@ -63,7 +65,7 @@
 
             <input class="color-apply" type="color" onchange="chooseColor()" id="myColor" />
 
-            <!-- font size start -->
+           
             <select id="fontSize" onchange="changeSize()">
                 <option value="9">8</option>
                 <option value="2">10</option>
@@ -75,15 +77,20 @@
                 <option value="8">72</option>
             </select>
 
-            <!-- font size end -->
+      
         </fieldset>
-
-        <div id="editor1" contenteditable="true"></div> 
+        <form action="http://localhost:3000/example" method="POST">
+        <div id="editor1" contenteditable="true" name="imp"></div> 
         <br>
         <br>
-        <button style="margin-left: 400px;height: 50px;width:50px;" onclick="f();">save</button>
+        <input type="text" name="fname" id="h">
+        
+        <button onclick="f();" type="submit" style="margin-left: 400px;height: 50px;width:50px;" >save</button>
+        </form>
     </div>
     <script src="/public/js/index.js"></script>
+  
+  
 </body>
 
 </html>
