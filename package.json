@@ -1,23 +1,22 @@
 {
-  "name": "sharedocs",
+  "name": "authdemo",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/simarpreet7/sharedocs.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/simarpreet7/sharedocs/issues"
-  },
-  "homepage": "https://github.com/simarpreet7/sharedocs#readme",
   "dependencies": {
-    "mongodb": "^3.4.1",
-    "mongoose": "^5.8.4"
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.4",
+    "express": "^4.17.1",
+    "express-session": "^1.17.0",
+    "mongoose": "^4.13.20",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.5.0",
+    "path": "^0.12.7"
   }
 }

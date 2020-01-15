@@ -1,11 +1,7 @@
 /* eslint-env browser */
 
-'use strict';
-
-require('./driver').set(require('./drivers/browser'));
-
-const DocumentProvider = require('./document_provider.js');
-const PromiseProvider = require('./promise_provider');
+var DocumentProvider = require('./document_provider.js');
+var PromiseProvider = require('./promise_provider');
 
 DocumentProvider.setBrowser(true);
 
@@ -41,7 +37,7 @@ exports.PromiseProvider = PromiseProvider;
  * @api public
  */
 
-exports.Error = require('./error/index');
+exports.Error = require('./error');
 
 /**
  * The Mongoose [Schema](#schema_Schema) constructor
@@ -122,17 +118,6 @@ exports.utils = require('./utils.js');
  * @api public
  */
 exports.Document = DocumentProvider();
-
-/**
- * function stub for model
- *
- * @method model
- * @api public
- * @return null
- */
-exports.model = function() {
-  return null;
-};
 
 /*!
  * Module exports.

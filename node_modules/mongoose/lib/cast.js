@@ -1,17 +1,13 @@
-'use strict';
-
 /*!
  * Module dependencies.
  */
 
-const StrictModeError = require('./error/strict');
-const Types = require('./schema/index');
-const castTextSearch = require('./schema/operators/text');
-const get = require('./helpers/get');
-const util = require('util');
-const utils = require('./utils');
+var StrictModeError = require('./error/strict');
+var Types = require('./schema/index');
+var util = require('util');
+var utils = require('./utils');
 
-const ALLOWED_GEOWITHIN_GEOJSON_TYPES = ['Polygon', 'MultiPolygon'];
+var ALLOWED_GEOWITHIN_GEOJSON_TYPES = ['Polygon', 'MultiPolygon'];
 
 /**
  * Handles internal casting for query filters.
@@ -27,32 +23,22 @@ module.exports = function cast(schema, obj, options, context) {
     throw new Error('Query filter must be an object, got an array ', util.inspect(obj));
   }
 
-  // bson 1.x has the unfortunate tendency to remove filters that have a top-level
-  // `_bsontype` property. But we should still allow ObjectIds because
-  // `Collection#find()` has a special case to support `find(objectid)`.
-  // Should remove this when we upgrade to bson 4.x. See gh-8222, gh-8268
-  if (obj.hasOwnProperty('_bsontype') && obj._bsontype !== 'ObjectID') {
-    delete obj._bsontype;
-  }
-
-  const paths = Object.keys(obj);
-  let i = paths.length;
-  let _keys;
-  let any$conditionals;
-  let schematype;
-  let nested;
-  let path;
-  let type;
-  let val;
-
-  options = options || {};
+  var paths = Object.keys(obj);
+  var i = paths.length;
+  var _keys;
+  var any$conditionals;
+  var schematype;
+  var nested;
+  var path;
+  var type;
+  var val;
 
   while (i--) {
     path = paths[i];
     val = obj[path];
 
     if (path === '$or' || path === '$nor' || path === '$and') {
-      let k = val.length;
+      var k = val.length;
 
       while (k--) {
         val[k] = cast(schema, val[k], options, context);
@@ -71,8 +57,6 @@ module.exports = function cast(schema, obj, options, context) {
       continue;
     } else if (path === '$elemMatch') {
       val = cast(schema, val, options, context);
-    } else if (path === '$text') {
-      val = castTextSearch(val, path);
     } else {
       if (!schema) {
         // no casting for Mixed types
@@ -81,39 +65,13 @@ module.exports = function cast(schema, obj, options, context) {
 
       schematype = schema.path(path);
 
-      // Check for embedded discriminator paths
-      if (!schematype) {
-        const split = path.split('.');
-        let j = split.length;
-        while (j--) {
-          const pathFirstHalf = split.slice(0, j).join('.');
-          const pathLastHalf = split.slice(j).join('.');
-          const _schematype = schema.path(pathFirstHalf);
-          const discriminatorKey = get(_schematype, 'schema.options.discriminatorKey');
-
-          // gh-6027: if we haven't found the schematype but this path is
-          // underneath an embedded discriminator and the embedded discriminator
-          // key is in the query, use the embedded discriminator schema
-          if (_schematype != null &&
-              get(_schematype, 'schema.discriminators') != null &&
-              discriminatorKey != null &&
-              pathLastHalf !== discriminatorKey) {
-            const discriminatorVal = get(obj, pathFirstHalf + '.' + discriminatorKey);
-            if (discriminatorVal != null) {
-              schematype = _schematype.schema.discriminators[discriminatorVal].
-                path(pathLastHalf);
-            }
-          }
-        }
-      }
-
       if (!schematype) {
         // Handle potential embedded array queries
-        const split = path.split('.');
-        let j = split.length;
-        let pathFirstHalf;
-        let pathLastHalf;
-        let remainingConds;
+        var split = path.split('.'),
+            j = split.length,
+            pathFirstHalf,
+            pathLastHalf,
+            remainingConds;
 
         // Find the part of the var path that is a path of the Schema
         while (j--) {
@@ -142,7 +100,7 @@ module.exports = function cast(schema, obj, options, context) {
           // handle geo schemas that use object notation
           // { loc: { long: Number, lat: Number }
 
-          let geo = '';
+          var geo = '';
           if (val.$near) {
             geo = '$near';
           } else if (val.$nearSphere) {
@@ -156,8 +114,8 @@ module.exports = function cast(schema, obj, options, context) {
           }
 
           if (geo) {
-            const numbertype = new Types.Number('__QueryCasting__');
-            let value = val[geo];
+            var numbertype = new Types.Number('__QueryCasting__');
+            var value = val[geo];
 
             if (val.$maxDistance != null) {
               val.$maxDistance = numbertype.castForQueryWrapper({
@@ -173,13 +131,13 @@ module.exports = function cast(schema, obj, options, context) {
             }
 
             if (geo === '$within') {
-              const withinType = value.$center
+              var withinType = value.$center
                   || value.$centerSphere
                   || value.$box
                   || value.$polygon;
 
               if (!withinType) {
-                throw new Error('Bad $within parameter: ' + JSON.stringify(val));
+                throw new Error('Bad $within paramater: ' + JSON.stringify(val));
               }
 
               value = withinType;
@@ -214,7 +172,7 @@ module.exports = function cast(schema, obj, options, context) {
                 if (utils.isMongooseObject(value.$geometry)) {
                   value.$geometry = value.$geometry.toObject({ virtuals: false });
                 }
-                const geoWithinType = value.$geometry.type;
+                var geoWithinType = value.$geometry.type;
                 if (ALLOWED_GEOWITHIN_GEOJSON_TYPES.indexOf(geoWithinType) === -1) {
                   throw new Error('Invalid geoJSON type for $geoWithin "' +
                     geoWithinType + '", must be "Polygon" or "MultiPolygon"');
@@ -234,26 +192,22 @@ module.exports = function cast(schema, obj, options, context) {
           }
         }
 
-        if (schema.nested[path]) {
-          continue;
-        }
-        if (options.upsert && options.strict) {
+        if (options && options.upsert && options.strict && !schema.nested[path]) {
           if (options.strict === 'throw') {
             throw new StrictModeError(path);
           }
           throw new StrictModeError(path, 'Path "' + path + '" is not in ' +
             'schema, strict mode is `true`, and upsert is `true`.');
-        } else if (options.strictQuery === 'throw') {
+        } else if (options && options.strictQuery === 'throw') {
           throw new StrictModeError(path, 'Path "' + path + '" is not in ' +
-            'schema and strictQuery is \'throw\'.');
-        } else if (options.strictQuery) {
-          delete obj[path];
+            'schema and strictQuery is true.');
         }
-      } else if (val == null) {
+      } else if (val === null || val === undefined) {
+        obj[path] = null;
         continue;
       } else if (val.constructor.name === 'Object') {
         any$conditionals = Object.keys(val).some(function(k) {
-          return k.startsWith('$') && k !== '$id' && k !== '$ref';
+          return k.charAt(0) === '$' && k !== '$id' && k !== '$ref';
         });
 
         if (!any$conditionals) {
@@ -262,10 +216,10 @@ module.exports = function cast(schema, obj, options, context) {
             context: context
           });
         } else {
-          const ks = Object.keys(val);
-          let $cond;
+          var ks = Object.keys(val),
+              $cond;
 
-          let k = ks.length;
+          k = ks.length;
 
           while (k--) {
             $cond = ks[k];
@@ -274,8 +228,8 @@ module.exports = function cast(schema, obj, options, context) {
             if ($cond === '$not') {
               if (nested && schematype && !schematype.caster) {
                 _keys = Object.keys(nested);
-                if (_keys.length && _keys[0].startsWith('$')) {
-                  for (const key in nested) {
+                if (_keys.length && _keys[0].charAt(0) === '$') {
+                  for (var key in nested) {
                     nested[key] = schematype.castForQueryWrapper({
                       $conditional: key,
                       val: nested[key],
@@ -302,8 +256,8 @@ module.exports = function cast(schema, obj, options, context) {
           }
         }
       } else if (Array.isArray(val) && ['Buffer', 'Array'].indexOf(schematype.instance) === -1) {
-        const casted = [];
-        for (let valIndex = 0; valIndex < val.length; valIndex++) {
+        var casted = [];
+        for (var valIndex = 0; valIndex < val.length; valIndex++) {
           casted.push(schematype.castForQueryWrapper({
             val: val[valIndex],
             context: context
@@ -332,11 +286,11 @@ function _cast(val, numbertype, context) {
       val[i] = numbertype.castForQueryWrapper({ val: item, context: context });
     });
   } else {
-    const nearKeys = Object.keys(val);
-    let nearLen = nearKeys.length;
+    var nearKeys = Object.keys(val);
+    var nearLen = nearKeys.length;
     while (nearLen--) {
-      const nkey = nearKeys[nearLen];
-      const item = val[nkey];
+      var nkey = nearKeys[nearLen];
+      var item = val[nkey];
       if (Array.isArray(item) || utils.isObject(item)) {
         _cast(item, numbertype, context);
         val[nkey] = item;
