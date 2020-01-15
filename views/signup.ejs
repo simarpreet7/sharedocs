@@ -1,10 +1,7 @@
-  
-<h1> This is Home page </h1>
+
+<h1> Sign Up Form </h1>
 
 <link type="text/css" rel="stylesheet" href="/public/assets/style.css" />
-<br>
-<br>
-<br>
 <div class="topnav">
     <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/')">Home</button></p>
     <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/login')"> Login</button></p>
@@ -12,4 +9,12 @@
    <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/signup')">Sign Up</button> </p>
     
   </div>
+<br>
+<form method="POST" action="/register">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <button> Submit </button>
+</form>
 
+
+<li><a href="/login">Login!</a></li>

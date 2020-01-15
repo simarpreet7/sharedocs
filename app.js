@@ -19,9 +19,9 @@ mongoose.connect("mongodb://localhost/share");
 
 const Schema=mongoose.Schema;
 
-const shareschema=new Schema({name:String});
+const shareschema=new Schema({name:String,created_by:String});
 
-const share=mongoose.model("share",shareschema)
+const _document=mongoose.model("document",shareschema)
 
 
 
@@ -48,8 +48,8 @@ app.get("/",function(req,res){
     res.render("home");
 });
 
-app.get("/secret",isLoggedIn, function(req, res){
-    res.render("secret");
+app.get("/word",isLoggedIn, function(req, res){
+    res.render("word");
 });
 
 
@@ -59,23 +59,23 @@ app.get("/secret",isLoggedIn, function(req, res){
 app.post('/save', (req, res) => {
     res.send("data saved succesful");
     
-  var document1 = new share({name:req.body.fname})
-  document1.save();
+  var new_document = new _document({name:req.body.fname,created_by:req.body.username})
+  new_document.save();
 
 
   });
 
 // Auth Routes
 
-app.get("/register", function(req, res){
-    res.render("register");
+app.get("/signup", function(req, res){
+    res.render("signup");
 });
 //handling user sign up
-app.post("/register", function(req, res){
+app.post("/signup", function(req, res){
 User.register(new User({username:req.body.username}),req.body.password, function(err, user){
        if(err){
             console.log(err);
-            return res.render('register');
+            return res.render('signup');
         } //user stragety
         passport.authenticate("local")(req, res, function(){
             res.redirect("/login"); //once the user sign up
@@ -91,7 +91,7 @@ app.get("/login", function(req, res){
 
 // middleware
 app.post("/login", passport.authenticate("local",{
-    successRedirect:"/secret",
+    successRedirect:"/word",
     failureRedirect:"/login"
 }),function(req, res){
     res.send("User is "+ req.user.id);
@@ -107,7 +107,9 @@ function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
+    //user does not exist
     res.redirect("/login");
+    
 }
 
 
