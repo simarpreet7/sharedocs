@@ -7,42 +7,46 @@
     <button> Login </button>
 </form> -->
 
-
 <!-- <li><a href="/logout">Logout!</a></li> -->
 <!-- <li><a href="/login">Login!</a></li>
  -->
-
-
-
-
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
- 
+
     <link type="text/css" rel="stylesheet" href="/public/assets/style.css" />
     <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Patua+One|Lato|Source+Sans+Pro|Zilla+Slab"
-  />
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Patua+One|Lato|Source+Sans+Pro|Zilla+Slab"
+    />
     <title>Login</title>
   </head>
 
   <body>
     <!--  very imp -->
     <div class="topnav">
-      <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/')">Home</button></p>
-      <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/login')"> Login</button></p>
-      
-     <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/signup')">Sign Up</button> </p>
-      
+      <!-- <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/')">Home</button></p> -->
+      <p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="window.location.replace('/login')"
+        >
+          Login
+        </button>
+      </p>
+
+      <p>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="window.location.replace('/signup')"
+        >
+          Sign Up
+        </button>
+      </p>
     </div>
 
     <div class="bg-img">
@@ -55,12 +59,17 @@
       </div>
 
       <div class="logo-icon">
-        <img height="160px" width="216px " src="/public/assets/projectLogo.png" />
+        <img
+          height="160px"
+          width="216px "
+          src="/public/assets/projectLogo.png"
+        />
       </div>
 
       <form
         style=" margin-top:80px; margin-right:80px;"
-        method="POST" action="/login"
+        method="POST"
+        action="/login"
         class="container"
       >
         <div class="bar"></div>
@@ -77,16 +86,14 @@
           style="text-align: center; font-family: 'Zilla Slab', sans-serif; font-size: 18px;"
           ><b>Email</b></label
         >
-        <input type="text" name="username" placeholder="username"/>
+        <input type="text" name="username" placeholder="username" />
 
         <label
           for="psw"
           style="text-align: center; font-family: 'Zilla Slab', sans-serif; font-size: 18px;"
           ><b>Password</b></label
         >
-        <input
-        type="password" name="password" placeholder="password"
-        />
+        <input type="password" name="password" placeholder="password" />
 
         <button
           type="submit"
@@ -97,7 +104,7 @@
         </button>
       </form>
     </div>
-  
+
     <div class="footer">
       <table width="80%">
         <tr>
@@ -185,6 +192,5 @@
         list right here
       </p>
     </div>
-  
   </body>
 </html>
