@@ -5,7 +5,7 @@ var express = require("express"),
   User = require("./models/user"),
   LocalStrategy = require("passport-local"),
   passportLocalMongoose = require("passport-local-mongoose");
- 
+
 var app = express();
 path = require("path");
 app.use("/public", express.static("public"));
@@ -43,46 +43,48 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-app.get("/", function(req, res) {
+app.get("/", function (req, res) {
   res.render("login");
 });
 
 
-app.get("/word/:id", isLoggedIn, function(req, res) {
+app.get("/word/:id", isLoggedIn, function (req, res) {
   // req.params= { id:req.user.id}
   res.render("word");
 });
 
-app.post("/save", function(req, res) {
+
+app.post("/word/:id", function (req, res) {
   res.send("data saved succesful");
   //two files require to access username and fname
   var new_document = new _document({
     name: req.body.fname,
-    created_by: req.body.username
+    created_by:req.params.id,
   });
   new_document.save();
+
 });
 
 // Auth Routes
 
-app.get("/signup", function(req, res) {
+app.get("/signup", function (req, res) {
   res.render("signup");
 });
 
 //handling user sign up
-app.post("/signup", function(req, res) {
-  
+app.post("/signup", function (req, res) {
+
   User.register(
     new User({
       username: req.body.username
     }),
     req.body.password,
-    function(err, user) {
+    function (err, user) {
       if (err) {
         console.log(err);
         return res.render("signup");
       } //user stragety
-      passport.authenticate("local")(req, res, function() {
+      passport.authenticate("local")(req, res, function () {
         res.redirect("/login"); //once the user sign up
       });
     }
@@ -91,7 +93,7 @@ app.post("/signup", function(req, res) {
 
 // Login Routes
 
-app.get("/login", function(req, res) {
+app.get("/login", function (req, res) {
   res.render("login");
 });
 
@@ -102,13 +104,13 @@ app.post(
     // successRedirect: "/word",
     failureRedirect: "/login"
   }),
-  function(req, res) {
+  function (req, res) {
     // res.send("User is " + req.user.id);
-    res.redirect("/word/"+req.body.username)
+    res.redirect("/word/" + req.body.username)
   }
 );
 
-app.get("/logout", function(req, res) {
+app.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");
 });
