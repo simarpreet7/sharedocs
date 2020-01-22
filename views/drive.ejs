@@ -1,0 +1,590 @@
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>CoverDrive</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../public/assets/icons/projectLogo.png" />
+    <link type="text/css" rel="stylesheet" href="../public/assets/stylesheet_drive.css" />
+    <script type="text/javascript" src="../public/js/script_drive.js">
+      createEditableSelect(document.forms[0].myText);
+    </script>
+    <link
+      href="
+            https://fonts.googleapis.com/icon?family=Roboto|Patua+One|Source+Sans+Pro|Zilla+Slab|Material+Icons|Open+Sans|Material+Icons+Round|Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />-->
+
+    <!--We can not use Bootstrap in our page due to 2 fundamental reasons. One, since this is a stylesheet,
+  it is infering with our own stylesheet. The entire layout goes haywire. the size in pixels is being changed -->
+  </head>
+</html>
+<body onload="viewFromPanel(2)">
+  <body>
+    <div id="header">
+      <div class="logo-icon">
+        <img src="../public/assets/icons/logo.png" width="38px" />
+      </div>
+      <div class="logo-text">CoverDrive</div>
+
+      <div id="utility">
+        <input type="text" placeholder="Search..." id="fileSearch" required />
+        <div class="icon">
+          <img
+            src="../public/assets/icons/search.png"
+            id="searchButton"
+            style="width: 32px"
+            onclick="searchQuery()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="menu">
+      <div class="new">
+        <div class="icon">
+          <img src="new.svg" width="43px" />
+        </div>
+        <div class="text">Images of 10 recent-most items</div>
+      </div>
+    </div> -->
+
+    <div id="panel" onload="viewFromPanel(1)">
+      <fieldset>
+        <div
+          class="panel-headings"
+          id="label-add-members"
+          onclick="viewSelectionPane();"
+        >
+          Add Members
+        </div>
+        <div
+          class="panel-headings"
+          id="label-content-create-doc"
+          onmouseover="onContent(1)"
+          onmouseout="outsideContent(1)"
+          onclick="viewFromPanel(1)"
+        >
+        <a href="/word" style="color:white;">create doc</a>
+        </div>
+        <div
+        class="panel-headings"
+        id="label-content-create-doc"
+        onmouseover="onContent(1)"
+        onmouseout="outsideContent(1)"
+        onclick="viewFromPanel(1)"
+      >
+        Create sheet
+      </div>
+        <div
+          class="panel-headings"
+          id="label-content-my-docs"
+          onmouseover="onContent(2)"
+          onmouseout="outsideContent(2)"
+          onclick="viewFromPanel(2)"
+        >
+          My Docs
+        </div>
+        <div
+          class="panel-headings"
+          id="label-content-create-group"
+          onmouseover="onContent(3)"
+          onmouseout="outsideContent(3)"
+          onclick="viewFromPanel(3)"
+        >
+          Create Group
+        </div>
+        <div
+          class="panel-headings"
+          id="label-content-my-groups"
+          onmouseover="onContent(4)"
+          onmouseout="outsideContent(4)"
+          onclick="viewFromPanel(4)"
+        >
+          My Groups
+        </div>
+        <div
+          class="panel-headings"
+          id="label-content-recent"
+          onmouseover="onContent(5)"
+          onmouseout="outsideContent(5)"
+          onclick="viewFromPanel(5)"
+        >
+          Recent
+        </div>
+        <div
+          class="panel-headings"
+          id="label-content-important"
+          onmouseover="onContent(6)"
+          onmouseout="outsideContent(6)"
+          onclick="viewFromPanel(6)"
+        >
+          Important
+        </div>
+        <div
+          class="panel-headings"
+          id="label-content-recycle-bin"
+          onmouseover="onContent(7)"
+          onmouseout="outsideContent(7)"
+          onclick="viewFromPanel(7)"
+        >
+          Recycle Bin (v3.0)
+        </div>
+        <p id="lock-state">Hover Mode Active</p>
+
+        <span class="brlarge"></span>
+<!-- 
+        <table id="access-level-data">
+          <thead>
+            <tr>
+              <td style="width: 65px; text-align: center">Colour Code</td>
+              <td>Access Level</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #e64a19"
+                ></div>
+              </td>
+              <td>Read Only</td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #fdd835"
+                ></div>
+              </td>
+              <td>Write</td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #43a047"
+                ></div>
+              </td>
+              <td>SuperUser</td>
+            </tr>
+            <tr>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #3498db"
+                ></div>
+              </td>
+              <td>Owner</td>
+            </tr>
+          </tbody>
+        </table> -->
+      </fieldset>
+    </div>
+
+    <div
+      id="content"
+      style="height: 100px; background-color: #43a047; background-size: cover;"
+    >
+      <div
+        id="content-create-doc"
+        style="visibility: hidden; position:absolute; z-index: 2;"
+      >
+        <div id="openEditor">
+          <div
+            id="openWordEditor"
+            onclick="location.href='../Editor_Sid/index.html';"
+          >
+            Word
+          </div>
+          <div
+            id="openSheetsEditor"
+            onclick="location.href='../Editor_Sid/index.html';"
+          >
+            Sheets
+          </div>
+        </div>
+      </div>
+      <div
+        id="content-my-docs"
+        style="visibility: hidden; position:absolute; z-index: 3;"
+      >
+        <table>
+          <thead>
+            <tr>
+              <td style="width: 70%;">Document Name</td>
+              <td style="width: 50px;">Access Rights</td>
+              <td>Creator</td>
+              <td>Date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Word Document XYZ</td>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #3498db"
+                ></div>
+              </td>
+              <td>Siddhartha</td>
+              <td>20 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document ABC</td>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #43a047"
+                ></div>
+              </td>
+              <td>Simarpreet</td>
+              <td>21 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Tender Document MNO</td>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #fdd835"
+                ></div>
+              </td>
+              <td>Me</td>
+              <td>21 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Transfer Document QRS</td>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #e64a19"
+                ></div>
+              </td>
+              <td>Me</td>
+              <td>21 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document EFG</td>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #43a047"
+                ></div>
+              </td>
+              <td>Siddhant</td>
+              <td>22 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Database Document JKL</td>
+              <td>
+                <div
+                  class="access-level"
+                  style="background-color: #fdd835"
+                ></div>
+              </td>
+              <td>Yogesh</td>
+              <td>23 - 12 - 2019</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total 4</td>
+              <td></td>
+              <td>Nothing stated here</td>
+              <td>Nothing stated here</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div
+        id="content-create-group"
+        style="visibility: hidden; position:absolute; z-index: 4;"
+      >
+        <table>
+          <thead>
+            <tr>
+              <td>Document Name</td>
+              <td>Creator</td>
+              <td>Date</td>
+              <td>Last Modified</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Word Document XYZ</td>
+              <td>Siddhartha</td>
+              <td>20 - 12 - 2019</td>
+              <td>1 hour ago</td>
+            </tr>
+            <tr>
+              <td>Sheets Document ABC</td>
+              <td>Simarpreet</td>
+              <td>21 - 12 - 2019</td>
+              <td>2 days ago</td>
+            </tr>
+            <tr>
+              <td>Sheets Document EFG</td>
+              <td>Siddhant</td>
+              <td>22 - 12 - 2019</td>
+              <td>1 week ago</td>
+            </tr>
+            <tr>
+              <td>Database Document JKL</td>
+              <td>Yogesh</td>
+              <td>23 - 12 - 2019</td>
+              <td>2 Months ago</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total 4</td>
+              <td>Nothing stated here</td>
+              <td>Nothing stated here</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div
+        id="content-my-groups"
+        style="visibility: hidden; position:absolute; z-index: 5;"
+      >
+        For Shared by Me option. This is precisely where we add the cards for
+        all the-docs on the database We have two viewing alternatives. One is a
+        list. The other is the card layout We may go for a hybrid but not until
+        we have a meeting.
+      </div>
+      <div
+        id="content-recent"
+        style="visibility: hidden; position:absolute; z-index: 6;"
+      >
+        <table>
+          <thead>
+            <tr>
+              <td>Document Name</td>
+              <td>Creator</td>
+              <td>Date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Word Document XYZ</td>
+              <td>Siddhartha</td>
+              <td>20 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document ABC</td>
+              <td>Simarpreet</td>
+              <td>21 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document EFG</td>
+              <td>Siddhant</td>
+              <td>22 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Database Document JKL</td>
+              <td>Yogesh</td>
+              <td>23 - 12 - 2019</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total 4</td>
+              <td>Nothing stated here</td>
+              <td>Nothing stated here</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div
+        id="content-important"
+        style="visibility: hidden; position:absolute; z-index: 7;"
+      >
+        <table>
+          <thead>
+            <tr>
+              <td>Document Name</td>
+              <td>Creator</td>
+              <td>Date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Word Document XYZ</td>
+              <td>Siddhartha</td>
+              <td>20 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document ABC</td>
+              <td>Simarpreet</td>
+              <td>21 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document EFG</td>
+              <td>Siddhant</td>
+              <td>22 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Database Document JKL</td>
+              <td>Yogesh</td>
+              <td>23 - 12 - 2019</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total 4</td>
+              <td>Nothing stated here</td>
+              <td>Nothing stated here</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div
+        id="content-recycle-bin"
+        style="visibility: hidden; position:absolute; z-index: 8;"
+      >
+        <table>
+          <thead>
+            <tr>
+              <td>Document Name</td>
+              <td>Creator</td>
+              <td>Date</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Word Document XYZ</td>
+              <td>Siddhartha</td>
+              <td>20 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document ABC</td>
+              <td>Simarpreet</td>
+              <td>21 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Sheets Document EFG</td>
+              <td>Siddhant</td>
+              <td>22 - 12 - 2019</td>
+            </tr>
+            <tr>
+              <td>Database Document JKL</td>
+              <td>Yogesh</td>
+              <td>23 - 12 - 2019</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total 4</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <div
+        id="content-temp"
+        style="visibility: hidden; position:absolute; z-index: 9;"
+      >
+        This is just temporary. This is what we are trying to idealize. We can
+        clearly see the tables with their relavant info. The data provided here
+        is not provided from the DB, but, just like that.
+      </div>
+    </div>
+
+    <div id="share-selection-pane">
+      <label for="officialName"><b>Name:</b></label>
+      <input
+        type="text"
+        placeholder="Enter Name"
+        id="officialName"
+        style="margin-left:60px;"
+        required
+      />
+      <span class="br"></span>
+      <label for="group"><b>Group:</b></label>
+      <input
+        type="text"
+        placeholder="Enter Group"
+        id="group"
+        style="margin-left:56px;"
+        required
+      />
+      <span class="br"></span>
+      <label for="officeDept"><b>Office/Dept:</b></label>
+      <input
+        type="text"
+        placeholder="Enter Office/Dept"
+        id="officeDept"
+        style="margin-left:15px;"
+        required
+      />
+      <span class="br"></span>
+      <label for="email"><b>Email:</b></label>
+      <input
+        type="text"
+        placeholder="Enter Email"
+        id="email"
+        style="margin-left:60px;"
+        required
+      />
+
+      <div id="add-member" onclick="addMember()">Add</div>
+      New data is added at the top of table after pressing the add button.
+      Following is just a sample table. Table Heads may be added or reduced.
+      <table id="share-table">
+        <!-- comment %} <thead>
+           <tr>
+            <td>Official Name</td>
+            <td>Group</td>
+            <td>Office/Dept</td>
+            <td>E-Mail ID</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Siddhartha</td>
+            <td>DTU</td>
+            <td>Backend / Frontend</td>
+            <td>siddharthamaster4@gmail.com</td>
+          </tr>
+         <tr>
+            <td>Simarpreet Singh</td>
+            <td>DTU</td>
+            <td>Backend</td>
+            <td>samsingh7039@gmail.com</td>
+          </tr>
+          <tr>
+            <td>Siddhant Jain</td>
+            <td>DTU</td>
+            <td>Word Frontend</td>
+            <td>asn.siddhant@gmail.com</td>
+          </tr>
+          <tr>
+            <td>Yogesh Narang</td>
+            <td>DTU</td>
+            <td>Sheets Frontend</td>
+            <td>NA</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td id="memberCounter">Total</td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot> -->
+      </table>
+    </div>
+
+    <div id="footer">
+      <p>&copy; 2019. CoverDrive Online document storage utility</p>
+    </div>
+  </body>
+</body>

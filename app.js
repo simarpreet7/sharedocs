@@ -4,6 +4,7 @@ var express = require("express"),
   bodyParser = require("body-parser"),
   User = require("./models/user"),
   LocalStrategy = require("passport-local"),
+  _document = require("./models/document"),
   passportLocalMongoose = require("passport-local-mongoose");
 
 var app = express();
@@ -12,14 +13,8 @@ app.use("/public", express.static("public"));
 
 mongoose.connect("mongodb://localhost/share");
 
-var Schema = mongoose.Schema;
 
-var shareschema = new Schema({
-  name: String,
-  created_by: String
-});
 
-var _document = mongoose.model("document", shareschema);
 
 app.use(
   bodyParser.urlencoded({
@@ -48,20 +43,34 @@ app.get("/", function (req, res) {
 });
 
 
-app.get("/word/:id", isLoggedIn, function (req, res) {
+app.get("/drive/:id", isLoggedIn, function (req, res) {
   // req.params= { id:req.user.id}
-  res.render("word");
+  res.render("drive",{user_name:req.params.id});
 });
 
 
-app.post("/word/:id", function (req, res) {
-  res.send("data saved succesful");
+
+app.get("/word", isLoggedIn, function (req, res) {
+  // req.params= { id:req.user.id}
+  res.redirect('/word/'+req.user.username)
+});
+
+app.get("/word/:id", isLoggedIn, function (req, res) {
+  // req.params= { id:req.user.id}
+  res.render("word")
+});
+app.post("/word/:id", isLoggedIn,function (req, res) {
+ 
   //two files require to access username and fname
+  
   var new_document = new _document({
     name: req.body.fname,
-    created_by:req.params.id,
+    created_by:req.user.username,
   });
-  new_document.save();
+  new_document.save(function(err){
+    res.send("data saved succesful");
+
+  });
 
 });
 
@@ -106,7 +115,7 @@ app.post(
   }),
   function (req, res) {
     // res.send("User is " + req.user.id);
-    res.redirect("/word/" + req.body.username)
+    res.redirect("/drive/"+req.body.username)
   }
 );
 
