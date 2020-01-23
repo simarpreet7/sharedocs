@@ -8,6 +8,7 @@ var shareschema = new Schema({
   created_by: String,
   permission:{ type: String, default: "o" },
   date: { type: Date, default: Date.now },
+  document_name: String,
 
 });
 /*

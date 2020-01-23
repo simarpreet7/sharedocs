@@ -1,7 +1,8 @@
 function f() {
   var x = document.getElementById("editor1").innerHTML;
   document.getElementById("h").value = x;
-
+  var p = prompt("please enter your file name :");
+  document.getElementById("saver").value = p;
 }
 
 function d() {

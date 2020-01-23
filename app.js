@@ -3,6 +3,7 @@ var express = require("express"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
   User = require("./models/user"),
+  drivemodel = require("./models/drivemodel"),
   LocalStrategy = require("passport-local"),
   _document = require("./models/document"),
   passportLocalMongoose = require("passport-local-mongoose");
@@ -73,16 +74,22 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
 app.post("/word/:id", isLoggedIn, function (req, res) {
 
   //two files require to access username and fname
-
+ 
   var new_document = new _document({
     name: req.body.fname,
     created_by: req.user.username,
+    document_name:req.body.save_fname,
   });
   new_document.save(function (err) {
     res.send("data saved succesful");
-
-  });
-
+      });
+  var new_drive = new drivemodel({
+    doc_id: new_document._id,
+    created_by: req.user.username,
+    date:new_document.date,
+    document_name:new_document.document_name,
+     });
+    new_drive.save(function(err){})
 });
 
 // Auth Routes
@@ -106,6 +113,7 @@ app.post("/signup", function (req, res) {
       } //user stragety
       passport.authenticate("local")(req, res, function () {
         res.redirect("/login"); //once the user sign up
+        
       });
     }
   );
