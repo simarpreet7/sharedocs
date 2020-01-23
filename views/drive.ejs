@@ -3,8 +3,12 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>CoverDrive</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../public/assets/icons/projectLogo.png" />
-    <link type="text/css" rel="stylesheet" href="../public/assets/stylesheet_drive.css" />
+    <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="../public/assets/stylesheet_drive.css"
+    />
     <script type="text/javascript" src="../public/js/script_drive.js">
       createEditableSelect(document.forms[0].myText);
     </script>
@@ -26,7 +30,7 @@
   <body>
     <div id="header">
       <div class="logo-icon">
-        <img src="../public/assets/icons/logo.png" width="38px" />
+        <img src="../public/assets/icons_drive/logo.png" width="38px" />
       </div>
       <div class="logo-text">CoverDrive</div>
 
@@ -34,7 +38,7 @@
         <input type="text" placeholder="Search..." id="fileSearch" required />
         <div class="icon">
           <img
-            src="../public/assets/icons/search.png"
+            src="../public/assets/icons_drive/search.png"
             id="searchButton"
             style="width: 32px"
             onclick="searchQuery()"
@@ -58,6 +62,7 @@
           class="panel-headings"
           id="label-add-members"
           onclick="viewSelectionPane();"
+          style="z-index: 100;"
         >
           Add Members
         </div>
@@ -68,17 +73,17 @@
           onmouseout="outsideContent(1)"
           onclick="viewFromPanel(1)"
         >
-        <a href="/word" style="color:white;">create doc</a>
+          <a href="/word" style="color:white;">Create Doc</a>
         </div>
         <div
-        class="panel-headings"
-        id="label-content-create-doc"
-        onmouseover="onContent(1)"
-        onmouseout="outsideContent(1)"
-        onclick="viewFromPanel(1)"
-      >
-        Create sheet
-      </div>
+          class="panel-headings"
+          id="label-content-create-doc"
+          onmouseover="onContent(1)"
+          onmouseout="outsideContent(1)"
+          onclick="viewFromPanel(1)"
+        >
+          <a href="/sheets" style="color:white;">Create Sheets</a>
+        </div>
         <div
           class="panel-headings"
           id="label-content-my-docs"
@@ -136,7 +141,7 @@
         <p id="lock-state">Hover Mode Active</p>
 
         <span class="brlarge"></span>
-<!-- 
+        <!-- 
         <table id="access-level-data">
           <thead>
             <tr>
@@ -213,92 +218,62 @@
         id="content-my-docs"
         style="visibility: hidden; position:absolute; z-index: 3;"
       >
-        <table>
+      <!-- starting of tables -->
+      <form action="">
+                <table>
           <thead>
             <tr>
-              <td style="width: 70%;">Document Name</td>
-              <td style="width: 50px;">Access Rights</td>
-              <td>Creator</td>
-              <td>Date</td>
+              <td style="width: 10%;text-align: center;">Document type</td>
+              <td style="width: 50%;text-align: center;">Document Name</td>
+              <td style="width: 15%; text-align: center;">Owner</td>
+              <td style="width: 10%; text-align: center;">permission</td>
+              <td style="width:15%;text-align: center;">Date</td>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Word Document XYZ</td>
-              <td>
-                <div
-                  class="access-level"
-                  style="background-color: #3498db"
-                ></div>
-              </td>
-              <td>Siddhartha</td>
-              <td>20 - 12 - 2019</td>
+          <tr>
+              <td style="width: 10%;text-align: center;">docs</td>
+              <td style="width: 50%;text-align: center;"><button onclick="w();">phd</button></td>
+              <td style="width: 15%; text-align: center;">samr</td>
+              <td style="width: 10%; text-align: center;">O</td>
+              <td style="width:15%;text-align: center;">11/11/11</td>
             </tr>
-            <tr>
-              <td>Sheets Document ABC</td>
-              <td>
-                <div
-                  class="access-level"
-                  style="background-color: #43a047"
-                ></div>
-              </td>
-              <td>Simarpreet</td>
-              <td>21 - 12 - 2019</td>
+               <tr>
+              <td style="width: 10%;text-align: center;">docs</td>
+              <td style="width: 50%;text-align: center;"><button onclick="w();">phd2</button></td>
+              <td style="width: 15%; text-align: center;">samr</td>
+              <td style="width: 10%; text-align: center;">O</td>
+              <td style="width:15%;text-align: center;">11/11/11</td>
             </tr>
-            <tr>
-              <td>Tender Document MNO</td>
-              <td>
-                <div
-                  class="access-level"
-                  style="background-color: #fdd835"
-                ></div>
-              </td>
-              <td>Me</td>
-              <td>21 - 12 - 2019</td>
+                <tr>
+              <td style="width: 10%;text-align: center;">docs</td>
+              <td style="width: 50%;text-align: center;"><button onclick="w();">phd3</button></td>
+              <td style="width: 15%; text-align: center;">samr</td>
+              <td style="width: 10%; text-align: center;">O</td>
+              <td style="width:15%;text-align: center;">11/11/11</td>
             </tr>
-            <tr>
-              <td>Transfer Document QRS</td>
-              <td>
-                <div
-                  class="access-level"
-                  style="background-color: #e64a19"
-                ></div>
-              </td>
-              <td>Me</td>
-              <td>21 - 12 - 2019</td>
+           <tr>
+              <td style="width: 10%;text-align: center;">docs</td>
+              <td style="width: 50%;text-align: center;"><button onclick="w();">phd4</button></td>
+              <td style="width: 15%; text-align: center;">samr</td>
+              <td style="width: 10%; text-align: center;">O</td>
+              <td style="width:15%;text-align: center;">11/11/11</td>
             </tr>
-            <tr>
-              <td>Sheets Document EFG</td>
-              <td>
-                <div
-                  class="access-level"
-                  style="background-color: #43a047"
-                ></div>
-              </td>
-              <td>Siddhant</td>
-              <td>22 - 12 - 2019</td>
-            </tr>
-            <tr>
-              <td>Database Document JKL</td>
-              <td>
-                <div
-                  class="access-level"
-                  style="background-color: #fdd835"
-                ></div>
-              </td>
-              <td>Yogesh</td>
-              <td>23 - 12 - 2019</td>
-            </tr>
-          </tbody>
+            
+          </tbody> 
           <tfoot>
             <tr>
               <td>Total 4</td>
+              <td></td>
+              <td></td>
+              <td></td>
               <td></td>
               <td>Nothing stated here</td>
               <td>Nothing stated here</td>
             </tr>
           </tfoot>
         </table>
+        </form>
       </div>
       <div
         id="content-create-group"

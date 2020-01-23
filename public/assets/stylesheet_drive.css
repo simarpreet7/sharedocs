@@ -488,6 +488,22 @@
         border-bottom-right-radius: 4px;
     }
 
+    #content table tr td:nth-child(6),
+    #content table tr td:nth-child(1) {
+        padding-left: 10px;
+    }
+
+    #content table tbody tr td:nth-child(2),
+    table tbody tr td:nth-child(3),
+    table tbody tr td:nth-child(4),
+    table tbody tr td:nth-child(5) {
+        border-left: 1px solid #aaaaaa;
+    }
+
+    #content table tbody tr td:nth-child(5) {
+        border-right: 1px solid #aaaaaa;
+    }
+
     table thead td:first-of-type {
         border-top-left-radius: 10px;
     }

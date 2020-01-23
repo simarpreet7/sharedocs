@@ -1,0 +1,653 @@
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <title>Sheets Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
+    <link type="text/css" rel="stylesheet" href="../public/assets/stylesheet_sheets.css" />
+    <link
+      href="
+            https://fonts.googleapis.com/icon?family=Roboto|Patua+One|Source+Sans+Pro|Zilla+Slab|Material+Icons|Material+Icons+Round|Material+Icons+Outlined"
+      rel="stylesheet"
+    />
+    <script type="text/javascript" src="../public/js/script_sheets.js">
+      createEditableSelect(document.forms[0].myText);
+    </script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="header">
+      <div class="logo-icon">
+        <img
+          src="../public/assets/icons_sheets/logo.png"
+          width="38px"
+          draggable="false"
+        />
+      </div>
+      <div class="logo-text">ShareDocs</div>
+
+      <div id="utility" style="float: right;">
+        <div class="download-doc">
+          <div class="icon">
+            <img
+              src="../public/assets/icons_sheets/download.svg"
+              color="white"
+              width="28px"
+              draggable="false"
+            />
+          </div>
+          <div class="text">Download</div>
+        </div>
+
+        <div class="print-doc">
+          <div class="icon">
+            <img
+              src="../public/assets/icons_sheets/print.svg"
+              color="white"
+              width="28px"
+              draggable="false"
+            />
+          </div>
+          <div class="text" onclick="viewMenu()">Print</div>
+        </div>
+        <div class="hide-menu" onclick="changeName(this)">Hide Menu</div>
+      </div>
+    </div>
+
+    <div id="menu">
+      <div class="new">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/new.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">New</div>
+      </div>
+
+      <div class="save">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/save.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Save</div>
+      </div>
+
+      <div class="open">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/open.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Open</div>
+      </div>
+
+      <!-- <div class="cut">
+        <div class="icon">
+          <img src="../public/assets/icons_sheets/cut_alt.png" width="43px" />
+        </div>
+        <div class="text">Cut</div>
+      </div>
+
+      <div class="copy">
+        <div class="icon">
+          <img src="../public/assets/icons_sheets/copy_alt.png" width="43px" />
+        </div>
+        <div class="text">Copy</div>
+      </div>
+
+      <div class="paste">
+        <div class="icon">
+          <img src="../public/assets/icons_sheets/paste.png" width="43px" />
+        </div>
+        <div class="text">Paste</div>
+      </div> -->
+
+      <div class="undo">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/undo.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Undo</div>
+      </div>
+
+      <div class="redo">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/redo.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Redo</div>
+      </div>
+
+      <div class="text-format">
+        <div class="icon" onclick="viewPanel()">
+          <img
+            src="../public/assets/icons_sheets/text-format.png"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Format Text</div>
+      </div>
+
+      <div class="image">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/image.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Image</div>
+      </div>
+
+      <div class="format-cell">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/table.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Format Cell</div>
+      </div>
+
+      <div class="functions">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/function.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Functions</div>
+      </div>
+
+      <div class="sort">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/sort.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Sort</div>
+      </div>
+
+      <div class="graph">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/graph.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Graphs</div>
+      </div>
+
+      <div class="pie-chart">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/pie-chart.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">PieCharts</div>
+      </div>
+
+      <div class="new-sheet">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/new-sheet.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">New Sheet</div>
+      </div>
+
+      <div class="find">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/find.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Find</div>
+      </div>
+
+      <div class="access">
+        <div class="icon">
+          <img
+            src="../public/assets/icons_sheets/access.svg"
+            width="43px"
+            draggable="false"
+          />
+        </div>
+        <div class="text">Access</div>
+      </div>
+    </div>
+
+    <div id="panel">
+      <div id="format-text-panel">
+        <fieldset>
+          <div class="panel-headings">Format Text</div>
+          <div class="panel-headings">Text</div>
+          <span class="br"></span>
+
+          <select id="input-font" class="input" onchange="changeFont(this);">
+            <option value="Arial">Arial</option>
+            <option value="Helvetica" selected>Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Sans serif">Sans serif</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Palatino">Palatino</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+            <option value="Arial Black">Arial Black</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Comic Sans MS">Comic Sans MS</option>
+          </select>
+
+          <!-- font size start -->
+          <select id="fontSize" onchange="changeSize()">
+            <option value="9">8</option>
+            <option value="2">10</option>
+            <option value="3">14</option>
+            <option value="4">18</option>
+            <option value="5">24</option>
+            <option value="6">36</option>
+            <option value="7">48</option>
+            <option value="8">72</option>
+          </select>
+          <!-- font size end -->
+          <span class="brmedium"></span>
+
+          <button
+            class="fontStyle bold"
+            onclick="document.execCommand('bold', false, null);"
+            title="Bold"
+          ></button>
+
+          <button
+            class="fontStyle italic"
+            onclick="document.execCommand('italic', false, null);"
+            title="Italics"
+          ></button>
+
+          <button
+            class="fontStyle underline"
+            onclick="document.execCommand('underline', false, null);"
+          ></button>
+
+          <button
+            class="fontStyle strikethrough"
+            onclick="document.execCommand('strikethrough', false, null);"
+          >
+            <strikethrough></strikethrough>
+          </button>
+
+          <span class="brlarge"></span>
+
+          <div class="panel-headings">Paragraph</div>
+
+          <button
+            class="fontStyle align-left"
+            onclick="document.execCommand('justifyLeft', false, null);"
+          >
+            <justifyLeft></justifyLeft>
+          </button>
+
+          <button
+            class="fontStyle align-center"
+            onclick="document.execCommand('justifyCenter', false, null);"
+          >
+            <justifyCenter></justifyCenter>
+          </button>
+
+          <button
+            class="fontStyle align-right"
+            onclick="document.execCommand('justifyRight', false, null);"
+          >
+            <justifyRight></justifyRight>
+          </button>
+
+          <button
+            class="fontStyle undo-apply"
+            onclick="document.execCommand('undo', false, null);"
+          >
+            <undo></undo>
+          </button>
+
+          <button
+            class="fontStyle redo-apply"
+            onclick="document.execCommand('redo', false, null);"
+          >
+            <redo></redo>
+          </button>
+
+          <button class="fontStyle copy-view" onclick="viewer()"></button>
+
+          <span class="br"></span>
+
+          <button
+            class="fontStyle orderedlist"
+            onclick="document.execCommand('insertOrderedList', false, null);"
+          >
+            <insertOrderedList></insertOrderedList>
+          </button>
+
+          <button
+            class="fontStyle unorderedlist"
+            onclick="document.execCommand('insertUnorderedList',false, null)"
+          >
+            <insertUnorderedList></insertUnorderedList>
+          </button>
+
+          <input
+            class="color-apply"
+            type="color"
+            onchange="chooseColor()"
+            id="myColor"
+          />
+        </fieldset>
+      </div>
+
+      <div id="copy-panel" style="visibility: hidden;">
+        <div class="panel-headings">Paste</div>
+        <div class="panel-headings">Copied Text</div>
+        <p id="copied-text">Pasted Here</p>
+      </div>
+    </div>
+
+    <div id="content">
+      <div class="cell-content">
+        <div>fx</div>
+        <div></div>
+      </div>
+      <div class="cells">
+        <div class="cells__spacer"></div>
+        <div class="cells__alphabet">A</div>
+        <div class="cells__alphabet">B</div>
+        <div class="cells__alphabet">C</div>
+        <div class="cells__alphabet">D</div>
+        <div class="cells__alphabet">E</div>
+        <div class="cells__alphabet">F</div>
+        <div class="cells__alphabet">G</div>
+        <div class="cells__alphabet">H</div>
+        <div class="cells__alphabet">I</div>
+        <div class="cells__alphabet">J</div>
+        <div class="cells__alphabet">K</div>
+        <div class="cells__number">1</div>
+        <div class="cells__number">2</div>
+        <div class="cells__number">3</div>
+        <div class="cells__number">4</div>
+        <div class="cells__number">5</div>
+        <div class="cells__number">6</div>
+        <div class="cells__number">7</div>
+        <div class="cells__number">8</div>
+        <div class="cells__number">9</div>
+        <div class="cells__number">10</div>
+        <div class="cells__number">11</div>
+        <div class="cells__number">12</div>
+        <div class="cells__number">13</div>
+        <div class="cells__number">14</div>
+        <div class="cells__number">15</div>
+        <div class="cells__number">16</div>
+        <div class="cells__number">17</div>
+        <div class="cells__number">18</div>
+        <div class="cells__number">19</div>
+        <div class="cells__number">20</div>
+        <input class="cells__input" placeholder="A1" />
+        <input class="cells__input" placeholder="B1" />
+        <input class="cells__input" placeholder="C1" />
+        <input class="cells__input" placeholder="D1" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <input class="cells__input" />
+        <!--<input class="input__explanation" value="Part of the CSS Grid Collection 👉🏻"/>-->
+        <!--<div class="input__see-more"><a href="https://codepen.io/collection/DQvYpQ/" target="_blank">Click here!</a></div>
+        <div class="input__sm-1"><a href="https://twitter.com/meowlivia_" target="_blank">Twitter</a></div>
+        <div class="input__sm-2"><a href="https://github.com/oliviale" target="_blank">GitHub</a></div>
+        <div class="input__sm-3"><a href="https://dribbble.com/oliviale" target="_blank">Dribbble</a></div>-->
+      </div>
+    </div>
+
+    <div id="footer">
+      <p>&copy; 2019. ShareDocs Sheets Editor</p>
+    </div>
+  </body>
+</html>

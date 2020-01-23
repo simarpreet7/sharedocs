@@ -109,31 +109,23 @@
 </html>
   -->
 
-
-
-
-  
-
-
-
-
-
-
-
-
-  <html lang="en">
+<html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>Word Editor</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../public/assets/icons/projectLogo.ico" />
-    <link type="text/css" rel="stylesheet" href="../public/assets/styles2.css" />
+    <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="../public/assets/stylesheet_word.css"
+    />
     <link
       href="
             https://fonts.googleapis.com/icon?family=Roboto|Patua+One|Source+Sans+Pro|Zilla+Slab|Material+Icons|Material+Icons+Round|Material+Icons+Outlined"
       rel="stylesheet"
     />
-    <script type="text/javascript" src="../public/js/script3.js">
+    <script type="text/javascript" src="../public/js/script_word.js">
       createEditableSelect(document.forms[0].myText);
     </script>
     <link
@@ -145,7 +137,11 @@
   <body>
     <div id="header">
       <div class="logo-icon">
-        <img src="../public/assets/icons/logo.png" width="38px" draggable="false" />
+        <img
+          src="../public/assets/icons_word/logo.png"
+          width="38px"
+          draggable="false"
+        />
       </div>
       <div class="logo-text">ShareDocs</div>
 
@@ -153,19 +149,19 @@
         <div class="download-doc">
           <div class="icon">
             <img
-              src="../public/assets/icons/download.svg"
+              src="../public/assets/icons_word/download.svg"
               color="white"
               width="28px"
               draggable="false"
             />
           </div>
-          <div class="text">Download</div>
+          <div class="text">Logout</div>
         </div>
 
         <div class="print-doc">
           <div class="icon">
             <img
-              src="../public/assets/icons/print.svg"
+              src="../public/assets/icons_word/print.svg"
               color="white"
               width="28px"
               draggable="true"
@@ -180,74 +176,86 @@
     <div id="menu">
       <div class="new">
         <div class="icon">
-          <img src="../public/assets/icons/new.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/new.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">New</div>
       </div>
 
-
       <form method="POST">
-        
-      <div class="save">
-        <button onclick="f();" type="submit" style="background-color: white;border:0px;">
-        <div class="icon">
-        
-          <img src="../public/assets/icons/save.svg" width="43px" draggable="false" />
-          
+        <div class="save">
+          <button
+            onclick="f();"
+            type="submit"
+            style="background-color: white;border:0px;"
+          >
+            <div class="icon">
+              <img
+                src="../public/assets/icons_word/save.svg"
+                width="43px"
+                draggable="false"
+              />
+            </div>
+          </button>
+          <div class="text">save</div>
         </div>
-        </button>
-        <div class="text">save</div>
-      </div>
-     
-        
-      <input type="text" name="fname" id="h" style="visibility:hidden">
 
-
-     </form>
-
-     
-
-
-
+        <input type="text" name="fname" id="h" style="visibility:hidden" />
+      </form>
 
       <div class="open">
         <div class="icon">
-          <img src="../public/assets/icons/open.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/open.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Open</div>
       </div>
 
       <!-- <div class="cut">
         <div class="icon">
-          <img src="../public/assets/icons/cut_alt.png" width="43px" />
+          <img src="../public/assets/icons_word/cut_alt.png" width="43px" />
         </div>
         <div class="text">Cut</div>
       </div>
 
       <div class="copy">
         <div class="icon">
-          <img src="../public/assets/icons/copy_alt.png" width="43px" />
+          <img src="../public/assets/icons_word/copy_alt.png" width="43px" />
         </div>
         <div class="text">Copy</div>
       </div>
 
       <div class="paste">
         <div class="icon">
-          <img src="../public/assets/icons/paste.png" width="43px" />
+          <img src="../public/assets/icons_word/paste.png" width="43px" />
         </div>
         <div class="text">Paste</div>
       </div> -->
 
       <div class="undo">
         <div class="icon" onclick="document.execCommand('undo', false, null);">
-          <img src="../public/assets/icons/undo.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/undo.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Undo</div>
       </div>
 
       <div class="redo">
         <div class="icon" onclick="document.execCommand('redo', false, null);">
-          <img src="../public/assets/icons/redo.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/redo.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Redo</div>
       </div>
@@ -255,7 +263,7 @@
       <div class="text-format">
         <div class="icon" onclick="viewPanel()">
           <img
-            src="../public/assets/icons/text-format.svg"
+            src="../public/assets/icons_word/text-format.svg"
             width="43px"
             draggable="false"
           />
@@ -265,7 +273,11 @@
 
       <div class="image">
         <div class="icon">
-          <img src="../public/assets/icons/image.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/image.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Image</div>
       </div>
@@ -273,28 +285,44 @@
 
       <div class="table">
         <div class="icon">
-          <img src="../public/assets/icons/table.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/table.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Table</div>
       </div>
 
       <div class="link">
         <div class="icon">
-          <img src="../public/assets/icons/link.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/link.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Link</div>
       </div>
 
       <div class="bookmark">
         <div class="icon">
-          <img src="../public/assets/icons/bookmark.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/bookmark.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Bookmark</div>
       </div>
 
       <div class="page-header-footer">
         <div class="icon">
-          <img src="../public/assets/icons/image.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/image.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Header Footer</div>
       </div>
@@ -302,7 +330,7 @@
       <div class="page-setup">
         <div class="icon">
           <img
-            src="../public/assets/icons/page_setup.png"
+            src="../public/assets/icons_word/page_setup.png"
             width="43px"
             draggable="false"
           />
@@ -313,7 +341,7 @@
       <div class="page-number">
         <div class="icon">
           <img
-            src="../public/assets/icons/page_number.png"
+            src="../public/assets/icons_word/page_number.png"
             width="43px"
             draggable="false"
           />
@@ -323,21 +351,33 @@
 
       <div class="break">
         <div class="icon">
-          <img src="../public/assets/icons/image.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/image.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Add Page</div>
       </div>
 
       <div class="find">
         <div class="icon">
-          <img src="../public/assets/icons/find.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/find.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Find</div>
       </div>
 
       <div class="access">
         <div class="icon">
-          <img src="../public/assets/icons/access.svg" width="43px" draggable="false" />
+          <img
+            src="../public/assets/icons_word/access.svg"
+            width="43px"
+            draggable="false"
+          />
         </div>
         <div class="text">Access</div>
       </div>
@@ -472,8 +512,6 @@
 
       <div id="image-format-panel">
         <div>
-
-
           <!-- Siddhant, add you functinalities of the image formatting here-->
           <div class="">
             <button></button>
@@ -490,10 +528,8 @@
 
     <div id="content">
       <div id="resize-table" onclick="resizeTable()"></div>
-    
-        <div id="editor1" contenteditable="true" name="imp"></div> 
-  
-   
+
+      <div id="editor1" contenteditable="true" name="imp"></div>
     </div>
 
     <div id="footer">

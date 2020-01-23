@@ -15,8 +15,13 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
 
-    <link type="text/css" rel="stylesheet" href="/public/assets/style.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="/public/assets/stylesheet_login.css"
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Patua+One|Lato|Source+Sans+Pro|Zilla+Slab"
@@ -29,21 +34,13 @@
     <div class="topnav">
       <!-- <p><button type="button" class="btn btn-primary" onclick="window.location.replace('/')">Home</button></p> -->
       <p>
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="window.location.replace('/login')"
-        >
+        <button type="button" onclick="window.location.replace('/login')">
           Login
         </button>
       </p>
 
       <p>
-        <button
-          type="button"
-          class="btn btn-primary"
-          onclick="window.location.replace('/signup')"
-        >
+        <button type="button" onclick="window.location.replace('/signup')">
           Sign Up
         </button>
       </p>
@@ -84,15 +81,15 @@
         <label
           for="email"
           style="text-align: center; font-family: 'Zilla Slab', sans-serif; font-size: 18px;"
-          ><b>Email</b></label
-        >
+          ><b>Email</b>
+        </label>
         <input type="text" name="username" placeholder="username" />
 
         <label
           for="psw"
           style="text-align: center; font-family: 'Zilla Slab', sans-serif; font-size: 18px;"
-          ><b>Password</b></label
-        >
+          ><b>Password</b>
+        </label>
         <input type="password" name="password" placeholder="password" />
 
         <button
@@ -101,6 +98,15 @@
           style="text-align: center; font-family: 'Source Sans Pro', sans-serif; font-size: 18px;"
         >
           Login
+        </button>
+        <br />
+        <button
+          type="button"
+          class="btn"
+          style="background-color: #3498db;"
+          onclick="window.location.replace('/signup')"
+        >
+          Create new account
         </button>
       </form>
     </div>

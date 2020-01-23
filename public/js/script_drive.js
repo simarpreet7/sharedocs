@@ -1,3 +1,6 @@
+function k() {
+  window.location.replace("/word");
+}
 var counterContent = 0;
 
 function viewContent() {
@@ -13,10 +16,7 @@ function searchQuery() {
   var text = document.getElementById("fileSearch").value;
   alert("User has searched for " + text);
 }
-function k(){
-  window.location.replace("/word");
 
-}
 var previousHoverIndex = 0;
 var previousLockIndex = 0;
 
@@ -36,7 +36,8 @@ function viewFromPanel(b) {
   clearViewFromPanel(previousLockIndex);
   switch (b) {
     case 1:
-      document.getElementById("content-create-doc").style.visibility = "visible";
+      document.getElementById("content-create-doc").style.visibility =
+        "visible";
       styleViewFromPanel("label-content-create-doc");
       // document.getElementById("label-content-create-doc").style.fontSize = 24;
       // document.getElementById("label-content-create-doc").style.backgroundColor = "#388e3c";
@@ -46,8 +47,7 @@ function viewFromPanel(b) {
       previousLockIndex = 1;
       break;
     case 2:
-      document.getElementById("content-my-docs").style.visibility =
-        "visible";
+      document.getElementById("content-my-docs").style.visibility = "visible";
       styleViewFromPanel("label-content-my-docs");
       // document.getElementById("label-content-my-docs").style.fontSize = 24;
       // document.getElementById("label-content-my-docs").style.backgroundColor = "#388e3c";
@@ -70,8 +70,7 @@ function viewFromPanel(b) {
       previousLockIndex = 3;
       break;
     case 4:
-      document.getElementById("content-my-groups").style.visibility =
-        "visible";
+      document.getElementById("content-my-groups").style.visibility = "visible";
       styleViewFromPanel("label-content-my-groups");
       // document.getElementById("label-content-my-groups").style.fontSize = 24;
       // document.getElementById("label-content-my-groups").style.backgroundColor = "#388e3c";
@@ -119,58 +118,48 @@ function viewFromPanel(b) {
   console.log(previousLockIndex);
 }
 
-ID = "content-create-doc";
-console.log("lable-" + ID);
-
-function clearViewFromPanel(id) {
-
-  document.getElementById(id).style.visibility = "hidden";
-  document.getElementById("label-" + id).style = "initial;"
-  // switch (c) {
-  //   case 1:
-  //     document.getElementById("content-create-doc").style.visibility = "hidden";
-  //     document.getElementById("label-content-create-doc").style = "intial";
-  //     previousLockIndex = 1;
-  //     break;
-  //   case 2:
-  //     document.getElementById("content-my-docs").style.visibility =
-  //       "hidden";
-  //     document.getElementById("label-content-my-docs").style = "intial";
-  //     previousLockIndex = 2;
-  //     break;
-  //   case 3:
-  //     document.getElementById("content-create-group").style.visibility =
-  //       "hidden";
-  //     document.getElementById(
-  //       "label-content-create-group"
-  //     ).style = "intial";
-  //     previousLockIndex = 3;
-  //     break;
-  //   case 4:
-  //     document.getElementById("content-my-groups").style.visibility =
-  //       "hidden";
-  //     document.getElementById("label-content-my-groups").style = "intial";
-  //     previousLockIndex = 4;
-  //     break;
-  //   case 5:
-  //     document.getElementById("content-recent").style.visibility = "hidden";
-  //     document.getElementById("label-content-recent").style = "intial";
-  //     previousLockIndex = 5;
-  //     break;
-  //   case 6:
-  //     document.getElementById("content-important").style.visibility = "hidden";
-  //     document.getElementById("label-content-important").style = "intial";
-  //     previousLockIndex = 6;
-  //     break;
-  //   case 7:
-  //     document.getElementById("content-recycle-bin").style.visibility =
-  //       "hidden";
-  //     document.getElementById("label-content-recycle-bin").style = "intial";
-  //     previousLockIndex = 7;
-  //     break;
-  //   default:
-  //     previousLockIndex = 0;
-  // }
+function clearViewFromPanel(c) {
+  switch (c) {
+    case 1:
+      document.getElementById("content-create-doc").style.visibility = "hidden";
+      document.getElementById("label-content-create-doc").style = "intial";
+      previousLockIndex = 1;
+      break;
+    case 2:
+      document.getElementById("content-my-docs").style.visibility = "hidden";
+      document.getElementById("label-content-my-docs").style = "intial";
+      previousLockIndex = 2;
+      break;
+    case 3:
+      document.getElementById("content-create-group").style.visibility =
+        "hidden";
+      document.getElementById("label-content-create-group").style = "intial";
+      previousLockIndex = 3;
+      break;
+    case 4:
+      document.getElementById("content-my-groups").style.visibility = "hidden";
+      document.getElementById("label-content-my-groups").style = "intial";
+      previousLockIndex = 4;
+      break;
+    case 5:
+      document.getElementById("content-recent").style.visibility = "hidden";
+      document.getElementById("label-content-recent").style = "intial";
+      previousLockIndex = 5;
+      break;
+    case 6:
+      document.getElementById("content-important").style.visibility = "hidden";
+      document.getElementById("label-content-important").style = "intial";
+      previousLockIndex = 6;
+      break;
+    case 7:
+      document.getElementById("content-recycle-bin").style.visibility =
+        "hidden";
+      document.getElementById("label-content-recycle-bin").style = "intial";
+      previousLockIndex = 7;
+      break;
+    default:
+      previousLockIndex = 0;
+  }
 }
 
 function onContent(a) {
@@ -182,9 +171,7 @@ function onContent(a) {
         previousHoverIndex = 1;
         break;
       case 2:
-        document.getElementById(
-          "label-content-my-docs"
-        ).style.fontSize = 20;
+        document.getElementById("label-content-my-docs").style.fontSize = 20;
         previousHoverIndex = 2;
         break;
       case 3:
@@ -194,9 +181,7 @@ function onContent(a) {
         previousHoverIndex = 3;
         break;
       case 4:
-        document.getElementById(
-          "label-content-my-groups"
-        ).style.fontSize = 20;
+        document.getElementById("label-content-my-groups").style.fontSize = 20;
         previousHoverIndex = 4;
         break;
       case 5:
@@ -227,9 +212,7 @@ function outsideContent(a) {
         previousHoverIndex = 1;
         break;
       case 2:
-        document.getElementById(
-          "label-content-my-docs"
-        ).style.fontSize = 16;
+        document.getElementById("label-content-my-docs").style.fontSize = 16;
         previousHoverIndex = 2;
         break;
       case 3:
@@ -239,9 +222,7 @@ function outsideContent(a) {
         previousHoverIndex = 3;
         break;
       case 4:
-        document.getElementById(
-          "label-content-my-groups"
-        ).style.fontSize = 16;
+        document.getElementById("label-content-my-groups").style.fontSize = 16;
         previousHoverIndex = 4;
         break;
       case 5:
