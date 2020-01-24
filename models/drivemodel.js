@@ -6,8 +6,9 @@ var connectingschema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'document'
     },
-    created_by: String,
     date: { type: Date },
+    user_id:String,
+    permission:{ type: String, default: "o" },
     document_name: String,
 });
 

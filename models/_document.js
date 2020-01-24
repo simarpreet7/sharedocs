@@ -6,9 +6,9 @@ var Schema = mongoose.Schema;
 var shareschema = new Schema({
   name: String,
   created_by: String,
-  permission:{ type: String, default: "o" },
   date: { type: Date, default: Date.now },
   document_name: String,
+  doc_type:{type:String,default:"docs"},
 
 });
 /*
@@ -18,4 +18,4 @@ w : write
 s : share and write
 */
 
-module.exports= mongoose.model("document", shareschema);
+module.exports= mongoose.model("_document", shareschema);

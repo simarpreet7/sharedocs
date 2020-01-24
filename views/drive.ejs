@@ -32,7 +32,7 @@
       <div class="logo-icon">
         <img src="../public/assets/icons_drive/logo.png" width="38px" />
       </div>
-      <div class="logo-text">CoverDrive</div>
+      <div class="logo-text">CoverDrive welcome <%= user_name %></div>
 
       <div id="utility">
         <input type="text" placeholder="Search..." id="fileSearch" required />
@@ -227,43 +227,27 @@
               <td style="width: 50%;text-align: center;">Document Name</td>
               <td style="width: 15%; text-align: center;">Owner</td>
               <td style="width: 10%; text-align: center;">permission</td>
-              <td style="width:15%;text-align: center;">Date</td>
+              <td style="width:10%;text-align: center;">Date</td>
+              <td style="width:5%;text-align: center;">open</td>
             </tr>
           </thead>
           <tbody>
+            <form action="/drive" method="POST">
+            <% for(var i = 0; i < doc_.length; i++) { %>
           <tr>
-              <td style="width: 10%;text-align: center;">docs</td>
-              <td style="width: 50%;text-align: center;"><button onclick="w();">phd</button></td>
-              <td style="width: 15%; text-align: center;">samr</td>
+              <td style="width: 10%;text-align: center;"><%= doc_[i].doc_type %></td>
+              <td style="width: 50%;text-align: center;" name="d_name"><%= doc_[i].document_name %></button></td>
+              <td style="width: 15%; text-align: center;"><%= doc_[i].created_by %></td>
               <td style="width: 10%; text-align: center;">O</td>
-              <td style="width:15%;text-align: center;">11/11/11</td>
-            </tr>
-               <tr>
-              <td style="width: 10%;text-align: center;">docs</td>
-              <td style="width: 50%;text-align: center;"><button onclick="w();">phd2</button></td>
-              <td style="width: 15%; text-align: center;">samr</td>
-              <td style="width: 10%; text-align: center;">O</td>
-              <td style="width:15%;text-align: center;">11/11/11</td>
-            </tr>
-                <tr>
-              <td style="width: 10%;text-align: center;">docs</td>
-              <td style="width: 50%;text-align: center;"><button onclick="w();">phd3</button></td>
-              <td style="width: 15%; text-align: center;">samr</td>
-              <td style="width: 10%; text-align: center;">O</td>
-              <td style="width:15%;text-align: center;">11/11/11</td>
-            </tr>
-           <tr>
-              <td style="width: 10%;text-align: center;">docs</td>
-              <td style="width: 50%;text-align: center;"><button onclick="w();">phd4</button></td>
-              <td style="width: 15%; text-align: center;">samr</td>
-              <td style="width: 10%; text-align: center;">O</td>
-              <td style="width:15%;text-align: center;">11/11/11</td>
-            </tr>
-            
+              <td style="width:15%;text-align: center;"><%= doc_[i].date %></td>
+              <td><button type="submit">open</button></td>
+          </tr>
+            <% } %> 
+            </form>
           </tbody> 
           <tfoot>
             <tr>
-              <td>Total 4</td>
+              <td>Total  <%= doc_.length %></td>
               <td></td>
               <td></td>
               <td></td>
