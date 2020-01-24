@@ -12,6 +12,7 @@
     "ejs": "^2.7.4",
     "express": "^4.17.1",
     "express-session": "^1.17.0",
+    "lodash": "^4.17.15",
     "mongoose": "^4.13.20",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
@@ -19,5 +20,13 @@
     "path": "^0.12.7"
   },
   "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simarpreet7/sharedocs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/simarpreet7/sharedocs/issues"
+  },
+  "homepage": "https://github.com/simarpreet7/sharedocs#readme",
   "description": ""
 }

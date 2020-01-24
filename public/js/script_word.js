@@ -1,8 +1,12 @@
 function f() {
-  var x = document.getElementById("editor1").innerHTML;
-  document.getElementById("h").value = x;
+  while(p==""||p==null){
   var p = prompt("please enter your file name :");
+  }
+  
+    var x = document.getElementById("editor1").innerHTML;
+  document.getElementById("h").value = x;
   document.getElementById("saver").value = p;
+  
 }
 
 function d() {

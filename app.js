@@ -6,13 +6,14 @@ var express = require("express"),
   drivemodel = require("./models/drivemodel"),
   LocalStrategy = require("passport-local"),
   _document = require("./models/_document"),
+  _ = require("lodash")
   passportLocalMongoose = require("passport-local-mongoose");
 
 var app = express();
 path = require("path");
 app.use("/public", express.static("public"));
-
-mongoose.connect("mongodb://localhost/share");
+mongoose.Promise = global.Promise;
+mongoose.connect("mongodb://localhost/share", { useMongoClient: true });
 
 
 
@@ -62,12 +63,18 @@ app.get("/", function (req, res) {
 //   res.redirect('/word/' + req.user.username+);
 // });
 
+
+app.get("/drive", isLoggedIn, function (req, res) {
+  res.redirect('/drive/'+req.user.username)
+});
+
 app.get("/drive/:id", isLoggedIn, function (req, res) {
 
   drivemodel.find({ user_id: req.params.id }, (err, docs) => {
     var c = docs;
-    if (err)
+    if (err) {
       res.send("error1")
+    }
     // _document.find({ _id: c[0].doc_id }, (err, docs) => {
     //   if (err)
     //     res.send("error2")
@@ -75,27 +82,24 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
     //     res.render("drive", {user_name: req.params.id, doc_: docs});
     //   }
     // });
-    else
-    {
-      var doca=new Array();
-    
-      for(var i=0;i<c.length;++i)
-      {
-         _document.find({_id:c[i].doc_id},(err,docs)=>{
-               doca.push(docs[0]);
-                  if(doca.length==c.length)
-                  {
-                    res.render("drive", {user_name: req.params.id, doc_: doca});
-                  }
-              
-          });
-          
+    else {
+      var doca = new Array();
 
-         
+      for (var i = 0; i < c.length; ++i) {
+        _document.find({ _id: c[i].doc_id }, (err, docs) => {
+          doca.push(docs[0]);
+          if (doca.length == c.length) {
+            res.render("drive", { user_name: req.params.id, doc_: doca });
+          }
+
+        });
+
+
+
       }
-       
-        
-     
+
+
+
     }
   });
 
@@ -113,44 +117,68 @@ app.get("/sheets/:id", isLoggedIn, function (req, res) {
 
 
 app.get("/word/:id", isLoggedIn, function (req, res) {
- if(req.params.id==req.user.username)
- {
-  res.render("word", { doc_text: "" });
- }
- else
- {
-  _document.find({_id:req.params.id},(err,docs)=>{
-    res.render("word",{doc_text:docs[0].name})
-  })
-   
- }
+  if (req.params.id == req.user.username) {
+    res.render("word", { doc_text: "" });
+  }
+  else {
+    _document.find({ _id: req.params.id }, (err, docs) => {
+      res.render("word", { doc_text: docs[0].name })
+    })
+
+  }
 });
 app.post("/word/:id", isLoggedIn, function (req, res) {
 
+  
+      if (req.user.username==req.params.id) {
+        
+      var new__document = new _document({
+        name: req.body.fname,//doc data
+        created_by: req.user.username,
+        document_name: req.body.save_fname,
+      });
+      new__document.save(function (err) {
 
-  var new__document = new _document({
-    name: req.body.fname,//doc data
-    created_by: req.user.username,
-    document_name: req.body.save_fname,
-  });
-  new__document.save(function (err) {
+        var new_drive = new drivemodel({
+          doc_id: new__document._id,
+          user_id: req.user.username,
+          document_name: req.body.save_fname,
+          // date:Date.now,
+        });
+     
 
-    var new_drive = new drivemodel({
-      doc_id: new__document._id,
-      user_id: req.user.username,
-      // date:Date.now,
-    });
-    new_drive.save(function (err) {
-      res.send("data saved succesful");
-    })
+        drivemodel.findOne({ document_name: req.body.save_fname, user_id: req.user.username }, function (err, doc) {//doc exist
+          
+          if (_.isEmpty(doc)) {
+          
+           
+             new_drive.save(function (err) {
+             
+              res.redirect("/drive/"+req.user.username)//saving successfull
+             })
+            
+          }
+          else {
+            _document.deleteOne({ _id: new_drive.doc_id }, function (err) {
 
-  });
+              res.send("doc already exists");//doc already exist
+            })
 
 
-  //   var await messageModel.find({
-  //     adId: req.params.id,
-  //     userId: req.session.user._id
-  // })
+          }
+        })
+
+
+      });
+    
+     }
+    else {
+        //updation
+       
+    }
+
+  // });
+
 
 });
 
