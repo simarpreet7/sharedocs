@@ -124,3 +124,6 @@ function viewTitle() {
 function resizeTable() {
   document.getElementById("table-1").resize = "both";
 }
+function ko(){
+  document.getElementById("editor1").innerHTML=document.getElementById("fname").value;
+}

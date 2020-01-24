@@ -1,8 +1,12 @@
 function k() {
   window.location.replace("/word");
 }
-var counterContent = 0;
-
+// var counterContent = 0;
+// function n(c_id){
+//   var x=c_id;
+//   var y=document.getElementsByName("uname").innerHTML;
+//   window.location.replace("/word/"+y+"/"+x);
+// }
 function viewContent() {
   if (counterContent % 2 == 0) {
     document.getElementById("content-create-doc").style.visibility = "visible";

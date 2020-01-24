@@ -101,9 +101,9 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
 
 });
 
-app.get("/sheets", isLoggedIn, function (req, res) {
+app.get("/word/:id/:docname", isLoggedIn, function (req, res) {
 
-  res.redirect('/sheets/' + req.user.username);
+  res.render("word", { doc_text: req.params.docname });
 });
 
 app.get("/sheets/:id", isLoggedIn, function (req, res) {
@@ -111,14 +111,19 @@ app.get("/sheets/:id", isLoggedIn, function (req, res) {
   res.render("sheets");
 });
 
-app.get("/word", isLoggedIn, function (req, res) {
-
-  res.redirect('/word/' + req.user.username);
-});
 
 app.get("/word/:id", isLoggedIn, function (req, res) {
-
+ if(req.params.id==req.user.username)
+ {
   res.render("word", { doc_text: "" });
+ }
+ else
+ {
+  _document.find({_id:req.params.id},(err,docs)=>{
+    res.render("word",{doc_text:docs[0].name})
+  })
+   
+ }
 });
 app.post("/word/:id", isLoggedIn, function (req, res) {
 

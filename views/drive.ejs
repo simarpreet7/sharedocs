@@ -32,7 +32,7 @@
       <div class="logo-icon">
         <img src="../public/assets/icons_drive/logo.png" width="38px" />
       </div>
-      <div class="logo-text">CoverDrive welcome <%= user_name %></div>
+      <div class="logo-text" id="uname"><%= user_name %></div>
 
       <div id="utility">
         <input type="text" placeholder="Search..." id="fileSearch" required />
@@ -73,7 +73,7 @@
           onmouseout="outsideContent(1)"
           onclick="viewFromPanel(1)"
         >
-          <a href="/word" style="color:white;">Create Doc</a>
+          <a href="/word/<%= user_name %>" style="color:white;">Create Doc</a>
         </div>
         <div
           class="panel-headings"
@@ -82,7 +82,7 @@
           onmouseout="outsideContent(1)"
           onclick="viewFromPanel(1)"
         >
-          <a href="/sheets" style="color:white;">Create Sheets</a>
+          <a href="/sheets/<%= user_name %>" style="color:white;">Create Sheets</a>
         </div>
         <div
           class="panel-headings"
@@ -223,6 +223,7 @@
                 <table>
           <thead>
             <tr>
+              <td style="width: 2%;text-align: center;">S no.</td>
               <td style="width: 10%;text-align: center;">Document type</td>
               <td style="width: 50%;text-align: center;">Document Name</td>
               <td style="width: 15%; text-align: center;">Owner</td>
@@ -232,22 +233,24 @@
             </tr>
           </thead>
           <tbody>
-            <form action="/drive" method="POST">
+            <!-- <form method="GET" id="ff"> -->
             <% for(var i = 0; i < doc_.length; i++) { %>
           <tr>
-              <td style="width: 10%;text-align: center;"><%= doc_[i].doc_type %></td>
-              <td style="width: 50%;text-align: center;" name="d_name"><%= doc_[i].document_name %></button></td>
+            <td style="width: 2%;text-align: center;" id="noo"><%= i %></td>
+              <td style="width: 8%;text-align: center;"><%= doc_[i].doc_type %></td>
+              <td style="width: 50%;text-align: center;" name="d_name"><a href="/word/<%= doc_[i]._id %>"><%= doc_[i].document_name %></a></button></td>
               <td style="width: 15%; text-align: center;"><%= doc_[i].created_by %></td>
               <td style="width: 10%; text-align: center;">O</td>
               <td style="width:15%;text-align: center;"><%= doc_[i].date %></td>
-              <td><button type="submit">open</button></td>
+              <!-- <td><button type="submit">open</button></td> -->
           </tr>
             <% } %> 
-            </form>
+            <!-- </form> -->
           </tbody> 
           <tfoot>
             <tr>
               <td>Total  <%= doc_.length %></td>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>

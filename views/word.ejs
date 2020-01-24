@@ -134,7 +134,7 @@
     />
   </head>
 
-  <body>
+  <body >
     <div id="header">
       <div class="logo-icon">
         <img
@@ -203,7 +203,7 @@
           <div class="text">save</div>
         </div>
 
-        <input type="text" name="fname" id="h" style="visibility:hidden;height: 0px;width:0px;" />
+        <input type="text" name="fname" id="h" style="visibility:hidden;height: 0px;width:0px;"/>
         
         <input type="text" name="save_fname" id="saver" style="visibility:hidden;height: 0px;width:0px;" />
       </form>
@@ -531,7 +531,7 @@
     <div id="content">
       <div id="resize-table" onclick="resizeTable()"></div>
 
-      <div id="editor1" contenteditable="true" name="imp"><%= doc_text %></div>
+      <div id="editor1" contenteditable="true" name="imp"><%- doc_text %></div>
     </div>
 
     <div id="footer">
