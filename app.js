@@ -41,6 +41,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get("/", function (req, res) {
+  
   res.render("login");
 });
 
@@ -104,6 +105,26 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
   });
 
 });
+
+
+app.get("/drive/delete/:id", isLoggedIn, function (req, res) {
+  
+
+  
+   drivemodel.deleteOne({ doc_id:req.params.id,user_id:req.user.username }, function (err) {
+    _document.deleteOne({ _id:req.params.id}, function (err) {
+     
+       res.redirect("/drive/"+req.user.username)
+      
+    })
+   
+   })
+  
+
+});
+
+
+
 
 app.get("/word/:id/:docname", isLoggedIn, function (req, res) {
 
@@ -174,6 +195,19 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
      }
     else {
         //updation
+           
+        
+        
+        
+        drivemodel.findOneAndUpdate({user_id: req.user.username,doc_id:req.params.id}, { document_name: req.body.save_fname}, {upsert: true}, function(err, doc) {
+            if (err) res.send("server error in updataion line 183");
+            else{// res.redirect("/drive/"+req.user.username);
+            _document.findOneAndUpdate({_id:req.params.id}, {   name: req.body.fname,document_name: req.body.save_fname}, {upsert: true}, function(err, doc) {
+              res.redirect("/drive/"+req.user.username);
+            })
+                }
+
+        });
        
     }
 
@@ -191,23 +225,60 @@ app.get("/signup", function (req, res) {
 //handling user sign up
 app.post("/signup", function (req, res) {
 
-  User.register(
-    new User({
-      username: req.body.username
-    }),
-    req.body.password,
-    function (err, user) {
-      if (err) {
+  User.register(new User({username: req.body.username}),req.body.password,
+      function (err, user) 
+      {                           
+        if (err) 
+        {
         console.log(err);
         return res.render("signup");
-      } //user stragety
-      passport.authenticate("local")(req, res, function () {
-        res.redirect("/login"); //once the user sign up
+        } //user stragety
+        
+                    passport.authenticate("local")(req, res, function () {
 
-      });
-    }
-  );
-});
+                      var new__document = new _document({
+                        name: "dummy data",//doc data
+                        created_by: req.body.username,
+                        document_name: "dummy name",
+                      });
+                      new__document.save(function (err) {
+                
+                        var new_drive = new drivemodel({
+                          doc_id: new__document._id,
+                          user_id: req.body.username,
+                          document_name: new__document.document_name,
+                          // date:Date.now,
+                        });
+              
+                                    new_drive.save(function(err){
+                                      res.redirect("/login");
+                                    });
+              
+                      });
+                 
+
+
+
+
+                    });//user sign up done
+
+
+
+
+
+
+
+
+
+   
+
+      }//fun below user.reg
+ 
+     
+ 
+ 
+  );//user reg
+});//app post
 
 // Login Routes
 

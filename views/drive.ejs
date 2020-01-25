@@ -229,11 +229,11 @@
               <td style="width: 15%; text-align: center;">Owner</td>
               <td style="width: 10%; text-align: center;">permission</td>
               <td style="width:10%;text-align: center;">Date</td>
-              <td style="width:5%;text-align: center;">open</td>
+              <td style="width:5%;text-align: center;">DELETE</td>
             </tr>
           </thead>
           <tbody>
-            <!-- <form method="GET" id="ff"> -->
+            <!-- <form method="GET" action="/drive/delete"> -->
             <% for(var i = 0; i < doc_.length; i++) { %>
           <tr>
             <td style="width: 2%;text-align: center;" id="noo"><%= i %></td>
@@ -242,7 +242,10 @@
               <td style="width: 15%; text-align: center;"><%= doc_[i].created_by %></td>
               <td style="width: 10%; text-align: center;">O</td>
               <td style="width:15%;text-align: center;"><%= doc_[i].date %></td>
-              <!-- <td><button type="submit">open</button></td> -->
+            <% if(user_name==doc_[i].created_by) %>
+              {
+                <td style="width: 50%;text-align: center;"><a href="/drive/delete/<%= doc_[i]._id %>">delete</a></button></td>
+              }    
           </tr>
             <% } %> 
             <!-- </form> -->
