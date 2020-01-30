@@ -7,14 +7,15 @@ function k() {
 //   var y=document.getElementsByName("uname").innerHTML;
 //   window.location.replace("/word/"+y+"/"+x);
 // }
-function viewContent() {
-  if (counterContent % 2 == 0) {
-    document.getElementById("content-create-doc").style.visibility = "visible";
-  } else {
-    document.getElementById("content-create-doc").style.visibility = "hidden";
-  }
-  counterContent = counterContent + 1;
-}
+
+// function viewContent() {
+//   if (counterContent % 2 == 0) {
+//     document.getElementById("content-create-doc").style.visibility = "visible";
+//   } else {
+//     document.getElementById("content-create-doc").style.visibility = "hidden";
+//   }
+//   counterContent = counterContent + 1;
+// }
 
 function searchQuery() {
   var text = document.getElementById("fileSearch").value;
@@ -39,10 +40,21 @@ function styleViewFromPanel(id) {
 function viewFromPanel(b) {
   clearViewFromPanel(previousLockIndex);
   switch (b) {
-    case 1:
+    case 0:
       document.getElementById("content-create-doc").style.visibility =
         "visible";
       styleViewFromPanel("label-content-create-doc");
+      // document.getElementById("label-content-create-doc").style.fontSize = 24;
+      // document.getElementById("label-content-create-doc").style.backgroundColor = "#388e3c";
+      // document.getElementById("label-content-create-doc").style.borderRadius = "20px";
+      // document.getElementById("label-content-create-doc").style.border = "2px solid white";
+      // document.getElementById("label-content-create-doc").style.paddingLeft = "15px";
+      previousLockIndex = 0;
+      break;
+    case 1:
+      document.getElementById("content-create-doc").style.visibility =
+        "visible";
+      styleViewFromPanel("label-content-create-sheets");
       // document.getElementById("label-content-create-doc").style.fontSize = 24;
       // document.getElementById("label-content-create-doc").style.backgroundColor = "#388e3c";
       // document.getElementById("label-content-create-doc").style.borderRadius = "20px";
@@ -115,7 +127,7 @@ function viewFromPanel(b) {
       previousLockIndex = 7;
       break;
     default:
-      previousLockIndex = 0;
+      previousLockIndex = 99;
   }
 
   // console.log(counterOnContentSwitch);
@@ -124,9 +136,14 @@ function viewFromPanel(b) {
 
 function clearViewFromPanel(c) {
   switch (c) {
-    case 1:
+    case 0:
       document.getElementById("content-create-doc").style.visibility = "hidden";
       document.getElementById("label-content-create-doc").style = "intial";
+      previousLockIndex = 0;
+      break;
+    case 1:
+      document.getElementById("content-create-doc").style.visibility = "hidden";
+      document.getElementById("label-content-create-sheets").style = "intial";
       previousLockIndex = 1;
       break;
     case 2:
@@ -162,7 +179,7 @@ function clearViewFromPanel(c) {
       previousLockIndex = 7;
       break;
     default:
-      previousLockIndex = 0;
+      previousLockIndex = 99;
   }
 }
 
@@ -170,8 +187,12 @@ function onContent(a) {
   if (a != previousLockIndex) {
     outsideContent(previousHoverIndex);
     switch (a) {
-      case 1:
+      case 0:
         document.getElementById("label-content-create-doc").style.fontSize = 20;
+        previousHoverIndex = 0;
+        break;
+      case 1:
+        document.getElementById("label-content-create-sheets").style.fontSize = 20;
         previousHoverIndex = 1;
         break;
       case 2:
@@ -203,7 +224,7 @@ function onContent(a) {
         previousHoverIndex = 7;
         break;
       default:
-        previousHoverIndex = 0;
+        previousHoverIndex = 99;
     }
   }
 }
@@ -211,8 +232,12 @@ function onContent(a) {
 function outsideContent(a) {
   if (a != previousLockIndex) {
     switch (a) {
-      case 1:
+      case 0:
         document.getElementById("label-content-create-doc").style.fontSize = 16;
+        previousHoverIndex = 0;
+        break;
+      case 1:
+        document.getElementById("label-content-create-sheets").style.fontSize = 16;
         previousHoverIndex = 1;
         break;
       case 2:
@@ -260,6 +285,11 @@ function viewSelectionPane() {
   } else {
     document.getElementById("share-selection-pane").style.visibility = "hidden";
   }
+  counterSelectionPane = counterSelectionPane + 1;
+}
+
+function hideSelectionPane() {
+  document.getElementById("share-selection-pane").style.visibility = "hidden";
   counterSelectionPane = counterSelectionPane + 1;
 }
 

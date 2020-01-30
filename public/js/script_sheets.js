@@ -65,7 +65,7 @@ function viewMenu() {
   if (counterMenu % 2 == 0) {
     document.getElementById("menu").style.visibility = "visible";
     // document.getElementById("hide-menu").innerHTML = 'Hide Menu';
-    document.getElementById("content").style.marginTop = "166px";
+    document.getElementById("content").style.marginTop = "131px";
     document.getElementById("header").style.borderBottom = "none";
     // document.getElementById("content").style.width = "80%";
   } else {

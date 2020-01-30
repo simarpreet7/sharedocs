@@ -1,13 +1,14 @@
 function f() {
-  while(p==""||p==null){
-  var p = prompt("please enter your file name :");
+  var p;
+  while (p == "" || p == null) {
+    p = prompt("please enter your file name :",document.getElementById("orignal_name").value);
   }
-  
-    var x = document.getElementById("editor1").innerHTML;
+
+  var x = document.getElementById("editor1").innerHTML;
   document.getElementById("h").value = x;
   document.getElementById("saver").value = p;
-  
 }
+
 
 function d() {
 
@@ -61,7 +62,7 @@ function viewPanel() {
 
   // document.getElementById("panel").style.width = "0px";
 
-  if (counterFormatTextPanel % 2 != 0) {
+  if (counterFormatTextPanel % 2 == 0) {
     document.getElementById("panel").style.visibility = "visible";
     document.getElementById("format-text-panel").style.visibility = "visible";
     document.getElementById("content").style.width = width - 340;
@@ -84,7 +85,7 @@ function viewMenu() {
   if (counterMenu % 2 == 0) {
     document.getElementById("menu").style.visibility = "visible";
     // document.getElementById("hide-menu").innerHTML = 'Hide Menu';
-    document.getElementById("content").style.marginTop = "166px";
+    document.getElementById("content").style.marginTop = "131px";
     document.getElementById("header").style.borderBottom = "none";
     // document.getElementById("content").style.width = "80%";
   } else {
@@ -128,6 +129,7 @@ function viewTitle() {
 function resizeTable() {
   document.getElementById("table-1").resize = "both";
 }
-function ko(){
-  document.getElementById("editor1").innerHTML=document.getElementById("fname").value;
+
+function ko() {
+  document.getElementById("editor1").innerHTML = document.getElementById("fname").value;
 }

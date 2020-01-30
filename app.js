@@ -6,15 +6,23 @@ var express = require("express"),
   drivemodel = require("./models/drivemodel"),
   LocalStrategy = require("passport-local"),
   _document = require("./models/_document"),
-  _ = require("lodash")
+  _ = require("lodash"),
+ 
+  uniqueValidator = require('mongoose-unique-validator'),
+ 
   passportLocalMongoose = require("passport-local-mongoose");
 
 var app = express();
 path = require("path");
 app.use("/public", express.static("public"));
+const Swal = require('sweetalert2')
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/share", { useMongoClient: true });
-
+mongoose.connect("mongodb://localhost/share", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false,
+});
 
 
 
@@ -41,7 +49,7 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get("/", function (req, res) {
-  
+
   res.render("login");
 });
 
@@ -66,15 +74,17 @@ app.get("/", function (req, res) {
 
 
 app.get("/drive", isLoggedIn, function (req, res) {
-  res.redirect('/drive/'+req.user.username)
+  res.redirect('/drive/' + req.user.username);
 });
 
 app.get("/drive/:id", isLoggedIn, function (req, res) {
 
-  drivemodel.find({ user_id: req.params.id }, (err, docs) => {
+  drivemodel.find({
+    user_id: req.params.id
+  }, function (err, docs) {
     var c = docs;
     if (err) {
-      res.send("error1")
+      res.send("error1");
     }
     // _document.find({ _id: c[0].doc_id }, (err, docs) => {
     //   if (err)
@@ -87,10 +97,15 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
       var doca = new Array();
 
       for (var i = 0; i < c.length; ++i) {
-        _document.find({ _id: c[i].doc_id }, (err, docs) => {
+        _document.find({
+          _id: c[i].doc_id
+        }, (err, docs) => {
           doca.push(docs[0]);
           if (doca.length == c.length) {
-            res.render("drive", { user_name: req.params.id, doc_: doca });
+            res.render("drive", {
+              user_name: req.params.id,
+              doc_: doca
+            });
           }
 
         });
@@ -108,28 +123,27 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
 
 
 app.get("/drive/delete/:id", isLoggedIn, function (req, res) {
-  
 
-  
-   drivemodel.deleteOne({ doc_id:req.params.id,user_id:req.user.username }, function (err) {
-    _document.deleteOne({ _id:req.params.id}, function (err) {
-     
-       res.redirect("/drive/"+req.user.username)
-      
+
+
+  drivemodel.deleteOne({
+    doc_id: req.params.id,
+    user_id: req.user.username
+  }, function (err) {
+    _document.deleteOne({
+      _id: req.params.id
+    }, function (err) {
+
+      res.redirect("/drive/" + req.user.username);
+
     })
-   
-   })
-  
+
+  })
+
 
 });
 
 
-
-
-app.get("/word/:id/:docname", isLoggedIn, function (req, res) {
-
-  res.render("word", { doc_text: req.params.docname });
-});
 
 app.get("/sheets/:id", isLoggedIn, function (req, res) {
 
@@ -138,80 +152,114 @@ app.get("/sheets/:id", isLoggedIn, function (req, res) {
 
 
 app.get("/word/:id", isLoggedIn, function (req, res) {
+ 
   if (req.params.id == req.user.username) {
-    res.render("word", { doc_text: "" });
-  }
-  else {
-    _document.find({ _id: req.params.id }, (err, docs) => {
-      res.render("word", { doc_text: docs[0].name })
-    })
+    
+    res.render("word", {
+      doc_text: {  name: "",
+        created_by: req.params.id,
+        date: Date.now ,
+        document_name: "untitled",
+       doc_type:"doc"}
+    });
+  } else {
+    _document.find({
+      _id: req.params.id
+    }, function (err, docs) {
+      res.render("word", {
+        doc_text: docs[0]
+      });
+    });
 
   }
 });
 app.post("/word/:id", isLoggedIn, function (req, res) {
 
-  
-      if (req.user.username==req.params.id) {
-        
-      var new__document = new _document({
-        name: req.body.fname,//doc data
-        created_by: req.user.username,
+
+  if (req.user.username == req.params.id) {
+
+    var new__document = new _document({
+      name: req.body.fname, //doc data
+      created_by: req.user.username,
+      document_name: req.body.save_fname,
+    });
+    new__document.save(function (err) {
+
+      var new_drive = new drivemodel({
+        doc_id: new__document._id,
+        user_id: req.user.username,
         document_name: req.body.save_fname,
+        // date:Date.now,
       });
-      new__document.save(function (err) {
 
-        var new_drive = new drivemodel({
-          doc_id: new__document._id,
-          user_id: req.user.username,
-          document_name: req.body.save_fname,
-          // date:Date.now,
-        });
-     
 
-        drivemodel.findOne({ document_name: req.body.save_fname, user_id: req.user.username }, function (err, doc) {//doc exist
-          
-          if (_.isEmpty(doc)) {
-          
+      drivemodel.findOne({
+        document_name: req.body.save_fname,
+        user_id: req.user.username
+      }, function (err, doc) { //doc exist
+
+        if (_.isEmpty(doc)) {
+
+
+          new_drive.save(function (err) {
+
+            res.redirect("/drive/" + req.user.username); //saving successfull
+          });
+
+        } else {
+          _document.deleteOne({
+            _id: new_drive.doc_id
+          }, function (err) {
            
-             new_drive.save(function (err) {
-             
-              res.redirect("/drive/"+req.user.username)//saving successfull
-             })
-            
-          }
-          else {
-            _document.deleteOne({ _id: new_drive.doc_id }, function (err) {
-
-              res.send("doc already exists");//doc already exist
-            })
+                       res.redirect("/word/"+req.user.username);
+            //  res.send("doc already exists"); //doc already exist
+          });
 
 
-          }
-        })
-
-
+        }
       });
-    
-     }
-    else {
-        //updation
-           
-        
-        
-        
-        drivemodel.findOneAndUpdate({user_id: req.user.username,doc_id:req.params.id}, { document_name: req.body.save_fname}, {upsert: true}, function(err, doc) {
-            if (err) res.send("server error in updataion line 183");
-            else{// res.redirect("/drive/"+req.user.username);
-            _document.findOneAndUpdate({_id:req.params.id}, {   name: req.body.fname,document_name: req.body.save_fname}, {upsert: true}, function(err, doc) {
-              res.redirect("/drive/"+req.user.username);
-            })
-                }
 
-        });
-       
-    }
+
+    });
+
+  } 
+  // drivemodel.findOne({},function(err){
 
   // });
+  
+
+                              
+                                  else {
+                                    //updation with different name
+
+
+                                    drivemodel.findOneAndUpdate({
+                                      user_id: req.user.username,
+                                      doc_id: req.params.id
+                                    }, {
+                                      document_name: req.body.save_fname
+                                    }, {
+                                      upsert: true,
+                                       runValidators: true, context: 'query' 
+                                    }, function (err, doc) {
+                                      if (err) res.send("server error in updataion line 183");
+                                      else { // res.redirect("/drive/"+req.user.username);
+                                        _document.findOneAndUpdate({
+                                          _id: req.params.id
+                                        }, {
+                                          name: req.body.fname,
+                                          document_name: req.body.save_fname
+                                        }, {
+                                          upsert: true
+                                        }, function (err, doc) {
+                                          res.redirect("/drive/" + req.user.username);
+                                        });
+                                      }
+
+                                    });
+
+                                  }
+
 
 
 });
@@ -225,44 +273,42 @@ app.get("/signup", function (req, res) {
 //handling user sign up
 app.post("/signup", function (req, res) {
 
-  User.register(new User({username: req.body.username}),req.body.password,
-      function (err, user) 
-      {                           
-        if (err) 
-        {
+  User.register(new User({
+      username: req.body.username
+    }), req.body.password,
+    function (err, user) {
+      if (err) {
         console.log(err);
         return res.render("signup");
-        } //user stragety
-        
-                    passport.authenticate("local")(req, res, function () {
+      } //user stragety
 
-                      var new__document = new _document({
-                        name: "dummy data",//doc data
-                        created_by: req.body.username,
-                        document_name: "dummy name",
-                      });
-                      new__document.save(function (err) {
-                
-                        var new_drive = new drivemodel({
-                          doc_id: new__document._id,
-                          user_id: req.body.username,
-                          document_name: new__document.document_name,
-                          // date:Date.now,
-                        });
-              
-                                    new_drive.save(function(err){
-                                      res.redirect("/login");
-                                    });
-              
-                      });
-                 
+      passport.authenticate("local")(req, res, function () {
 
+        var new__document = new _document({
+          name: "dummy data", //doc data
+          created_by: req.body.username,
+          document_name: "dummy name",
+        });
+        new__document.save(function (err) {
+
+          var new_drive = new drivemodel({
+            doc_id: new__document._id,
+            user_id: req.body.username,
+            document_name: new__document.document_name,
+            // date:Date.now,
+          });
+
+          new_drive.save(function (err) {
+            res.redirect("/login");
+          });
+
+        });
 
 
 
-                    });//user sign up done
 
 
+      }); //user sign up done
 
 
 
@@ -270,15 +316,17 @@ app.post("/signup", function (req, res) {
 
 
 
-   
 
-      }//fun below user.reg
- 
-     
- 
- 
-  );//user reg
-});//app post
+
+
+
+    } //fun below user.reg
+
+
+
+
+  ); //user reg
+}); //app post
 
 // Login Routes
 

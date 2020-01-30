@@ -112,7 +112,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <title>Word Editor</title>
+    <title>Word Editor <%= doc_text.document_name %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
     <link
@@ -134,7 +134,7 @@
     />
   </head>
 
-  <body >
+  <body>
     <div id="header">
       <div class="logo-icon">
         <img
@@ -155,7 +155,7 @@
               draggable="false"
             />
           </div>
-          <div class="text">Logout</div>
+          <div class="text"><a href="/logout">Logout!</a></div>
         </div>
 
         <div class="print-doc">
@@ -174,6 +174,9 @@
     </div>
 
     <div id="menu">
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin-top: 7px;"
+      ></span>
       <div class="new">
         <div class="icon">
           <img
@@ -182,48 +185,69 @@
             draggable="false"
           />
         </div>
-        <div class="text">New</div>
+        <!-- <div class="text">New</div> -->
       </div>
 
       <form method="POST">
         <div class="save">
           <button
+            class="icon"
             onclick="f();"
             type="submit"
             style="background-color: white;border:0px;"
           >
-            <div class="icon">
-              <img
-                src="../public/assets/icons_word/save.svg"
-                width="43px"
-                draggable="false"
-              />
-            </div>
+            <img
+              src="../public/assets/icons_word/save.svg"
+              width="43px"
+              draggable="false"
+            />
           </button>
-          <div class="text">save</div>
         </div>
 
-        <input type="text" name="fname" id="h" style="visibility:hidden;height: 0px;width:0px;"/>
+        <input
+          type="text"
+          name="fname"
+          id="h"
+          style="visibility:hidden;height: 0px;width:0px;"
+        />
         
-        <input type="text" name="save_fname" id="saver" style="visibility:hidden;height: 0px;width:0px;" />
+        <input
+          type="text"
+         
+          id="orignal_name"
+          style="visibility:hidden;height: 0px;width:0px;"
+          value="<%= doc_text.document_name %>"
+        />
+
+        <input
+          type="text"
+          name="save_fname"
+          id="saver"
+          style="visibility:hidden;height: 0px;width:0px;"
+        />
+        
       </form>
 
       <div class="open">
         <button
-        onclick="window.location.replace('/drive')"
-      
-        style="background-color: white;border:0px;"
-      >
-        <div class="icon">
-          <img
-            src="../public/assets/icons_word/open.svg"
-            width="43px"
-            draggable="false"
-          />
-        </div>
+          onclick="window.location.replace('/drive')"
+          style="background-color: white;border:0px;"
+        >
+          <div class="icon">
+            <img
+              src="../public/assets/icons_word/open.svg"
+              width="43px"
+              style="justify-content: center;"
+              draggable="false"
+            />
+          </div>
         </button>
-        <div class="text">Open</div>
+        <!-- <div class="text">Open</div> -->
       </div>
+
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+      ></span>
 
       <!-- <div class="cut">
         <div class="icon">
@@ -254,7 +278,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Undo</div>
+        <!-- <div class="text">Undo</div> -->
       </div>
 
       <div class="redo">
@@ -265,8 +289,12 @@
             draggable="false"
           />
         </div>
-        <div class="text">Redo</div>
+        <!-- <div class="text">Redo</div> -->
       </div>
+
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+      ></span>
 
       <div class="text-format">
         <div class="icon" onclick="viewPanel()">
@@ -276,7 +304,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Format Text</div>
+        <!-- <div class="text">Format Text</div> -->
       </div>
 
       <div class="image">
@@ -287,7 +315,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Image</div>
+        <!-- <div class="text">Image</div> -->
       </div>
       <!--https://www.w3schools.com/howto/howto_css_image_effects.asp-->
 
@@ -299,8 +327,12 @@
             draggable="false"
           />
         </div>
-        <div class="text">Table</div>
+        <!-- <div class="text">Table</div> -->
       </div>
+
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+      ></span>
 
       <div class="link">
         <div class="icon">
@@ -310,7 +342,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Link</div>
+        <!-- <div class="text">Link</div> -->
       </div>
 
       <div class="bookmark">
@@ -321,8 +353,12 @@
             draggable="false"
           />
         </div>
-        <div class="text">Bookmark</div>
+        <!-- <div class="text">Bookmark</div> -->
       </div>
+
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+      ></span>
 
       <div class="page-header-footer">
         <div class="icon">
@@ -332,7 +368,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Header Footer</div>
+        <!-- <div class="text">Header Footer</div> -->
       </div>
 
       <div class="page-setup">
@@ -343,7 +379,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Page Setup</div>
+        <!-- <div class="text">Page Setup</div> -->
       </div>
 
       <div class="page-number">
@@ -354,7 +390,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Page Number</div>
+        <!-- <div class="text">Page Number</div> -->
       </div>
 
       <div class="break">
@@ -365,8 +401,12 @@
             draggable="false"
           />
         </div>
-        <div class="text">Add Page</div>
+        <!-- <div class="text">Add Page</div> -->
       </div>
+
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+      ></span>
 
       <div class="find">
         <div class="icon">
@@ -376,7 +416,7 @@
             draggable="false"
           />
         </div>
-        <div class="text">Find</div>
+        <!-- <div class="text">Find</div> -->
       </div>
 
       <div class="access">
@@ -387,8 +427,12 @@
             draggable="false"
           />
         </div>
-        <div class="text">Access</div>
+        <!-- <div class="text">Access</div> -->
       </div>
+
+      <span
+        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+      ></span>
     </div>
 
     <div id="panel">
@@ -537,7 +581,14 @@
     <div id="content">
       <div id="resize-table" onclick="resizeTable()"></div>
 
-      <div id="editor1" contenteditable="true" name="imp"><%- doc_text %></div>
+      <div
+        id="editor1"
+        contenteditable="true"
+        name="imp"
+        style="outline: 0 solid transparent;"
+      >
+        <%- doc_text.name %>
+      </div>
     </div>
 
     <div id="footer">

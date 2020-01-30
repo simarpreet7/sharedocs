@@ -146,17 +146,17 @@
         top: 55px;
         left: 0px;
         width: 100%;
-        height: 85px;
+        height: 50px;
         border-top: 5px solid yellowgreen;
         border-bottom: 1px solid #cccccc;
-        justify-content: flex-start;
+        justify-content: center;
         display: inline-flex;
         overflow-x: auto;
     }
 
     #menu .icon {
         width: 45px;
-        margin: 5px 17px;
+        margin: 5px 7px;
         align-content: center;
         /*border: 1px solid black;
         border-radius: 4px;*/
@@ -207,7 +207,8 @@
     }
 
     #content {
-        margin-top: 166px;
+        /* margin-top: 166px; */
+        margin-top: 131px;
         margin-bottom: 35px;
         margin-left: 0px;
         color: black;
@@ -215,8 +216,8 @@
         padding-bottom: 15px;
         /* width: 80%; */
         width: 100%;
-        overflow-x: scroll;
-        overflow-y: scroll;
+        /* overflow-x: scroll; */
+        /* overflow-y: scroll; */
         background-color: #eeeeee;
         border-right: -5px solid gold;
         /*Attention to the details here*/
@@ -251,7 +252,8 @@
         background-color: white;
         position: fixed;
         right: 0;
-        top: 166px;
+        /* top: 166px; */
+        top: 131px;
         bottom: 36px;
         height: auto;
         border: 1px solid #dddddd;
@@ -308,59 +310,59 @@
     }*/
 
     #format-text-panel .bold {
-        background-image: url("assets/icons/bold.png");
+        background-image: url("icons_sheets/bold.png");
         margin-left: 10px;
         margin-top: 0px;
     }
 
     #format-text-panel .italic {
-        background-image: url("assets/icons/italics.png");
+        background-image: url("icons_sheets/italics.png");
     }
 
     #format-text-panel .underline {
-        background-image: url("assets/icons/underlined.png");
+        background-image: url("icons_sheets/underlined.png");
     }
 
     #format-text-panel .align-left {
-        background-image: url("assets/icons/align_left.png");
+        background-image: url("icons_sheets/align_left.png");
         margin-left: 10px;
         margin-top: 10px;
     }
 
     #format-text-panel .align-right {
-        background-image: url("assets/icons/align_right.png");
+        background-image: url("icons_sheets/align_right.png");
     }
 
     #format-text-panel .align-center {
-        background-image: url("assets/icons/align_center.png");
+        background-image: url("icons_sheets/align_center.png");
     }
 
     #format-text-panel .redo-apply {
-        background-image: url("assets/icons/redo.svg");
+        background-image: url("icons_sheets/redo.svg");
         background-color: #eeeeee;
         border: none;
         border-radius: 5px;
     }
 
     #format-text-panel .undo-apply {
-        background-image: url("assets/icons/undo.svg");
+        background-image: url("icons_sheets/undo.svg");
     }
 
     #format-text-panel .copy-view {
-        background-image: url("assets/icons/copy_alt.png");
+        background-image: url("icons_sheets/copy_alt.png");
     }
 
     #format-text-panel .unorderedlist {
-        background-image: url("assets/icons/bulleted_list.png");
+        background-image: url("icons_sheets/bulleted_list.png");
     }
 
     #format-text-panel .orderedlist {
-        background-image: url("assets/icons/numbered_list.png");
+        background-image: url("icons_sheets/numbered_list.png");
         margin-left: 10px;
     }
 
     #format-text-panel .strikethrough {
-        background-image: url("assets/icons/strikethrough.png");
+        background-image: url("icons_sheets/strikethrough.png");
         width: 38px;
     }
 
