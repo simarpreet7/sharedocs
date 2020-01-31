@@ -150,7 +150,6 @@ app.get("/sheets/:id", isLoggedIn, function (req, res) {
   res.render("sheets");
 });
 
-
 app.get("/word/:id", isLoggedIn, function (req, res) {
  
   if (req.params.id == req.user.username) {
@@ -160,19 +159,21 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
         created_by: req.params.id,
         date: Date.now ,
         document_name: "untitled",
-       doc_type:"doc"}
+       doc_type:"doc"},x:0
     });
-  } else {
+  } else {//unsafe
     _document.find({
       _id: req.params.id
     }, function (err, docs) {
       res.render("word", {
-        doc_text: docs[0]
+        doc_text: docs[0],x:0
       });
     });
 
   }
 });
+
+
 app.post("/word/:id", isLoggedIn, function (req, res) {
 
 
@@ -210,8 +211,13 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
           _document.deleteOne({
             _id: new_drive.doc_id
           }, function (err) {
+            
            
-                       res.redirect("/word/"+req.user.username);
+                        res.render("word",{doc_text:{name: req.body.fname,
+                        created_by: req.params.id,
+                        date: Date.now ,
+                        document_name: req.body.save_fname,
+                       doc_type:"doc"},x:1});
             //  res.send("doc already exists"); //doc already exist
           });
 
@@ -242,7 +248,10 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
                                       upsert: true,
                                        runValidators: true, context: 'query' 
                                     }, function (err, doc) {
-                                      if (err) res.send("server error in updataion line 183");
+                                                  if (err) {   res.render("word",{doc_text:{name: req.body.fname,
+                                                   
+                                                    document_name: req.body.save_fname,
+                                                  doc_type:"doc"},x:1});}
                                       else { // res.redirect("/drive/"+req.user.username);
                                         _document.findOneAndUpdate({
                                           _id: req.params.id
@@ -263,6 +272,9 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
 
 
 });
+
+
+
 
 // Auth Routes
 

@@ -594,5 +594,10 @@
     <div id="footer">
       <p>&copy; 2019. ShareDocs Word Editor</p>
     </div>
+                <% if (x==1){ %>
+            <script type="text/javascript">
+                alert('<%= doc_text.document_name %> name already exist try another!');
+            </script>
+            <% } %>
   </body>
 </html>
