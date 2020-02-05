@@ -237,6 +237,19 @@
 
         <input
           type="text"
+          id="orignal_checker2"
+          style="visibility:hidden;height: 0px;width:0px;"
+          value="<%= doc_text.created_by %>"
+        />
+        <input
+          type="text"
+          id="orignal_checker"
+          style="visibility:hidden;height: 0px;width:0px;"
+          value="<%= user_name %>"
+        />
+
+        <input
+          type="text"
           name="save_fname"
           id="saver"
           style="visibility:hidden;height: 0px;width:0px;"
@@ -866,9 +879,7 @@
       </div>
     </div>
     <% if(y==1){%>
-      <!-- <script>
-        viewSelectionPane();
-        </script> -->
+     
   
        
       

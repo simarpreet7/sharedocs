@@ -1,7 +1,13 @@
 function f() {
   var p;
+  var k=0;
+  if(document.getElementById("orignal_checker").value===document.getElementById("orignal_checker2").value){k=1;}
   while (p == "" || p == null) {
     p = prompt("please enter your file name :", document.getElementById("orignal_name").value);
+    if(k==0)
+    {
+      p=document.getElementById("orignal_name").value
+    }
   }
 
   var x = document.getElementById("editor1").innerHTML;
