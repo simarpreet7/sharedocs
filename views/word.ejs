@@ -865,7 +865,13 @@
         <%- doc_text.name %>
       </div>
     </div>
-
+    <% if(y==1){%>
+      <!-- <script>
+        viewSelectionPane();
+        </script> -->
+  
+       
+      
     <div id="share-selection-pane">
     
       <div id="close-button"
@@ -874,7 +880,7 @@
       >
         &#x274C
       </div>
-      <form onload="storeRadioOutput('r')">
+      <form onload="storeRadioOutput('r')" method="POST" action="/word/add/<%= doc_text._id %>">
         <!-- <label for="officialName"><b>Name:</b></label>
         <input
           type="text"
@@ -891,7 +897,13 @@
           id="email"
           style="margin-left:60px;"
           required
+          name="etext"
+          value=""
         />
+        <!-- <script type="text/javascript">
+          document.getElementById("email").value = 'dummy';
+        </script> -->
+  
         <span class="br"></span>
         <!-- <label for="officeDept"><b>Office/Dept:</b></label>
           <input
@@ -910,25 +922,28 @@
           style="margin-left:25px;"
           required
         /> -->
-
+       
         <span class="brmedium"></span>
         <label for="group"><b>Access Rights:</b></label>
         <input type="radio" id="readable"
-        name="access-permission" value="r" checked="checked" onclick="storeRadioOutput(this.value)">
+        name="accesspermission" value="r" checked="checked" onclick="storeRadioOutput(this.value)">
         <label for="contactChoice1">Read</label>
 
         <input type="radio" id="writable"
-        name="access-permission" value="w" onclick="storeRadioOutput(this.value)">
+        name="accesspermission" value="w" onclick="storeRadioOutput(this.value)">
         <label for="contactChoice2">Write</label>
 
         <input type="radio" id="shareable"
-        name="access-permission" value="su" onclick="storeRadioOutput(this.value)">
+        name="accesspermission" value="su" onclick="storeRadioOutput(this.value)">
         <label for="contactChoice3">Super User</label>
-      </form>
+    
         
-      <button id="add-member" onclick="addMember()">Add</button>
+      <button id="add-member"  type="submit">Add</button>
+      <!-- onclick="addMember()" -->
       <button id="view-existing-groups" onclick="viewGroups()">View Groups</button>
+    </form>
       <span class="br"></span>
+
       Note: As of now, we haven't integrated the functionality of the groups.
       User needs to write the name of the sharee and can be done using
       <table id="share-table-new">
@@ -942,43 +957,46 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Siddhartha</td>
-            <td style="text-align: center;">&#x2705</tdtext-align: center;>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-          </tr>
-         <!-- <tr>
-            <td>Simarpreet Singh</td>
-            <td>DTU</td>
-            <td>Backend</td>
-            <td>samsingh7039@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Siddhant Jain</td>
-            <td>DTU</td>
-            <td>Word Frontend</td>
-            <td>asn.siddhant@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Yogesh Narang</td>
-            <td>DTU</td>
-            <td>Sheets Frontend</td>
-            <td>NA</td>
-          </tr> -->
+          
+        
+          <% for(var i = 0; i < _share.length; i++) { %>
+            <tr>
+              <td><%= _share[i].user_id %></td>
+              <% if(_share[i].permission=="r"){ %>
+              <td style="text-align: center;"></tdtext-align: center;>
+                <td style="text-align: center;">&#x2705</tdtext-align: center;>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;"></td>
+              <% } %>    
+
+              <% if(_share[i].permission=="o"){ %>
+                <td style="text-align: center;">&#x2705</tdtext-align: center;>
+                  <td style="text-align: center;"></tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: center;"></td>
+                <% } %> 
+             
+              <% if(_share[i].permission=="w"){ %>
+                <td style="text-align: center;"></tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: center;">&#x2705</tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                <% } %>
+
+                <% if(_share[i].permission=="su"){ %>
+                  <td style="text-align: center;"></tdtext-align: center;>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;"></td>
+                    <td style="text-align: center;">&#x2705</tdtext-align: center;>
+                  <% } %> 
+            </tr>
+          <% } %>
+      
         </tbody> 
-        <!-- <tfoot>
-          <tr>
-            <td id="memberCounter">Total</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tfoot> -->
+     
       </table>
     </div>
-
+    <% } %>  
     <div id="footer">
       <p>
         <span style="position: absolute; left: 5px;">

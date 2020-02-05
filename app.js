@@ -159,15 +159,47 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
         created_by: req.params.id,
         date: Date.now ,
         document_name: "untitled",
-       doc_type:"doc"},x:0
+       doc_type:"doc"},x:0,y:0
     });
-  } else {//unsafe
+  } else {//unsafe code the id
     _document.find({
       _id: req.params.id
     }, function (err, docs) {
-      res.render("word", {
-        doc_text: docs[0],x:0
-      });
+            if(req.user.username===docs[0].created_by){
+
+                drivemodel.find({doc_id: req.params.id},function(err,share){    
+                      res.render("word", {
+                        doc_text: docs[0],x:0,_share:share,y:1
+                      });
+                  });  
+            }  
+            else
+            {
+              drivemodel.find({doc_id: req.params.id,user_id:req.user.username},function(err,docsa){    
+                        if(docsa[0].permission==="r")
+                        {
+                          res.send(docs[0].name)
+                        }
+                        else if(docsa[0].permission==="w")
+                        {
+                          res.render("word", {
+                            doc_text: docs[0],x:0,y:0
+                          });  
+                        }
+                        else
+                        {
+                          drivemodel.find({doc_id: req.params.id},function(err,share){    
+                            res.render("word", {
+                              doc_text: docs[0],x:0,_share:share,y:1
+                            });
+                        });  
+
+                        }
+              
+              });  
+
+            }
+
     });
 
   }
@@ -217,7 +249,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
                         created_by: req.params.id,
                         date: Date.now ,
                         document_name: req.body.save_fname,
-                       doc_type:"doc"},x:1});
+                       doc_type:"doc"},x:1,y:0});
             //  res.send("doc already exists"); //doc already exist
           });
 
@@ -229,11 +261,34 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
     });
 
   } 
-  // drivemodel.findOne({},function(err){
-
-  // });
   
-
+  // else if(req.body.etext==="dummy"){
+  //   //check if user exists
+  //   var new__drive = new drivemodel({
+  //     doc_id: req.params.id,
+  //     user_id: req.body.etext,
+  //     document_name: req.body.save_fname,
+  //     permission:req.body.accesspermission,
+  //     //  date:Date.now,
+  //   });
+    
+  //       new__drive.save(function(err){
+  //         if(err){res.send(err)}
+          
+  //         drivemodel.find({doc_id: new__drive.doc_id},function(err,share){    
+  //           res.render("word", {
+  //             doc_text: {name: req.body.fname,
+                                                   
+  //               document_name: req.body.save_fname,
+  //             doc_type:"doc"},x:0,_share:share,y:1
+  //           });
+  //         });    
+          
+    
+  //       });
+  // }
+  
+   
                               
                                   else {
                                     //updation with different name
@@ -251,7 +306,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
                                                   if (err) {   res.render("word",{doc_text:{name: req.body.fname,
                                                    
                                                     document_name: req.body.save_fname,
-                                                  doc_type:"doc"},x:1});}
+                                                  doc_type:"doc"},x:1,y:0});}
                                       else { // res.redirect("/drive/"+req.user.username);
                                         _document.findOneAndUpdate({
                                           _id: req.params.id
@@ -273,7 +328,32 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
 
 });
 
-
+app.post("/word/add/:id",isLoggedIn,function(req,res){
+  //check if user exists
+    var new__drive = new drivemodel({
+      doc_id: req.params.id,
+      user_id: req.body.etext,
+      document_name: req.body.save_fname,
+      permission:req.body.accesspermission,
+      //  date:Date.now,
+    });
+    
+        new__drive.save(function(err){
+          if(err){res.send(err)}
+          
+          // drivemodel.find({doc_id: new__drive.doc_id},function(err,share){    
+          //   res.render("word", {
+          //     doc_text: {name: req.body.fname,
+                                                   
+          //       document_name: req.body.save_fname,
+          //     doc_type:"doc"},x:0,_share:share,y:1
+          //   });
+          // });    
+          return res.redirect("/word/"+req.params.id)
+          
+    
+        });
+});
 
 
 // Auth Routes

@@ -155,6 +155,7 @@ function addMember() {
   rowEntry.insertCell(1).innerHTML = '';
   // rowEntry.insertCell(1).innerHTML = response;
 
+
   var tickIndex = 0;
 
   if (response == 'r')
@@ -174,6 +175,7 @@ function addMember() {
   response = 'r';
   document.getElementById("email").value = '';
   document.getElementById("readable").checked = "checked";
+  
   //Task, to clear the input for the next one
   //Reset the radio buttons
 
