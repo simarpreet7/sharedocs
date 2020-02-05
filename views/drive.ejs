@@ -23,7 +23,7 @@
     </script>
     <link
       href="
-            https://fonts.googleapis.com/icon?family=Roboto|Patua+One|Source+Sans+Pro|Zilla+Slab|Material+Icons|Open+Sans|Material+Icons+Round|Material+Icons+Outlined"
+            https://fonts.googleapis.com/icon?family=Roboto|Patua+One|Source+Sans+Pro|Zilla+Slab|Material+Icons|Varela+Round|Open+Sans|Material+Icons+Round|Material+Icons+Outlined"
       rel="stylesheet"
     />
     <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -41,7 +41,8 @@
       <div class="logo-icon">
         <img src="../public/assets/icons_drive/logo.png" width="38px" />
       </div>
-      <div class="logo-text" id="uname"><%= user_name %>'s Drive <a href="/logout">Logout!</a></div>
+      <!-- <div class="logo-text" id="uname"><%= user_name %>'s Drive</div> -->
+      <div class="logo-text" id="uname">user_name's Drive</div>
 
       <div id="utility">
         <input type="text" placeholder="Search..." id="fileSearch" required />
@@ -53,6 +54,13 @@
             onclick="searchQuery()"
           />
         </div>
+      </div>
+      <div id='logout' style="position: absolute; right: 0; top: 50%; transform: translate(-50%, -50%)">
+        <a href="/logout" style="color: #1565c0; text-decoration: none; font-size: 20px; font-family: 'Patua One', cursive;">
+          
+          <img src="../public/assets/icons_drive/logout.png" style=" position: absolute; width: 22px; right: 65px; top: 1px;"/>
+          Logout
+        </a>
       </div>
     </div>
 
@@ -66,7 +74,7 @@
             <tr style="height: 40px; vertical-align: bottom;">
               <td rowspan="2" style="width: 40px; vertical-align: middle;">
                 <% if(doc_[i].doc_type == 'docs'){ %>
-                  <div class="doc-type word" style="width: 30px; height: 40px; font-size: 30px;">W</div>
+                  <div class="doc-type word" style="width: 30px; height: 40px; font-size: 24px; line-height: 40px; vertical-align: middle;">W</div>
                 <% } %>
               </td>
               <td>
@@ -75,7 +83,7 @@
             </tr>
             <tr style="height: 20px;">
               <td style="font-size: 16px; vertical-align: top;">
-                Created By: <%= doc_[i].created_by %>
+                 <%= doc_[i].created_by %>
               </td>
             </tr>
           </tbody>
@@ -95,31 +103,61 @@
 
     <div id="panel" onload="viewFromPanel(1)">
       <fieldset>
+        <span class="br"></span>
         <div
           class="panel-headings"
           id="label-add-members"
-          onclick="viewSelectionPane();"
-          style="z-index: 100;"
+          onmouseover="onContent(8)"
+          onmouseout="outsideContent(8)"
+          onclick="viewFromPanel(8)"
+          style="z-index: 100; display: inline-flexbox;"
         >
+          <img
+              src="../public/assets/icons_drive/add_member.png"
+              width="20px"
+              style="opacity: 0.7;"
+              draggable="false"
+          />
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
           Add Members
-        </div>
+      </div>
         <div
           class="panel-headings"
           id="label-content-create-doc"
           onmouseover="onContent(0)"
           onmouseout="outsideContent(0)"
-          onclick="viewFromPanel(0)"
+          onclick="window.location.href='/word/<%= user_name %>';"
         >
-          <a href="/word/<%= user_name %>" style="color:white; text-decoration:none;">Create Doc</a>
+          <img
+              src="../public/assets/icons_drive/create_document.png"
+              width="20px"
+              style="opacity: 0.7;"
+              draggable="false"
+          />  
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
+          Create Doc
         </div>
         <div
-          class="panel-headings"
-          id="label-content-create-sheets"
-          onmouseover="onContent(1)"
-          onmouseout="outsideContent(1)"
-          onclick="viewFromPanel(1)"
+        class="panel-headings"
+        id="label-content-create-sheets"
+        onmouseover="onContent(1)"
+        onmouseout="outsideContent(1)"
+        onclick="window.location.href='/sheets/<%= user_name %>';"
         >
-          <a href="/sheets/<%= user_name %>" style="color:white; text-decoration:none;">Create Sheets</a>
+          <img
+            src="../public/assets/icons_drive/create_sheets.png"
+            width="20px"
+            style="opacity: 0.7;"
+            draggable="false"
+          />
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
+          Create Sheets
         </div>
         <div
           class="panel-headings"
@@ -128,6 +166,15 @@
           onmouseout="outsideContent(2)"
           onclick="viewFromPanel(2)"
         >
+          <img
+            src="../public/assets/icons_drive/my_docs.png"
+            width="20px"
+            style="opacity: 0.7;"
+            draggable="false"
+          />
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
           My Docs
         </div>
         <div
@@ -137,6 +184,15 @@
           onmouseout="outsideContent(3)"
           onclick="viewFromPanel(3)"
         >
+          <img
+            src="../public/assets/icons_drive/create_group.png"
+            width="20px"
+            style="opacity: 0.7;"
+            draggable="false"
+          />
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
           Create Group
         </div>
         <div
@@ -146,9 +202,18 @@
           onmouseout="outsideContent(4)"
           onclick="viewFromPanel(4)"
         >
+          <img
+            src="../public/assets/icons_drive/my_group.png"
+            width="20px"
+            style="opacity: 0.7;"
+            draggable="false"
+          />
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
           My Groups
         </div>
-        <div
+        <!-- <div
           class="panel-headings"
           id="label-content-recent"
           onmouseover="onContent(5)"
@@ -174,8 +239,9 @@
           onclick="viewFromPanel(7)"
         >
           Recycle Bin (v3.0)
-        </div>
-        <p id="lock-state">Hover Mode Active</p>
+        </div> -->
+        
+        <!-- <p id="lock-state">Hover Mode Active</p> -->
 
         <span class="brlarge"></span>
         <!-- 
@@ -264,7 +330,7 @@
               <td style="width: 30px; text-align: center;">No.</td>
               <td style="width: 40px; text-align: center;"></td>
               <td style="width: auto; text-align: left; padding-left: -15px;">Document Name</td>
-              <td style="width: 100px; text-align: left; padding-left: 10px;">Owner</td>
+              <td style="width: 300px;  text-align: left; padding-left: 10px;">Owner</td>
               <td style="width: 80px; text-align: center;">Access</td>
               <td style="width: 150px; text-align: center;">Date</td>
               <td style="width: 80px;text-align: center;">
@@ -294,7 +360,7 @@
                    <%= daysOfWeek[doc_[i].date.getDay()] %>, <%= doc_[i].date.getDate() %>-<%= monthName[doc_[i].date.getMonth()] %>-<%= doc_[i].date.getFullYear() %>
                 </td>
                   <% if(user_name==doc_[i].created_by) { %>
-                      <td style="width: 50%;text-align: center;"><a href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;">&#x274C</a></button></td>
+                      <td style="width: 50%;text-align: center;"><a href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;">&#x274C</a></div></td>
                   <% } %>    
               </tr>
             <% } %> 
@@ -317,50 +383,100 @@
       <div
         id="content-create-group"
         style="visibility: hidden; position:absolute; z-index: 4;"
-      >
-        <table>
-          <thead>
-            <tr>
-              <td>Document Name</td>
-              <td>Creator</td>
-              <td>Date</td>
-              <td>Last Modified</td>
+      >    
+        <div> Create Group Pane</div>
+        <span class="brmedium"></span>
+      
+        <div id="close-button"
+          style="position: absolute; right: 10px; top: 10px; z-index: 12; cursor: pointer;"
+          onclick="hideCreateGroupPane()"
+        >
+          &#x274C
+        </div>
+        <form>
+          <!-- <label for="officialName"><b>Name:</b></label>
+          <input
+            type="text"
+            placeholder="Enter Name"
+            id="officialName"
+            style="margin-left:60px;"
+            required
+          />
+          <span class="br"></span> -->
+          <label for="email"><b>Email:</b></label>
+          <input
+            type="text"
+            placeholder="Enter Email"
+            id="email-for-group"
+            style="margin-left:79px; padding: 2px;"
+            required
+          />
+          <span class="br"></span>
+          <!-- <label for="officeDept"><b>Office/Dept:</b></label>
+            <input
+            type="text"
+            placeholder="Enter Office/Dept"
+            id="officeDept"
+            style="margin-left:15px;"
+            required
+          />
+          <span class="br"></span> -->
+          <label for="group"><b>Group Name:</b></label>
+          <input
+            type="text"
+            placeholder="Enter Name of Document"
+            id="group"
+            style="margin-left:25px; padding: 2px;"
+            required
+          />
+        </form>
+          
+        <div id="add-group-member" onclick="addGroupMember()">Add</div>
+        New data is added at the top of table after pressing the add button.
+        Following is just a sample table. Table Heads may be added or reduced.
+        <table id="group-members-table-new">
+          <!-- comment %} <thead>
+             <tr>
+              <td>Official Name</td>
+              <td>Group</td>
+              <td>Office/Dept</td>
+              <td>E-Mail ID</td>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Word Document XYZ</td>
               <td>Siddhartha</td>
-              <td>20 - 12 - 2019</td>
-              <td>1 hour ago</td>
+              <td>DTU</td>
+              <td>Backend / Frontend</td>
+              <td>siddharthamaster4@gmail.com</td>
+            </tr>
+           <tr>
+              <td>Simarpreet Singh</td>
+              <td>DTU</td>
+              <td>Backend</td>
+              <td>samsingh7039@gmail.com</td>
             </tr>
             <tr>
-              <td>Sheets Document ABC</td>
-              <td>Simarpreet</td>
-              <td>21 - 12 - 2019</td>
-              <td>2 days ago</td>
+              <td>Siddhant Jain</td>
+              <td>DTU</td>
+              <td>Word Frontend</td>
+              <td>asn.siddhant@gmail.com</td>
             </tr>
             <tr>
-              <td>Sheets Document EFG</td>
-              <td>Siddhant</td>
-              <td>22 - 12 - 2019</td>
-              <td>1 week ago</td>
-            </tr>
-            <tr>
-              <td>Database Document JKL</td>
-              <td>Yogesh</td>
-              <td>23 - 12 - 2019</td>
-              <td>2 Months ago</td>
+              <td>Yogesh Narang</td>
+              <td>DTU</td>
+              <td>Sheets Frontend</td>
+              <td>NA</td>
             </tr>
           </tbody>
           <tfoot>
             <tr>
-              <td>Total 4</td>
-              <td>Nothing stated here</td>
-              <td>Nothing stated here</td>
+              <td id="memberCounter">Total</td>
+              <td></td>
+              <td></td>
               <td></td>
             </tr>
-          </tfoot>
+          </tfoot> -->
         </table>
       </div>
       <div
@@ -372,7 +488,7 @@
         list. The other is the card layout We may go for a hybrid but not until
         we have a meeting.
       </div>
-      <div
+      <!-- <div
         id="content-recent"
         style="visibility: hidden; position:absolute; z-index: 6;"
       >
@@ -500,65 +616,68 @@
             </tr>
           </tfoot>
         </table>
-      </div>
-      <div
+      </div> -->
+      <!-- <div
         id="content-temp"
         style="visibility: hidden; position:absolute; z-index: 9;"
       >
         This is just temporary. This is what we are trying to idealize. We can
         clearly see the tables with their relavant info. The data provided here
         is not provided from the DB, but, just like that.
-      </div>
+      </div> -->
     </div>
 
     <div id="share-selection-pane">
-
+      <div> Adding Members Pane</div>
+      <span class="brmedium"></span>
       <div id="close-button"
         style="position: absolute; right: 10px; top: 10px; z-index: 12; cursor: pointer;"
         onclick="hideSelectionPane()"
       >
         &#x274C
       </div>
-      <label for="officialName"><b>Name:</b></label>
-      <input
-        type="text"
-        placeholder="Enter Name"
-        id="officialName"
-        style="margin-left:60px;"
-        required
-      />
-      <span class="br"></span>
-      <label for="group"><b>Group:</b></label>
-      <input
-        type="text"
-        placeholder="Enter Group"
-        id="group"
-        style="margin-left:56px;"
-        required
-      />
-      <span class="br"></span>
-      <label for="officeDept"><b>Office/Dept:</b></label>
-      <input
-        type="text"
-        placeholder="Enter Office/Dept"
-        id="officeDept"
-        style="margin-left:15px;"
-        required
-      />
-      <span class="br"></span>
-      <label for="email"><b>Email:</b></label>
-      <input
-        type="text"
-        placeholder="Enter Email"
-        id="email"
-        style="margin-left:60px;"
-        required
-      />
-
+      <form>
+        <!-- <label for="officialName"><b>Name:</b></label>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          id="officialName"
+          style="margin-left:60px;"
+          required
+        />
+        <span class="br"></span> -->
+        <label for="email"><b>Email:</b></label>
+        <input
+          type="text"
+          placeholder="Enter Email"
+          id="email-of-members"
+          style="margin-left:60px; padding: 2px;"
+          required
+        />
+        <!-- <span class="br"></span> -->
+        <!-- <label for="officeDept"><b>Office/Dept:</b></label>
+          <input
+          type="text"
+          placeholder="Enter Office/Dept"
+          id="officeDept"
+          style="margin-left:15px;"
+          required
+        />
+        <span class="br"></span> -->
+        <!-- <label for="group"><b>Doc Name:</b></label>
+        <input
+          type="text"
+          placeholder="Enter Name of Document"
+          id="group"
+          style="margin-left:25px;"
+          required
+        /> -->
+      </form>
+        
       <div id="add-member" onclick="addMember()">Add</div>
       New data is added at the top of table after pressing the add button.
       Following is just a sample table. Table Heads may be added or reduced.
-      <table id="share-table">
+      <table id="share-table-new">
         <!-- comment %} <thead>
            <tr>
             <td>Official Name</td>
@@ -604,8 +723,15 @@
       </table>
     </div>
 
-    <div id="footer" style="z-index: 50;">
-      <p>&copy; 2019. CoverDrive Online document storage utility</p>
+    <div id="footer">
+      <p>
+        <span style="position: absolute; left: 5px;">
+          &copy; 2019. ShareDocs Word Editor,</span
+        >
+        <span style="position: absolute; right: 15px;">
+          Works best with Google Chrome
+        </span>
+      </p>
     </div>
   </body>
 </body>

@@ -45,6 +45,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
 
     <link
       type="text/css"
@@ -75,24 +76,26 @@
     </div>
 
     <div class="bg-img">
-      <div class="hero-text top">
-        <p>Sharing documents made easy</p>
-      </div>
+      <div id="identity">
+        <div class="hero-text top">
+          Sharing documents made easy
+        </div>
 
-      <div class="hero-text logo">
-        <p>Sign up</p>
-      </div>
+        <div class="hero-text logo">
+          ShareDocs
+        </div>
 
-      <div class="logo-icon">
-        <img
-          height="160px"
-          width="216px "
-          src="/public/assets/projectLogo.png"
-        />
+        <div class="logo-icon">
+          <img
+            height="160px"
+            width="216px"
+            src="/public/assets/projectLogo.png"
+          />
+        </div>
       </div>
 
       <form
-        style=" margin-top:80px; margin-right:80px;"
+        style=" margin-top:80px; margin-right:20px;"
         method="POST"
         action="/signup"
         class="container"
@@ -109,15 +112,15 @@
         <label
           for="email"
           style="text-align: center; font-family: 'Zilla Slab', sans-serif; font-size: 18px;"
-          ><b>Email</b></label
-        >
-        <input type="text" name="username" placeholder="username" />
+          ><b>Email</b>
+        </label>
+        <input type="email" name="username" placeholder="username" />
 
         <label
           for="psw"
           style="text-align: center; font-family: 'Zilla Slab', sans-serif; font-size: 18px;"
-          ><b>Password</b></label
-        >
+          ><b>Password</b>
+        </label>
         <input type="password" name="password" placeholder="password" />
 
         <button
@@ -131,7 +134,7 @@
     </div>
 
     <div class="footer">
-      <table width="80%">
+      <table width="80%" style="justify-content: center;">
         <tr>
           <th>Header1</th>
           <th>Header1</th>

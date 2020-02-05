@@ -31,10 +31,12 @@ var previousLockIndex = 0;
 
 function styleViewFromPanel(id) {
   document.getElementById(id).style.fontSize = 20;
-  document.getElementById(id).style.backgroundColor = "#388e3c";
-  document.getElementById(id).style.borderRadius = "20px";
-  document.getElementById(id).style.border = "2px solid white";
-  document.getElementById(id).style.paddingLeft = "15px";
+  document.getElementById(id).style.backgroundColor = "#e6e6e6";
+  document.getElementById(id).style.borderRadius = "0 20px 20px 0";
+  document.getElementById(id).style.border = "2px solid #e6e6e6";
+  document.getElementById(id).style.borderLeft = "2px solid transparent";
+  document.getElementById(id).style.paddingLeft = "23px";
+  document.getElementById(id).style.marginRight = "5px";
 }
 
 function viewFromPanel(b) {
@@ -126,6 +128,17 @@ function viewFromPanel(b) {
       // document.getElementById("label-content-recycle-bin").style.paddingLeft = "15px";
       previousLockIndex = 7;
       break;
+    case 8:
+      document.getElementById("share-selection-pane").style.visibility =
+        "visible";
+      styleViewFromPanel("label-add-members");
+      // document.getElementById("label-content-recycle-bin").style.fontSize = 24;
+      // document.getElementById("label-content-recycle-bin").style.backgroundColor = "#388e3c";
+      // document.getElementById("label-content-recycle-bin").style.borderRadius = "20px";
+      // document.getElementById("label-content-recycle-bin").style.border = "2px solid white";
+      // document.getElementById("label-content-recycle-bin").style.paddingLeft = "15px";
+      previousLockIndex = 8;
+      break;
     default:
       previousLockIndex = 99;
   }
@@ -178,6 +191,12 @@ function clearViewFromPanel(c) {
       document.getElementById("label-content-recycle-bin").style = "intial";
       previousLockIndex = 7;
       break;
+    case 8:
+      document.getElementById("share-selection-pane").style.visibility =
+        "hidden";
+      document.getElementById("label-add-members").style = "intial";
+      previousLockIndex = 8;
+      break;
     default:
       previousLockIndex = 99;
   }
@@ -222,6 +241,10 @@ function onContent(a) {
           "label-content-recycle-bin"
         ).style.fontSize = 20;
         previousHoverIndex = 7;
+        break;
+      case 8:
+        document.getElementById("label-add-members").style.fontSize = 20;
+        previousHoverIndex = 8;
         break;
       default:
         previousHoverIndex = 99;
@@ -268,6 +291,12 @@ function outsideContent(a) {
         ).style.fontSize = 16;
         previousHoverIndex = 7;
         break;
+      case 8:
+        document.getElementById(
+          "label-add-members"
+        ).style.fontSize = 16;
+        previousHoverIndex = 8;
+        break;
       default:
         previousHoverIndex = 0;
         console.log("Process has begun");
@@ -291,6 +320,26 @@ function viewSelectionPane() {
 function hideSelectionPane() {
   document.getElementById("share-selection-pane").style.visibility = "hidden";
   counterSelectionPane = counterSelectionPane + 1;
+  viewFromPanel(2);
+}
+
+var counterCreateGroupPane = 0;
+
+function viewCreateGroupPane() {
+  if (counterSelectionPane % 2 == 0) {
+    document.getElementById("content-create-group").style.visibility =
+      "visible";
+    // alert("clicked");
+  } else {
+    document.getElementById("content-create-group").style.visibility = "hidden";
+  }
+  counterCreateGroupPane = counterCreateGroupPane + 1;
+}
+
+function hideCreateGroupPane() {
+  document.getElementById("content-create-group").style.visibility = "hidden";
+  counterCreateGroupPane = counterCreateGroupPane + 1;
+  viewFromPanel(2);
 }
 
 function addMember() {
@@ -334,27 +383,99 @@ function addMember() {
   // var name = document.getElementById("officialName").value;
   // var group = document.getElementById("group").value;
   // var officeDept = document.getElementById("officeDept").value;
-  // var email = document.getElementById("email").value;
+  var email = document.getElementById("email-of-members").value;
 
-  var table = document.getElementById("share-table");
-  // var insPosTable = /*table.rows.length - */ 1; //Last Row is the Footer
-  // var rowEntry = table.insertRow(insPosTable);
-  // rowEntry.insertCell(0).innerHTML = tableEntries[0].officialName;
+  var table = document.getElementById("share-table-new");
+  var insPosTable = table.rows.length; //Last Row is the Footer
+  var rowEntry = table.insertRow(insPosTable);
+  rowEntry.insertCell(0).innerHTML = tableEntries[0].officialName;
   // rowEntry.insertCell(1).innerHTML = tableEntries[];
   // rowEntry.insertCell(2).innerHTML = officeDept;
   // rowEntry.insertCell(3).innerHTML = email;
-  for (var i = 0; i < 55; ++i) {
-    table.innerHTML +=
-      "<tr><td>" +
-      tableEntries[i % 4].officialName +
-      "</td><td>" +
-      tableEntries[i % 4].group +
-      "</td><td>" +
-      tableEntries[i % 4].officeDept +
-      "</td><td>" +
-      tableEntries[i % 4].email +
-      "</td></tr>";
-  }
+
+
+  // for (var i = 0; i < 55; ++i) {
+  //   table.innerHTML +=
+  //     "<tr><td>" +
+  //     tableEntries[i % 4].officialName +
+  //     "</td><td>" +
+  //     tableEntries[i % 4].group +
+  //     "</td><td>" +
+  //     tableEntries[i % 4].officeDept +
+  //     "</td><td>" +
+  //     tableEntries[i % 4].email +
+  //     "</td></tr>";
+  // }
+  var memberCounter = document.createTextNode(table.rows.length);
+  document.getElementById("memberCounter").appendChild(" " + memberCounter);
+}
+
+function addGroupMember() {
+  var tableEntries = [{
+      officialName: "Siddhartha",
+      group: "DTU",
+      officeDept: "FrontEnd",
+      email: "siddharthamaster4@gmail.com"
+    },
+    {
+      officialName: "Simarpreet Singh",
+      group: "DTU",
+      officeDept: "BackEnd",
+      email: "siddharthamaster4@gmail.com"
+    },
+    {
+      officialName: "Siddhant Jain",
+      group: "DTU",
+      officeDept: "FrontEnd",
+      email: "siddharthamaster4@gmail.com"
+    },
+    {
+      officialName: "Yogesh Narang",
+      group: "DTU",
+      officeDept: "FrontEnd",
+      email: "siddharthamaster4@gmail.com"
+    },
+    {
+      officialName: "Siddhartha3",
+      group: "DTU",
+      officeDept: "FrontEnd",
+      email: "siddharthamaster4@gmail.com"
+    }
+  ];
+
+  // var para = document.createElement("P");
+  // var text = document.createTextNode("Addition button worked successfully");
+  // para.appendChild(text);
+  // document.getElementById("share-selection-pane").appendChild(text);
+
+  // var name = document.getElementById("officialName").value;
+  // var group = document.getElementById("group").value;
+  // var officeDept = document.getElementById("officeDept").value;
+  var email = document.getElementById("email-for-group").value;
+
+  var table = document.getElementById("group-members-table-new");
+  var insPosTable = table.rows.length; //Last Row is the Footer
+  var rowEntry = table.insertRow(insPosTable);
+  rowEntry.insertCell(0).innerHTML = tableEntries[0].email;
+  // rowEntry.insertCell(1).innerHTML = tableEntries[];
+  // rowEntry.insertCell(2).innerHTML = officeDept;
+  // rowEntry.insertCell(3).innerHTML = email;
+
+
+  // for (var i = 0; i < 55; ++i) {
+  //   table.innerHTML +=
+  //     "<tr><td>" +
+  //     tableEntries[i % 4].officialName +
+  //     "</td><td>" +
+  //     tableEntries[i % 4].group +
+  //     "</td><td>" +
+  //     tableEntries[i % 4].officeDept +
+  //     "</td><td>" +
+  //     tableEntries[i % 4].email +
+  //     "</td></tr>";
+  // }
+
+
   var memberCounter = document.createTextNode(table.rows.length);
   document.getElementById("memberCounter").appendChild(" " + memberCounter);
 }

@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <div id="header">
+    <div id="header" style="z-index: 50;">
       <div class="logo-icon">
         <img
           src="../public/assets/icons_sheets/logo.png"
@@ -35,16 +35,22 @@
       <div class="logo-text">ShareDocs</div>
 
       <div id="utility" style="float: right;">
-        <div class="download-doc">
+        <div class="download-doc" style="margin: 0;">
           <div class="icon">
             <img
-              src="../public/assets/icons_sheets/download.svg"
+              src="../public/assets/icons_sheets/logout.png"
               color="white"
-              width="28px"
+              width="24px"
               draggable="false"
             />
           </div>
-          <div class="text">Download</div>
+          <div class="text">
+            <a
+              href="/logout"
+              style="color: #2e7d32; font-family: 'Patua One', cursive; text-decoration: none;"
+              >Logout!</a
+            >
+          </div>
         </div>
 
         <div class="print-doc">
@@ -63,15 +69,15 @@
     </div>
 
     <div id="menu">
-      <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
-      ></span>
+      <!-- <span
+        style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px;"
+      ></span> -->
 
       <div class="new">
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/new.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -82,7 +88,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/save.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -93,7 +99,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/open.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -101,26 +107,26 @@
       </div>
 
       <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+        style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px; border-radius: 1px;"
       ></span>
 
       <!-- <div class="cut">
         <div class="icon">
-          <img src="../public/assets/icons_sheets/cut_alt.png" width="43px" />
+          <img src="../public/assets/icons_sheets/cut_alt.png" width="35px" />
         </div>
         <div class="text">Cut</div>
       </div>
 
       <div class="copy">
         <div class="icon">
-          <img src="../public/assets/icons_sheets/copy_alt.png" width="43px" />
+          <img src="../public/assets/icons_sheets/copy_alt.png" width="35px" />
         </div>
         <div class="text">Copy</div>
       </div>
 
       <div class="paste">
         <div class="icon">
-          <img src="../public/assets/icons_sheets/paste.png" width="43px" />
+          <img src="../public/assets/icons_sheets/paste.png" width="35px" />
         </div>
         <div class="text">Paste</div>
       </div> -->
@@ -129,7 +135,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/undo.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -140,7 +146,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/redo.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -148,14 +154,14 @@
       </div>
 
       <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+        style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px;"
       ></span>
 
       <div class="text-format">
         <div class="icon" onclick="viewPanel()">
           <img
             src="../public/assets/icons_sheets/text-format.png"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -166,7 +172,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/image.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -174,14 +180,14 @@
       </div>
 
       <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+        style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px;"
       ></span>
 
       <div class="format-cell">
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/table.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -192,7 +198,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/function.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -203,7 +209,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/sort.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -211,14 +217,14 @@
       </div>
 
       <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+        style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px;"
       ></span>
 
       <div class="graph">
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/graph.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -229,7 +235,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/pie-chart.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -237,14 +243,14 @@
       </div>
 
       <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
+        style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px;"
       ></span>
 
       <div class="new-sheet">
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/new-sheet.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -255,7 +261,7 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/find.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
@@ -266,16 +272,12 @@
         <div class="icon">
           <img
             src="../public/assets/icons_sheets/access.svg"
-            width="43px"
+            width="35px"
             draggable="false"
           />
         </div>
         <!-- <div class="text">Access</div> -->
       </div>
-
-      <span
-        style="width: 0px; height: 43px; border: 1px solid #dddddd; margin: 7px 10px 0 10px;"
-      ></span>
     </div>
 
     <div id="panel">
@@ -678,8 +680,15 @@
       </div>
     </div>
 
-    <div id="footer">
-      <p>&copy; 2019. ShareDocs Sheets Editor</p>
+    <div id="footer" style="z-index: 50;">
+      <p>
+        <span style="position: absolute; left: 5px;">
+          &copy; 2019. ShareDocs Word Editor,</span
+        >
+        <span style="position: absolute; right: 15px;">
+          Works best with Google Chrome
+        </span>
+      </p>
     </div>
   </body>
 </html>
