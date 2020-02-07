@@ -396,7 +396,21 @@
                 </td>
                 <td style="width: 50%;text-align: center;">
                   <% if(user_name==doc_[i].created_by) { %>
-                    <a href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;">&#x274C</a>
+                    <a id="myAnchor" href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;" >&#x274C</a>
+                    <script type="text/javascript">
+                      
+                      document.getElementById("myAnchor").addEventListener("click", function(event){
+                        var p;
+                        p = prompt("you sure you want to delete ? (type yes to confirm , no to reject ) : ","no");
+                        if(p==="no"){
+                            event.preventDefault();
+                           }
+                       
+                        
+
+                      });
+
+                      </script>
                   <% } %>    
                 </td>
               </tr>
