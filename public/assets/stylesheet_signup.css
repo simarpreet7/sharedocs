@@ -218,6 +218,7 @@ html {
     }
 
     /* Full-width input fields */
+    input[type=text],
     input[type=email],
     input[type=password] {
         width: 100%;
@@ -229,6 +230,7 @@ html {
         border-radius: 4px;
     }
 
+    input[type=text]:focus,
     input[type=email]:focus,
     input[type=password]:focus {
         background-color: #f5f5f5;

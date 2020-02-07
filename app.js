@@ -7,25 +7,21 @@ var express = require("express"),
   LocalStrategy = require("passport-local"),
   _document = require("./models/_document"),
   _ = require("lodash"),
- 
-  uniqueValidator = require('mongoose-unique-validator'),
- 
+  uniqueValidator = require("mongoose-unique-validator"),
   passportLocalMongoose = require("passport-local-mongoose");
 //rename issue
 //reload issue after share //i.e. you save theen share
 var app = express();
 path = require("path");
 app.use("/public", express.static("public"));
-const Swal = require('sweetalert2')
+const Swal = require("sweetalert2");
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/share", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false,
+  useFindAndModify: false
 });
-
-
 
 app.use(
   bodyParser.urlencoded({
@@ -50,10 +46,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.get("/", function (req, res) {
-
   res.render("login");
 });
-
 
 // app.post("/drive/:id", isLoggedIn, function (req, res) {
 
@@ -73,196 +67,194 @@ app.get("/", function (req, res) {
 //   res.redirect('/word/' + req.user.username+);
 // });
 
-
 app.get("/drive", isLoggedIn, function (req, res) {
-  res.redirect('/drive/' + req.user.username);
+  res.redirect("/drive/" + req.user.username);
 });
 
 app.get("/drive/:id", isLoggedIn, function (req, res) {
-
   drivemodel.find({
-    user_id: req.params.id
-  }, function (err, docs) {
-    var c = docs;
-    if (err) {
-      res.send("error1");
-    }
-    // _document.find({ _id: c[0].doc_id }, (err, docs) => {
-    //   if (err)
-    //     res.send("error2")
-    //   else {
-    //     res.render("drive", {user_name: req.params.id, doc_: docs});
-    //   }
-    // });
-    else {
-      var doca = new Array();
-
-      for (var i = 0; i < c.length; ++i) {
-        _document.find({
-          _id: c[i].doc_id
-        }, (err, docs) => {
-          doca.push(docs[0]);
-          if (doca.length == c.length) {
-            res.render("drive", {
-              user_name: req.params.id,
-              doc_: doca
-            });
-          }
-
-        });
-
-
-
+      user_id: req.params.id
+    },
+    function (err, docs) {
+      var c = docs;
+      if (err) {
+        res.send("error1");
       }
+      // _document.find({ _id: c[0].doc_id }, (err, docs) => {
+      //   if (err)
+      //     res.send("error2")
+      //   else {
+      //     res.render("drive", {user_name: req.params.id, doc_: docs});
+      //   }
+      // });
+      else {
+        var doca = new Array();
 
-
-
+        for (var i = 0; i < c.length; ++i) {
+          _document.find({
+              _id: c[i].doc_id
+            },
+            (err, docs) => {
+              doca.push(docs[0]);
+              if (doca.length == c.length) {
+                res.render("drive", {
+                  user_name: req.params.id,
+                  doc_: doca,
+                  driver: c,
+                });
+              }
+            }
+          );
+        }
+      }
     }
-  });
-
+  );
 });
-
 
 app.get("/drive/delete/:id", isLoggedIn, function (req, res) {
-
-
-
   drivemodel.deleteOne({
-    doc_id: req.params.id,
-    user_id: req.user.username
-  }, function (err) {
-    _document.deleteOne({
-      _id: req.params.id
-    }, function (err) {
-
-      res.redirect("/drive/" + req.user.username);
-
-    })
-
-  })
-
-
+      doc_id: req.params.id,
+      user_id: req.user.username
+    },
+    function (err) {
+      _document.deleteOne({
+          _id: req.params.id
+        },
+        function (err) {
+          res.redirect("/drive/" + req.user.username);
+        }
+      );
+    }
+  );
 });
 
-
-
 app.get("/sheets/:id", isLoggedIn, function (req, res) {
-
   res.render("sheets");
 });
 
 app.get("/word/:id", isLoggedIn, function (req, res) {
- 
   if (req.params.id == req.user.username) {
-    
     res.render("word", {
-      doc_text: {  name: "",
+      doc_text: {
+        name: "",
         created_by: req.params.id,
-        date: Date.now ,
+        date: Date.now,
         document_name: "untitled",
-       doc_type:"doc"},x:0,y:0,user_name:req.user.username
+        doc_type: "doc"
+      },
+      x: 0,
+      y: 0,
+      user_name: req.user.username
     });
-  } else {//unsafe code the id
+  } else {
+    //unsafe code the id
     _document.find({
-      _id: req.params.id
-    }, function (err, docs) {
-            if(req.user.username===docs[0].created_by){
-
-                drivemodel.find({doc_id: req.params.id},function(err,share){    
-                      res.render("word", {
-                        doc_text: docs[0],x:0,_share:share,y:1,user_name:req.user.username
-                      });
-                  });  
-            }  
-            else
-            {
-              drivemodel.find({doc_id: req.params.id,user_id:req.user.username},function(err,docsa){    
-                        if(docsa[0].permission==="r")
-                        {
-                          res.send(docs[0].name)
-                        }
-                        else if(docsa[0].permission==="w")
-                        {
-                          res.render("word", {
-                            doc_text: docs[0],x:0,y:0,user_name:req.user.username
-                          });  
-                        }
-                        else
-                        {
-                          drivemodel.find({doc_id: req.params.id},function(err,share){    
-                            res.render("word", {
-                              doc_text: docs[0],x:0,_share:share,y:1,user_name:req.user.username
-                            });
-                        });  
-
-                        }
-              
-              });  
-
+        _id: req.params.id
+      },
+      function (err, docs) {
+        if (req.user.username === docs[0].created_by) {
+          drivemodel.find({
+            doc_id: req.params.id
+          }, function (err, share) {
+            res.render("word", {
+              doc_text: docs[0],
+              x: 0,
+              _share: share,
+              y: 1,
+              user_name: req.user.username
+            });
+          });
+        } else {
+          drivemodel.find({
+              doc_id: req.params.id,
+              user_id: req.user.username
+            },
+            function (err, docsa) {
+              if (docsa[0].permission === "r") {
+                res.send(docs[0].name);
+              } else if (docsa[0].permission === "w") {
+                res.render("word", {
+                  doc_text: docs[0],
+                  x: 0,
+                  y: 0,
+                  user_name: req.user.username
+                });
+              } else {
+                drivemodel.find({
+                  doc_id: req.params.id
+                }, function (
+                  err,
+                  share
+                ) {
+                  res.render("word", {
+                    doc_text: docs[0],
+                    x: 0,
+                    _share: share,
+                    y: 1,
+                    user_name: req.user.username
+                  });
+                });
+              }
             }
-
-    });
-
+          );
+        }
+      }
+    );
   }
 });
 
-
 app.post("/word/:id", isLoggedIn, function (req, res) {
-
-
   if (req.user.username == req.params.id) {
-
     var new__document = new _document({
       name: req.body.fname, //doc data
       created_by: req.user.username,
-      document_name: req.body.save_fname,
+      document_name: req.body.save_fname
     });
     new__document.save(function (err) {
-
       var new_drive = new drivemodel({
         doc_id: new__document._id,
         user_id: req.user.username,
-        document_name: req.body.save_fname,
+        document_name: req.body.save_fname
         // date:Date.now,
       });
 
-
       drivemodel.findOne({
-        document_name: req.body.save_fname,
-        user_id: req.user.username
-      }, function (err, doc) { //doc exist
+          document_name: req.body.save_fname,
+          user_id: req.user.username
+        },
+        function (err, doc) {
+          //doc exist
 
-        if (_.isEmpty(doc)) {
-
-
-          new_drive.save(function (err) {
-
-            res.redirect("/drive/" + req.user.username); //saving successfull
-          });
-
-        } else {
-          _document.deleteOne({
-            _id: new_drive.doc_id
-          }, function (err) {
-            
-           
-                        res.render("word",{doc_text:{name: req.body.fname,
-                        created_by: req.params.id,
-                        date: Date.now ,
-                        document_name: req.body.save_fname,
-                       doc_type:"doc"},x:1,y:0,user_name:req.user.username});
-            //  res.send("doc already exists"); //doc already exist
-          });
-
-
+          if (_.isEmpty(doc)) {
+            new_drive.save(function (err) {
+              res.redirect("/drive/" + req.user.username); //saving successfull
+            });
+          } else {
+            _document.deleteOne({
+                _id: new_drive.doc_id
+              },
+              function (err) {
+                res.render("word", {
+                  doc_text: {
+                    name: req.body.fname,
+                    created_by: req.params.id,
+                    date: Date.now,
+                    document_name: req.body.save_fname,
+                    doc_type: "doc"
+                  },
+                  x: 1,
+                  y: 0,
+                  user_name: req.user.username
+                });
+                //  res.send("doc already exists"); //doc already exist
+              }
+            );
+          }
         }
-      });
-
-
+      );
     });
+  }
 
-  } 
-  
   // else if(req.body.etext==="dummy"){
   //   //check if user exists
   //   var new__drive = new drivemodel({
@@ -272,93 +264,100 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
   //     permission:req.body.accesspermission,
   //     //  date:Date.now,
   //   });
-    
+
   //       new__drive.save(function(err){
   //         if(err){res.send(err)}
-          
-  //         drivemodel.find({doc_id: new__drive.doc_id},function(err,share){    
+
+  //         drivemodel.find({doc_id: new__drive.doc_id},function(err,share){
   //           res.render("word", {
   //             doc_text: {name: req.body.fname,
-                                                   
+
   //               document_name: req.body.save_fname,
   //             doc_type:"doc"},x:0,_share:share,y:1
   //           });
-  //         });    
-          
-    
+  //         });
+
   //       });
   // }
-  
-   
-                              
-                                  else {
-                                    //updation with different name
+  else {
+    //updation with different name
 
+    drivemodel.findOneAndUpdate({
+        user_id: req.user.username,
+        doc_id: req.params.id
+      }, {
+        document_name: req.body.save_fname
+      }, {
+        upsert: true,
+        runValidators: true,
+        context: "query"
+      },
+      function (err, doc) {
+        if (err) {
+          res.render("word", {
+            doc_text: {
+              name: req.body.fname,
 
-                                    drivemodel.findOneAndUpdate({
-                                      user_id: req.user.username,
-                                      doc_id: req.params.id
-                                    }, {
-                                      document_name: req.body.save_fname
-                                    }, {
-                                      upsert: true,
-                                       runValidators: true, context: 'query' 
-                                    }, function (err, doc) {
-                                                  if (err) {   res.render("word",{doc_text:{name: req.body.fname,
-                                                   
-                                                    document_name: req.body.save_fname,
-                                                  doc_type:"doc"},x:1,y:0,user_name:req.user.username});}
-                                      else { // res.redirect("/drive/"+req.user.username);
-                                        _document.findOneAndUpdate({
-                                          _id: req.params.id
-                                        }, {
-                                          name: req.body.fname,
-                                          document_name: req.body.save_fname
-                                        }, {
-                                          upsert: true
-                                        }, function (err, doc) {
-                                          res.redirect("/drive/" + req.user.username);
-                                        });
-                                      }
-
-                                    });
-
-                                  }
-
-
-
-});
-
-app.post("/word/add/:id",isLoggedIn,function(req,res){
-  //checks if user exists
-  User.find({username:req.body.etext},function(err,d){
-           if(_.isEmpty(d)){return res.send("username does not exists")}
-            var new__drive = new drivemodel({
-              doc_id: req.params.id,
-              user_id: req.body.etext,
               document_name: req.body.save_fname,
-              permission:req.body.accesspermission,
-              //  date:Date.now,
-            });
-            
-                new__drive.save(function(err){
-                  if(err){res.send(err)}
-                  
-                  // drivemodel.find({doc_id: new__drive.doc_id},function(err,share){    
-                  //   res.render("word", {
-                  //     doc_text: {name: req.body.fname,
-                                                          
-                  //       document_name: req.body.save_fname,
-                  //     doc_type:"doc"},x:0,_share:share,y:1
-                  //   });
-                  // });    
-                  return res.redirect("/word/"+req.params.id)
-                  
-            
-                });
-    });             
+              doc_type: "doc"
+            },
+            x: 1,
+            y: 0,
+            user_name: req.user.username
+          });
+        } else {
+          // res.redirect("/drive/"+req.user.username);
+          _document.findOneAndUpdate({
+              _id: req.params.id
+            }, {
+              name: req.body.fname,
+              document_name: req.body.save_fname
+            }, {
+              upsert: true
+            },
+            function (err, doc) {
+              res.redirect("/drive/" + req.user.username);
+            }
+          );
+        }
+      }
+    );
+  }
 });
 
+app.post("/word/add/:id", isLoggedIn, function (req, res) {
+  //checks if user exists
+  User.find({
+    username: req.body.etext
+  }, function (err, d) {
+    if (_.isEmpty(d)) {
+      return res.send("username does not exists");
+    }
+    var new__drive = new drivemodel({
+      doc_id: req.params.id,
+      user_id: req.body.etext,
+      document_name: req.body.save_fname,
+      permission: req.body.accesspermission
+      //  date:Date.now,
+    });
+
+    new__drive.save(function (err) {
+      if (err) {
+        res.send(err);
+      }
+
+      // drivemodel.find({doc_id: new__drive.doc_id},function(err,share){
+      //   res.render("word", {
+      //     doc_text: {name: req.body.fname,
+
+      //       document_name: req.body.save_fname,
+      //     doc_type:"doc"},x:0,_share:share,y:1
+      //   });
+      // });
+      return res.redirect("/word/" + req.params.id);
+    });
+  });
+});
 
 // Auth Routes
 
@@ -368,10 +367,11 @@ app.get("/signup", function (req, res) {
 
 //handling user sign up
 app.post("/signup", function (req, res) {
-
-  User.register(new User({
+  User.register(
+    new User({
       username: req.body.username
-    }), req.body.password,
+    }),
+    req.body.password,
     function (err, user) {
       if (err) {
         console.log(err);
@@ -379,48 +379,25 @@ app.post("/signup", function (req, res) {
       } //user stragety
 
       passport.authenticate("local")(req, res, function () {
-
         var new__document = new _document({
           name: "dummy data", //doc data
           created_by: req.body.username,
-          document_name: "dummy name",
+          document_name: "dummy name"
         });
         new__document.save(function (err) {
-
           var new_drive = new drivemodel({
             doc_id: new__document._id,
             user_id: req.body.username,
-            document_name: new__document.document_name,
+            document_name: new__document.document_name
             // date:Date.now,
           });
 
           new_drive.save(function (err) {
             res.redirect("/login");
           });
-
         });
-
-
-
-
-
       }); //user sign up done
-
-
-
-
-
-
-
-
-
-
-
     } //fun below user.reg
-
-
-
-
   ); //user reg
 }); //app post
 

@@ -453,7 +453,8 @@
     }
 
     #quick-access-box {
-        width: 250px;
+        width: auto;
+        min-width: 250px;
         height: 60px;
         border: none;
         border-radius: 15px;
@@ -583,6 +584,14 @@
         padding: auto;
     }
 
+    #quick-access-box table tbody tr:first-of-type td:nth-of-type(2) {
+        padding: 10px 5px 0px;
+    }
+
+    #quick-access-box table tbody tr:nth-of-type(2) td:nth-of-type(2) {
+        padding: 0px 5px 0px;
+    }
+
     #quick-access-box table tr td a {
         height: 40px;
         border-top: none;
@@ -614,9 +623,9 @@
     }
 
     #content-create-group table {
-        width: 90%;
+        width: 95%;
         margin: auto;
-        margin-top: 50px;
+        margin-top: 30px;
         /* overflow-y: scroll; */
         padding: none;
         font-size: 18px;
@@ -699,15 +708,17 @@
         padding-left: 10px;
     }
 
-    #content table tbody tr td:nth-child(2),
+    /* #content table tbody tr td:nth-child(2),
     #content table tbody tr td:nth-child(4),
     #content table tbody tr td:nth-child(5),
     #content table tbody tr td:nth-child(6),
-    #content table tbody tr td:nth-child(7) {
+    #content table tbody tr td:nth-child(7),
+    #content table tbody tr td:nth-child(8),
+    #content table tbody tr td:nth-child(9) {
         border-left: 1px solid #aaaaaa;
         text-align: left;
         padding-left: 10px;
-    }
+    } */
 
     /* #content table tbody tr td:nth-child(5) {
         border-right: 1px solid #aaaaaa;
@@ -775,6 +786,8 @@
         /* background-color: hotpink; */
     }
 
+
+
     .br {
         display: block;
         margin-bottom: 5px;
@@ -797,10 +810,10 @@
         height: 25px;
         font-size: 16px;
         text-align: center;
-        line-height: 25px;
+        line-height: 30px;
         vertical-align: middle;
         color: white;
-        border-radius: 4px;
+        border-radius: 5px;
     }
 
     .doc-type.word {

@@ -144,7 +144,14 @@
         />
       </div>
       <div class="logo-text" style="width: auto">
-        <%= doc_text.document_name %>
+        <input
+          type="text"
+          name="docame"
+          id="docsname"
+          style="height: 30px; font-size: 20px; width:200px; margin: 4px 0 0 5px; border: 0px solid transparent; background-color: transparent; color: black;"
+          value=<%= doc_text.document_name %>
+          disabled
+        /> 
       </div>
 
       <div id="utility" style="float: right;">
@@ -538,18 +545,18 @@
             <option value="Comic Sans MS">Comic Sans MS</option>
           </select>
 
-          font size start
+          <!-- font size start -->
           <select id="fontSize" onchange="changeSize()">
-            <option value="9">8</option>
-            <option value="2">10</option>
-            <option value="3">14</option>
+            <option value="9px">8</option>
+            <option value="2px">10</option>
+            <option value="3px">14</option>
             <option value="4">18</option>
             <option value="5">24</option>
             <option value="6">36</option>
             <option value="7">48</option>
             <option value="8">72</option>
           </select>
-          font size end
+          <!-- font size end -->
           <span class="brmedium"></span>
 
           <button
@@ -663,7 +670,7 @@
         </fieldset>
       </div>
 
-      <div id="format-image-panel" style="z-index: 2;">
+      <div id="format-image-panel" style="z-index: 20;">
         <fieldset>
           <div class="panel-headings">Text Formatting</div>
           <div class="panel-headings">Text</div>
@@ -810,49 +817,49 @@
         </fieldset>
       </div>
 
-      <div id="format-text-panel-2">
+      <div id="format-text-panel-2" style="z-index: 30;">
         <div>
           Siddhant, add you functionalities of the image formatting here
           <div id="IMG"></div>
           <div>
-            <button style="z-index:5;" onclick="createImage()">
+            <button onclick="createImage()">
               Add Image.
               <!-- <img src="copy.png"/> -->
             </button>
           </div>
           <!-- <div id="Y"></div> -->
           <div>
-            <button style="z-index:5;" onclick="changeSize()">
+            <button onclick="changeSize()">
               Resize
             </button>
           </div>
           <div>
-            <button style="z-index:5;" onclick="changeBorder()">
+            <button onclick="changeBorder()">
               changeBorder
             </button>
           </div>
           <div>
-            <button style="z-index:5;" onclick="changeBorderColor()">
+            <button onclick="changeBorderColor()">
               changeBorderColor
             </button>
             <input type="color" id="get" />
           </div>
           <div>
-            <button style="z-index:5;" onclick="rotateLeft()">
+            <button onclick="rotateLeft()">
               rotateLeft
             </button>
           </div>
           <div>
-            <button style="z-index:5;" onclick="rotateRight()">
+            <button onclick="rotateRight()">
               rotateRight
           </div>
           <div>
-            <button style="z-index:5;" onclick="zoomIn()">
+            <button onclick="zoomIn()">
               zoomIn
             </button>
           </div>
           <div>
-            <button style="z-index:5;" onclick="zoomOut()">
+            <button onclick="zoomOut()">
               zoomOut
             </button>
           </div>
@@ -884,7 +891,6 @@
        
       
     <div id="share-selection-pane">
-    
       <div id="close-button"
         style="position: absolute; right: 10px; top: 10px; z-index: 12; cursor: pointer;"
         onclick="hideSelectionPane()"
@@ -947,12 +953,10 @@
         <input type="radio" id="shareable"
         name="accesspermission" value="su" onclick="storeRadioOutput(this.value)">
         <label for="contactChoice3">Super User</label>
-    
-        
-      <button id="add-member"  type="submit">Add</button>
-      <!-- onclick="addMember()" -->
-      <button id="view-existing-groups" onclick="viewGroups()">View Groups</button>
-    </form>
+        <button id="add-member"  type="submit">Add</button>
+        <!-- onclick="addMember()" -->
+        <button id="view-existing-groups" onclick="viewGroups()">View Groups</button>
+      </form>
       <span class="br"></span>
 
       Note: As of now, we haven't integrated the functionality of the groups.
@@ -973,8 +977,9 @@
           <% for(var i = 0; i < _share.length; i++) { %>
             <tr>
               <td><%= _share[i].user_id %></td>
+              
               <% if(_share[i].permission=="r"){ %>
-              <td style="text-align: center;"></tdtext-align: center;>
+                <td style="text-align: center;"></tdtext-align: center;>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
@@ -982,24 +987,24 @@
 
               <% if(_share[i].permission=="o"){ %>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
-                  <td style="text-align: center;"></tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: center;"></td>
-                <% } %> 
+                <td style="text-align: center;"></tdtext-align: center;>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;"></td>
+              <% } %> 
              
               <% if(_share[i].permission=="w"){ %>
                 <td style="text-align: center;"></tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: center;">&#x2705</tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                <% } %>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;">&#x2705</tdtext-align: center;>
+                <td style="text-align: center;"></td>
+              <% } %>
 
-                <% if(_share[i].permission=="su"){ %>
-                  <td style="text-align: center;"></tdtext-align: center;>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;"></td>
-                    <td style="text-align: center;">&#x2705</tdtext-align: center;>
-                  <% } %> 
+              <% if(_share[i].permission=="su"){ %>
+                <td style="text-align: center;"></tdtext-align: center;>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;">&#x2705</tdtext-align: center;>
+              <% } %> 
             </tr>
           <% } %>
       
@@ -1018,7 +1023,6 @@
         </span>
       </p>
     </div>
-
     <% if (x==1){ %>
     <script type="text/javascript">
       alert("<%= doc_text.document_name %> name already exist try another!");

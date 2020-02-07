@@ -3,7 +3,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
     <title>
       <% var date_Today = new Date(); %>
-      <% var newObjects = 1; %>
+      <% var newObjects = 0; %>
       <% for ( var k = 0; k  < doc_.length; k++) { %>
         <%if( (doc_[k].date.getDate() == date_Today.getDate()) && (doc_[k].date.getMonth() == date_Today.getMonth()) && (doc_[k].date.getFullYear() == date_Today.getFullYear()) ) { %>
           <% newObjects++; %>
@@ -82,7 +82,7 @@
               </td>
             </tr>
             <tr style="height: 20px;">
-              <td style="font-size: 16px; vertical-align: top;">
+              <td style="font-size: 14px; vertical-align: top;">
                  <%= doc_[i].created_by %>
               </td>
             </tr>
@@ -330,10 +330,13 @@
               <td style="width: 30px; text-align: center;">No.</td>
               <td style="width: 40px; text-align: center;"></td>
               <td style="width: auto; text-align: left; padding-left: -15px;">Document Name</td>
-              <td style="width: 300px;  text-align: left; padding-left: 10px;">Owner</td>
-              <td style="width: 80px; text-align: center;">Access</td>
-              <td style="width: 150px; text-align: center;">Date</td>
-              <td style="width: 80px;text-align: center;">
+              <td style="width: 250px; text-align: left; padding-left: 5px;">Created by</td>
+              <td style="width: 35px; text-align: center;">O</td>
+              <td style="width: 35px; text-align: center;">R</td>
+              <td style="width: 35px; text-align: center;">W</td>
+              <td style="width: 35px; text-align: center;">Su</td>
+              <td style="width: 180px; text-align: center;">Date</td>
+              <td style="width: 60px;text-align: center;">
                 <img
                   src="../public/assets/icons_drive/delete.svg"
                   style="width: 20px;"
@@ -352,16 +355,50 @@
                   <% } %>
                 </td>
                 <td style="text-align: left;" name="d_name"><a href="/word/<%= doc_[i]._id %>"><%= doc_[i].document_name %></a></td>
-                <td style="text-align: left;"><%= doc_[i].created_by %></td>
-                <td style="text-align: center;">&#x2705</td>
+                <td style="text-align: left;">
+                  <% if(user_name==doc_[i].created_by) { %> 
+                    Me
+                  <% } else { %>
+                    <%= doc_[i].created_by %>
+                  <% } %>
+                </td>
+                <% if(driver[i].permission=="r"){ %>
+                  <td style="text-align: center;"></tdtext-align: center;>
+                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: center;"></td>
+                <% } %>    
+
+                <% if(driver[i].permission=="o"){ %>
+                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                  <td style="text-align: center;"></tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: center;"></td>
+                <% } %> 
+              
+                <% if(driver[i].permission=="w"){ %>
+                  <td style="text-align: center;"></tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                <% } %>
+
+                <% if(driver[i].permission=="su"){ %>
+                  <td style="text-align: center;"></tdtext-align: center;>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: center;"></td>
+                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                <% } %> 
                 <% var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %>
                 <% var daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; %>
                 <td style="text-align: center;">
                    <%= daysOfWeek[doc_[i].date.getDay()] %>, <%= doc_[i].date.getDate() %>-<%= monthName[doc_[i].date.getMonth()] %>-<%= doc_[i].date.getFullYear() %>
                 </td>
+                <td style="width: 50%;text-align: center;">
                   <% if(user_name==doc_[i].created_by) { %>
-                      <td style="width: 50%;text-align: center;"><a href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;">&#x274C</a></div></td>
+                    <a href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;">&#x274C</a>
                   <% } %>    
+                </td>
               </tr>
             <% } %> 
             <!-- </form> -->
@@ -721,6 +758,11 @@
           </tr>
         </tfoot> -->
       </table>
+    </div>
+
+    <div id="Warning pane">
+      <p>Please type <% %> to confirm the deletion of the file named <% %>.</p>
+      <input type="text" placeholder="Search..." id="fileConfirm" required/>
     </div>
 
     <div id="footer">
