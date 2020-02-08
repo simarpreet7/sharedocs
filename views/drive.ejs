@@ -10,6 +10,7 @@
         <% } %>
       <% } %>
       MyDocs (<%= newObjects %>) - <%= user_name %>
+    
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="../public/assets/projectLogo.ico" />
@@ -362,33 +363,44 @@
                     <%= doc_[i].created_by %>
                   <% } %>
                 </td>
-                <% if(driver[i].permission=="r"){ %>
-                  <td style="text-align: center;"></tdtext-align: center;>
-                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: center;"></td>
-                <% } %>    
 
-                <% if(driver[i].permission=="o"){ %>
-                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
-                  <td style="text-align: center;"></tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: center;"></td>
-                <% } %> 
-              
-                <% if(driver[i].permission=="w"){ %>
-                  <td style="text-align: center;"></tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                <% } %>
 
-                <% if(driver[i].permission=="su"){ %>
-                  <td style="text-align: center;"></tdtext-align: center;>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: center;"></td>
-                  <td style="text-align: left;">&#x2705</tdtext-align: center;>
-                <% } %> 
+
+                 <% for(var j = 0; j < doc_.length; j++) { %>
+                          <% if(JSON.stringify(driver[j].doc_id)==JSON.stringify(doc_[i]._id)){ %>
+                          
+                              <% if(driver[j].permission=="r"){ %>
+                                <td style="text-align: center;"></tdtext-align: center;>
+                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: center;"></td>
+                              <% } %>    
+
+                              <% if(driver[j].permission=="o"){ %>
+                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                                <td style="text-align: center;"></tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: center;"></td>
+                              <% } %> 
+                            
+                              <% if(driver[j].permission=="w"){ %>
+                                <td style="text-align: center;"></tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                              <% } %>
+
+                              <% if(driver[j].permission=="su"){ %>
+                                <td style="text-align: center;"></tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                              <% } %> 
+                        <% break ;} %>     
+                <% } %>   
+
+
+
                 <% var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %>
                 <% var daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; %>
                 <td style="text-align: center;">
@@ -397,20 +409,12 @@
                 <td style="width: 50%;text-align: center;">
                   <% if(user_name==doc_[i].created_by) { %>
                     <a id="myAnchor" href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;" >&#x274C</a>
-                    <script type="text/javascript">
-                      
+                    <!-- <script>
                       document.getElementById("myAnchor").addEventListener("click", function(event){
-                        var p;
-                        p = prompt("you sure you want to delete ? (type yes to confirm , no to reject ) : ","no");
-                        if(p==="no"){
-                            event.preventDefault();
-                           }
-                       
-                        
-
+                        event.preventDefault();
+                        //multiple ids hence error
                       });
-
-                      </script>
+                      </script> -->
                   <% } %>    
                 </td>
               </tr>

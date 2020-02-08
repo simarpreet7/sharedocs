@@ -2,6 +2,7 @@ var express = require("express"),
   mongoose = require("mongoose"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
+  
   User = require("./models/user"),
   drivemodel = require("./models/drivemodel"),
   LocalStrategy = require("passport-local"),
@@ -73,42 +74,44 @@ app.get("/drive", isLoggedIn, function (req, res) {
 
 app.get("/drive/:id", isLoggedIn, function (req, res) {
   drivemodel.find({
-      user_id: req.params.id
-    },
-    function (err, docs) {
-      var c = docs;
-      if (err) {
-        res.send("error1");
-      }
-      // _document.find({ _id: c[0].doc_id }, (err, docs) => {
-      //   if (err)
-      //     res.send("error2")
-      //   else {
-      //     res.render("drive", {user_name: req.params.id, doc_: docs});
-      //   }
-      // });
-      else {
-        var doca = new Array();
+    user_id: req.params.id
+  },
+  function (err, docs) {
+    var c = docs;
+    if (err) {
+      res.send("error1");
+    }
+    // _document.find({ _id: c[0].doc_id }, (err, docs) => {
+    //   if (err)
+    //     res.send("error2")
+    //   else {
+    //     res.render("drive", {user_name: req.params.id, doc_: docs});
+    //   }
+    // });
+    else {
+      var doca = new Array();
 
-        for (var i = 0; i < c.length; ++i) {
-          _document.find({
-              _id: c[i].doc_id
-            },
-            (err, docs) => {
-              doca.push(docs[0]);
-              if (doca.length == c.length) {
-                res.render("drive", {
-                  user_name: req.params.id,
-                  doc_: doca,
-                  driver: c,
-                });
-              }
+      for (var i = 0; i < c.length; ++i) {
+        _document.find({
+            _id: c[i].doc_id
+          },
+          (err, docs) => {
+            doca.push(docs[0]);
+            if (doca.length == c.length) {
+              res.render("drive", {
+                user_name: req.params.id,
+                doc_: doca,
+                driver: c,
+              });
+              // return res.send(doca)
             }
-          );
-        }
+          }
+        );
       }
     }
-  );
+  }
+);
+   
 });
 
 app.get("/drive/delete/:id", isLoggedIn, function (req, res) {
@@ -329,32 +332,25 @@ app.post("/word/add/:id", isLoggedIn, function (req, res) {
   User.find({
     username: req.body.etext
   }, function (err, d) {
-    if (_.isEmpty(d)) {
-      return res.send("username does not exists");
-    }
-    var new__drive = new drivemodel({
-      doc_id: req.params.id,
-      user_id: req.body.etext,
-      document_name: req.body.save_fname,
-      permission: req.body.accesspermission
-      //  date:Date.now,
-    });
+        if (_.isEmpty(d)) {
+          return res.send("username does not exists");
+        }
+        var new__drive = new drivemodel({
+          doc_id: req.params.id,
+          user_id: req.body.etext,
+          document_name: req.body.ki,
+          permission: req.body.accesspermission
+          //  date:Date.now,
+        });
 
-    new__drive.save(function (err) {
-      if (err) {
-        res.send(err);
-      }
+        new__drive.save(function (err) {
+          if (err) {
+            return res.send(req.params.id+" "+req.body.etext+" "+req.body.docame+" "+req.body.accesspermission+" ");
+          }
 
-      // drivemodel.find({doc_id: new__drive.doc_id},function(err,share){
-      //   res.render("word", {
-      //     doc_text: {name: req.body.fname,
-
-      //       document_name: req.body.save_fname,
-      //     doc_type:"doc"},x:0,_share:share,y:1
-      //   });
-      // });
-      return res.redirect("/word/" + req.params.id);
-    });
+        
+          return res.redirect("/word/" + req.params.id);
+        });
   });
 });
 

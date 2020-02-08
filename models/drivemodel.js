@@ -10,6 +10,7 @@ var connectingschema = new mongoose.Schema({
     user_id:String,
     permission:{ type: String, default: "o" },
     document_name: String,
+    
 });
 connectingschema.index({ user_id: 1, document_name: 1 }, { unique: true })
 connectingschema.plugin(uniqueValidator);
