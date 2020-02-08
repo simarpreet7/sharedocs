@@ -112,20 +112,19 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
 });
 
 app.get("/drive/delete/:id", isLoggedIn, function (req, res) {
-  drivemodel.deleteOne({
-      doc_id: req.params.id,
-      user_id: req.user.username
-    },
-    function (err) {
+  
       _document.deleteOne({
           _id: req.params.id
         },
         function (err) {
-          res.redirect("/drive/" + req.user.username);
+          drivemodel.deleteMany({
+            doc_id: req.params.id
+            
+          },
+          function (err) {res.redirect("/drive/" + req.user.username);});
         }
       );
-    }
-  );
+      
 });
 
 app.get("/sheets/:id", isLoggedIn, function (req, res) {
