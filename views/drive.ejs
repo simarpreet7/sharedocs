@@ -408,17 +408,28 @@
                 </td>
                 <td style="width: 50%;text-align: center;">
                   <% if(user_name==doc_[i].created_by) { %>
-                    <a id="myAnchor" href="/drive/delete/<%= doc_[i]._id %>" style="text-decoration: none;" >&#x274C</a>
-                    <!-- <script>
-                      document.getElementById("myAnchor").addEventListener("click", function(event){
-                        event.preventDefault();
-                        //multiple ids hence error
-                      });
-                      </script> -->
+                    <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/drive/delete/<%= doc_[i]._id %>">&#x274C</a>
+                    <script type="text/javascript">
+                      document.getElementById("myAnchor-<%=i%>").addEventListener("click", function(event){
+                        var r = confirm("confirm deletion of this !");
+                        if (r == true) {
+                          ;
+                        } else {
+                          event.preventDefault();;
+                        }
+                        
+                            
+
+
+
+                          });
+                    </script>
+                    
                   <% } %>    
                 </td>
               </tr>
             <% } %> 
+          
             <!-- </form> -->
           </tbody> 
           <!--<tfoot>
