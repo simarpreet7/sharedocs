@@ -356,6 +356,24 @@ app.post("/word/add/:id", isLoggedIn, function (req, res) {
 
 // Auth Routes
 
+
+
+app.get("/word/add/:userd/delete/:id", isLoggedIn, function (req, res) {
+ 
+     drivemodel.deleteOne({user_id: req.params.userd,
+      doc_id: req.params.id},function(err){
+        if (err) {
+          return res.send(req.params.id+" "+req.body.etext+" "+req.body.docame+" "+req.body.accesspermission+" ");
+        }
+        return res.redirect("/word/" + req.params.id);
+      });
+
+       
+
+});
+
+
+
 app.get("/signup", function (req, res) {
   res.render("signup");
 });

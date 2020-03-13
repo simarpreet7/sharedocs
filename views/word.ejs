@@ -978,11 +978,12 @@
             <td style="width: 30px; text-align: center;">R</td>
             <td style="width: 30px; text-align: center;">W</td>
             <td style="width: 30px; text-align: center;">SU</td>
+            <td style="width: 30px; text-align: center;">delete</td>
           </tr>
         </thead>
         <tbody>
-          
-        
+       
+         
           <% for(var i = 0; i < _share.length; i++) { %>
             <tr>
               <td><%= _share[i].user_id %></td>
@@ -992,6 +993,7 @@
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
+                <td>                   <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
               <% } %>    
 
               <% if(_share[i].permission=="o"){ %>
@@ -1006,6 +1008,7 @@
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
                 <td style="text-align: center;"></td>
+                <td>                   <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
               <% } %>
 
               <% if(_share[i].permission=="su"){ %>
@@ -1013,10 +1016,12 @@
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
+                  <td>      <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
               <% } %> 
+             
             </tr>
           <% } %>
-      
+          
         </tbody> 
      
       </table>
