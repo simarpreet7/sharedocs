@@ -16,10 +16,7 @@ function k() {
 //   }
 //   counterContent = counterContent + 1;
 // }
-       function p(){
-                
-                 
-              }
+
 function searchQuery() {
   var text = document.getElementById("fileSearch").value;
   alert("User has searched for " + text);
