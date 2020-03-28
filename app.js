@@ -1,3 +1,4 @@
+const http=require("http");
 var express = require("express"),
   mongoose = require("mongoose"),
   passport = require("passport"),
@@ -12,7 +13,14 @@ var express = require("express"),
   passportLocalMongoose = require("passport-local-mongoose");
 //rename issue
 //reload issue after share //i.e. you save theen share
+
+
 var app = express();
+
+var socketio=require('socket.io')
+const server=http.createServer(app)
+const io=socketio(server)
+
 path = require("path");
 app.use("/public", express.static("public"));
 const Swal = require("sweetalert2");
@@ -45,6 +53,8 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+
 
 app.get("/", function (req, res) {
   res.render("login");
@@ -150,6 +160,13 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
     });
   } else {
     //unsafe code the id
+
+
+      
+
+
+
+
     _document.find({
         _id: req.params.id
       },
@@ -158,6 +175,17 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
           drivemodel.find({
             doc_id: req.params.id
           }, function (err, share) {
+            
+            io.on('connection',function(socket){
+          
+                  socket.on('boom',(data)=>{
+                    io.emit('btoc',data)
+                    
+                  })
+                
+              });
+
+
             res.render("word", {
               doc_text: docs[0],
               x: 0,
@@ -175,6 +203,19 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
               if (docsa[0].permission === "r") {
                 res.send(docs[0].name);
               } else if (docsa[0].permission === "w") {
+
+
+
+                                        io.on('connection',function(socket){
+                                  
+                                          socket.on('boom',(data)=>{
+                                            io.emit('btoc',data)
+                                            
+                                          })
+                                      });
+
+
+
                 res.render("word", {
                   doc_text: docs[0],
                   x: 0,
@@ -446,4 +487,4 @@ function isLoggedIn(req, res, next) {
   res.redirect("/login");
 }
 
-app.listen(3000);
+server.listen(3000);

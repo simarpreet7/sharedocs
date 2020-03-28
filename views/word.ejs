@@ -1,113 +1,4 @@
-<!-- <h1> This is the sectet Page!</h1>
 
-<p>You found me!</p>
- -->
-
-<!-- 
-<li><a href="/register">Sign Up</a></li>
-<li><a href="/logout">Logout!</a></li>
-<li><a href="/login">Login!</a></li> -->
-<!-- <li><a href="/logout">Logout!</a></li> -->
-<!-- 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <script type="text/javascript" src="/public/js/index.js">
-        createEditableSelect(document.forms[0].myText);
-
-    </script>
-<link href= "/public/assets/index.css" rel="stylesheet" type="text/css" />
-   
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
-
-<body>
-    <li><a href="/logout">Logout!</a></li><br>
-    <br>
-    <div id="container">
-        <fieldset >
-
-            <button class="fontStyle bold" onclick="document.execCommand('bold', false, null);" title="Bold"></button>
-          
-            <button class="fontStyle italic" onclick="document.execCommand('italic', false, null);" title="Italics"></button>
-            <button class="fontStyle underline" onclick="document.execCommand('underline', false, null);"></button>
-            <select id="input-font" class="input" onchange="changeFont (this);">
-                <option value="Arial" font="changeFont(Arial)">Arial</option>
-                <option value="Helvetica">Helvetica</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Sans serif">Sans serif</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Palatino">Palatino</option>
-                <option value="Garamond">Garamond</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-                <option value="Arial Black">Arial Black</option>
-                <option value="Tahoma">Tahoma</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-            </select>
-            <button class="fontStyle strikethrough" onclick="document.execCommand('strikethrough', false, null);">
-                <strikethrough></strikethrough>
-            </button>
-            <button class="fontStyle align-left" onclick="document.execCommand('justifyLeft', false, null);">
-                <justifyLeft></justifyLeft>
-            </button>
-            <button class="fontStyle align-center" onclick="document.execCommand('justifyCenter', false, null);">
-                <justifyCenter></justifyCenter>
-            </button>
-            <button class="fontStyle align-right" onclick="document.execCommand('justifyRight', false, null);">
-                <justifyRight></justifyRight>
-            </button>
-            <button class="fontStyle undo-apply" onclick="document.execCommand('undo', false, null);">
-                <undo></undo>
-            </button>
-            <button class="fontStyle redo-apply" onclick="document.execCommand('redo', false, null);">
-                <redo></redo>
-            </button>
-            <button class="fontStyle copy-view" onclick="viewer()">
-            </button>
-            <button class="fontStyle orderedlist" onclick="document.execCommand('insertOrderedList', false, null);">
-                <insertOrderedList></insertOrderedList>
-            </button>
-            <button class="fontStyle unorderedlist" onclick="document.execCommand('insertUnorderedList',false, null)">
-                <insertUnorderedList></insertUnorderedList>
-            </button>
-
-            <input class="color-apply" type="color" onchange="chooseColor()" id="myColor" />
-
-           
-            <select id="fontSize" onchange="changeSize()">
-                <option value="9">8</option>
-                <option value="2">10</option>
-                <option value="3">14</option>
-                <option value="4">18</option>
-                <option value="5">24</option>
-                <option value="6">36</option>
-                <option value="7">48</option>
-                <option value="8">72</option>
-            </select>
-
-      
-        </fieldset>
-        <form action="/save" method="POST">
-        <div id="editor1" contenteditable="true" name="imp"></div> 
-        <br>
-        <br>
-        <input type="text" name="fname" id="h" style="visibility:hidden">
-        
-        <button onclick="f();" type="submit" style="margin-left: 400px;height: 50px;width:50px;" >save</button>
-        </form>
-    </div>
-    <script src="/public/js/index.js"></script>
-  
-  
-</body>
-
-</html>
-  -->
 
 <html lang="en">
   <head>
@@ -125,6 +16,11 @@
             https://fonts.googleapis.com/icon?family=Roboto|Patua+One|Source+Sans+Pro|Zilla+Slab|Material+Icons|Material+Icons+Round|Material+Icons+Outlined"
       rel="stylesheet"
     />
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="/socket.io/socket.io.js"></script>
+          <script>
+          
+          </script>
     <script type="text/javascript" src="../public/js/script_word.js">
       createEditableSelect(document.forms[0].myText);
     </script>
@@ -288,26 +184,7 @@
         style="width: 0px; height: 27px; border: 1px solid #dddddd; margin: 7px 10px 0 10px; border-radius: 1px;"
       ></span>
 
-      <!-- <div class="cut">
-        <div class="icon">
-          <img src="../public/assets/icons_word/cut_alt.png" width="35px" />
-        </div>
-        <div class="text">Cut</div>
-      </div>
-
-      <div class="copy">
-        <div class="icon">
-          <img src="../public/assets/icons_word/copy_alt.png" width="35px" />
-        </div>
-        <div class="text">Copy</div>
-      </div>
-
-      <div class="paste">
-        <div class="icon">
-          <img src="../public/assets/icons_word/paste.png" width="35px" />
-        </div>
-        <div class="text">Paste</div>
-      </div> -->
+    
 
       <div class="undo">
         <div class="icon" onclick="document.execCommand('undo', false, null);"
@@ -877,14 +754,32 @@
     <div id="content">
       <div id="resize-table" onclick="resizeTable()"></div>
 
+
+
+
+
+      <!-- imp -->
       <div
         id="editor1"
         contenteditable="true"
         name="imp"
         style="outline: 0 solid transparent;height: 100%"
+        onchange="god();"
+        oninput="this.onchange();"
+        
       >
         <%- doc_text.name %>
       </div>
+      
+
+
+
+
+
+
+
+
+
     </div>
     <% if(y==1){%>
      
