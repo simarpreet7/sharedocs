@@ -567,9 +567,7 @@
         /*Attention to the details here*/
     }
 
-    #editor1 {
-        /*border: 1px solid green;*/
-        /*Inserting the values for the A4 sheet here*/
+    /* #editor1 {
         height: 842px;
         width: 595px;
         background-color: white;
@@ -582,7 +580,7 @@
         margin: 15px auto;
         border: 1px solid #bbb;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
-    }
+    } */
 
     input:focus,
     textarea:focus,

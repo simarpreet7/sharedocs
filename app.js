@@ -1,6 +1,16 @@
-const http=require("http");
-var express = require("express"),
-  mongoose = require("mongoose"),
+
+//rename issue
+//reload issue after share //i.e. you save theen share
+
+
+var express = require('express');
+	app = express(),
+	http = require('http').Server(app),
+	io = require('socket.io')(http),
+  realtimeEditor = require('realtime-editor');
+  
+
+  var mongoose = require("mongoose"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
   
@@ -11,19 +21,20 @@ var express = require("express"),
   _ = require("lodash"),
   uniqueValidator = require("mongoose-unique-validator"),
   passportLocalMongoose = require("passport-local-mongoose");
-//rename issue
-//reload issue after share //i.e. you save theen share
 
 
-var app = express();
 
-var socketio=require('socket.io')
-const server=http.createServer(app)
-const io=socketio(server)
+realtimeEditor.onSave(function (data) {
+	console.log('realtimeEditor.onSave: ', data);
+});
+
+
+
 
 path = require("path");
 app.use("/public", express.static("public"));
-const Swal = require("sweetalert2");
+
+
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/share", {
   useNewUrlParser: true,
@@ -176,14 +187,14 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
             doc_id: req.params.id
           }, function (err, share) {
             
-            io.on('connection',function(socket){
+            // io.on('connection',function(socket){
           
-                  socket.on('boom',(data)=>{
-                    io.emit('btoc',data)
+            //       socket.on('boom',(data)=>{
+            //         io.emit('btoc',data)
                     
-                  })
+            //       })
                 
-              });
+            //   });
 
 
             res.render("word", {
@@ -206,13 +217,13 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
 
 
 
-                                        io.on('connection',function(socket){
+                                      //   io.on('connection',function(socket){
                                   
-                                          socket.on('boom',(data)=>{
-                                            io.emit('btoc',data)
+                                      //     socket.on('boom',(data)=>{
+                                      //       io.emit('btoc',data)
                                             
-                                          })
-                                      });
+                                      //     })
+                                      // });
 
 
 
@@ -487,4 +498,6 @@ function isLoggedIn(req, res, next) {
   res.redirect("/login");
 }
 
-server.listen(3000);
+http.listen(3000, function () {
+	console.log('listening on :3000');
+});
