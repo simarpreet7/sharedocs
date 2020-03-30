@@ -13,6 +13,26 @@
   
 // })
 
+// document.getElementById("editor1").addEventListener("keydown")
+// {
+//   var x = document.getElementById("editor1").innerHTML;
+//   document.getElementById("h").value = x;
+// console.log(document.getElementById("h").value)
+// }
+
+
+// document.getElementById("editor1").addEventListener("click")
+// {
+//   var x = document.getElementById("editor1").innerHTML;
+//   document.getElementById("h").value = x;console.log(document.getElementById("h").value)}
+
+
+
+// document.getElementById("editor1").addEventListener("keyup")
+// {
+//   var x = document.getElementById("editor1").innerHTML;
+//   document.getElementById("h").value = x;console.log(document.getElementById("h").value)}
+
 
 
 

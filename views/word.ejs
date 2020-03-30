@@ -778,7 +778,7 @@
       <section class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp">
         <section class="mdl-card mdl-cell mdl-cell--12-col">
           <div class="realtimeWrapper">
-            <div id="editor1" class="realtimeEditor is-focused" ondragstart="return false" contenteditable="true" spellcheck="false">samm<br>wow<br>wew</div></section>
+            <div id="editor1" class="realtimeEditor is-focused" ondragstart="return false" contenteditable="true" spellcheck="false"></div></section>
       </section>
   
           
@@ -960,27 +960,27 @@
 
     <script>
 			var socket = io.connect();
-							var d=document.getElementById('editor1');
-							var r=String(d.innerHTML)
-							console.log(r)
-							var str=Array.from(r);
-							var arr=[];
-							var j=0;
-							arr[j]='';
-							for(var i=0;i<str.length;++i){
+							// var d=document.getElementById('editor1');
+							// var r=String(d.innerHTML)
+							// console.log(r)
+							// var str=Array.from(r);
+							// var arr=[];
+							// var j=0;
+							// arr[j]='';
+							// for(var i=0;i<str.length;++i){
 								
-								if(str[i]=='<'&&str[i+1]=='b'&&str[i+2]=='r'&&str[i+3]=='>'){
-								++j;
-								arr[j]='';
-								i+=3;
-								}
-								else
-								{
+							// 	if(str[i]=='<'&&str[i+1]=='b'&&str[i+2]=='r'&&str[i+3]=='>'){
+							// 	++j;
+							// 	arr[j]='';
+							// 	i+=3;
+							// 	}
+							// 	else
+							// 	{
 									
-									arr[j]+=String(str[i]);
+							// 		arr[j]+=String(str[i]);
 									
-								}
-							}
+							// 	}
+							// }
 
 						
 							var editor1 = {
@@ -988,19 +988,19 @@
 								projectId: 70,
 								room: 'project1',
 								text:[{author:String,text:String,id:String}],
-								// text: [
-								// 	{
-								// 		author: '',
-								// 		// text: arr[1],
-								// 		id: '1459856606818_16407750'
-								// 	},
-								// 	{
-								// 		author: '',
-								// 		// text: arr[2],
-								// 		id: '1459865117436_19682870'
-								// 	}
+								text: [
+									{
+										author: '',
+										text: "wewe",
+										id: '1459856606818_16407750'
+									},
+									{
+										author: '',
+										text: "sammy",
+										id: '1459865117436_19682870'
+									}
 								
-								// ],
+								],
 								custom: {
 									referenceId: 111,
 									componentId: 222
@@ -1010,15 +1010,15 @@
 
 
 
-							for(var k=0;k<=j;++k)
-							{
-									editor1.text[k]={author:"",text:arr[k],id:k}
+							// for(var k=0;k<=j;++k)
+							// {
+							// 		editor1.text[k]={author:k,text:arr[k],id:k}
 									
-							}
+							// }
 							
 						// console.log(editor1)
 
-
+//inner html not working as well as backend data to frontend not coming saving feature to be implmemeted like auto saving
 			new realtimeEditor(editor1);
 				
 		</script>

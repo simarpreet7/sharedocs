@@ -1,98 +1,52 @@
 {
-  "_from": "realtime-editor@^0.5.0",
-  "_id": "realtime-editor@0.5.0",
-  "_inBundle": false,
-  "_integrity": "sha1-YmXlTZfzgnG91RVOAv6oFm33Z64=",
-  "_location": "/realtime-editor",
-  "_nodeVersion": "4.4.4",
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/realtime-editor-0.3.0.tgz_1462549149459_0.9156533244531602"
-  },
-  "_npmUser": {
-    "name": "take",
-    "email": "take@takedesign.dk"
-  },
-  "_npmVersion": "3.8.9",
-  "_phantomChildren": {
-    "after": "0.8.2",
-    "backo2": "1.0.2",
-    "base64-arraybuffer": "0.1.5",
-    "component-bind": "1.0.0",
-    "component-inherit": "0.0.3",
-    "has-binary": "0.1.7",
-    "has-cors": "1.1.0",
-    "indexof": "0.0.1",
-    "json3": "3.3.2",
-    "mime-types": "2.1.26",
-    "object-assign": "4.1.0",
-    "object-component": "0.0.3",
-    "options": "0.0.6",
-    "parsejson": "0.0.3",
-    "parseqs": "0.0.5",
-    "parseuri": "0.0.5",
-    "to-array": "0.1.4",
-    "ultron": "1.0.2",
-    "wtf-8": "1.0.0",
-    "yeast": "0.1.2"
-  },
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "realtime-editor@^0.5.0",
-    "name": "realtime-editor",
-    "escapedName": "realtime-editor",
-    "rawSpec": "^0.5.0",
-    "saveSpec": null,
-    "fetchSpec": "^0.5.0"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/realtime-editor/-/realtime-editor-0.5.0.tgz",
-  "_shasum": "6265e54d97f38271bdd5154e02fea8166df767ae",
-  "_spec": "realtime-editor@^0.5.0",
-  "_where": "C:\\Users\\VORTON\\OneDrive\\Desktop\\govt work\\sharedocs",
+  "name": "realtime-editor",
+  "version": "0.5.0",
+  "description": "Simple collaborative textareas - unstable beta",
   "author": {
     "name": "T.A.K.E.",
     "email": "take@takedesign.dk",
     "url": "http://takedesign.dk"
   },
-  "bugs": {
-    "url": "https://github.com/takedesign/realtime-editor/issues"
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bundleDependencies": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/takedesign/realtime-editor.git"
+  },
+  "license": "Apache Version 2.0",
   "dependencies": {
     "diff-match-patch": "^1.0.0",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.4",
+    "socket.io-client": "^2.3.0"
   },
-  "deprecated": false,
-  "description": "Simple collaborative textareas - unstable beta",
   "devDependencies": {
     "jshint": "^2.9.1"
   },
-  "directories": {},
+  "_id": "realtime-editor@0.3.0",
+  "_shasum": "b7acbfd76681bc4572dcb87c031ce7fc98741ecc",
+  "_from": "realtime-editor@*",
+  "_npmVersion": "3.8.9",
+  "_nodeVersion": "4.4.4",
+  "_npmUser": {
+    "name": "take",
+    "email": "take@takedesign.dk"
+  },
   "dist": {
     "shasum": "b7acbfd76681bc4572dcb87c031ce7fc98741ecc",
     "tarball": "https://registry.npmjs.org/realtime-editor/-/realtime-editor-0.3.0.tgz"
   },
-  "homepage": "https://github.com/takedesign/realtime-editor#readme",
-  "license": "Apache Version 2.0",
-  "main": "index.js",
   "maintainers": [
     {
       "name": "take",
       "email": "take@takedesign.dk"
     }
   ],
-  "name": "realtime-editor",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/takedesign/realtime-editor.git"
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/realtime-editor-0.3.0.tgz_1462549149459_0.9156533244531602"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "version": "0.5.0"
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/realtime-editor/-/realtime-editor-0.3.0.tgz"
 }
