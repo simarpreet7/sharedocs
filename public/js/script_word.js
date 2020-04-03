@@ -52,7 +52,34 @@ function f() {
   }
 
   var x = document.getElementById("editor1").innerHTML;
-  document.getElementById("h").value = x;
+  var str=Array.from(x);
+  var stringa=[];
+   for(var i=0;i<str.length;++i){
+    if(str[i]=='<'&&str[i+1]=='d'&&str[i+2]=='i'&&str[i+3]=='v'){
+    
+      
+      while(str[i]!='>'){
+           i+=1;
+      }
+    }
+   
+      else if(str[i]=='<'&&str[i+1]=='/'&&str[i+2]=='d'&&str[i+3]=='i'&&str[i+4]=='v'){
+    
+        break;
+           
+        }
+      else
+      { 
+        stringa.push(str[i]);
+       
+        
+      }
+   } 
+   x3=stringa.join("")
+   console.log(x)
+ 
+   console.log(x3)
+  document.getElementById("h").value = x3;
   document.getElementById("saver").value = p;
 }
 

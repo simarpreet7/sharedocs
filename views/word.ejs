@@ -108,7 +108,7 @@
         <!-- <div class="text">New</div> -->
       </div>
 
-      <form method="POST">
+      <form method="POST"> 
         <div class="save">
           <button
             class="icon"
@@ -962,7 +962,7 @@
 			var creator=document.getElementById("orignal_checker2").value;
 							var d=document.getElementById('editor1');
 							var r=String(d.innerHTML)
-							console.log(r)
+					
 							var str=Array.from(r);
 							var arr=[];
 							var j=0;
@@ -981,8 +981,6 @@
 									
 								}
 							}
-           console.log(creator)
-           console.log(typeof(creator))
 							var editor1 = {
 								id: 'editor1',
 								projectId: getHash(creator+doce_name),
@@ -1008,7 +1006,7 @@
 									
 							}
 							
-						console.log(editor1)
+						// console.log(editor1)
 //inner html not working as well as backend data to frontend not coming saving feature to be implmemeted like auto saving
 //some issue in saving same copy created solved by reading documentation and changing variables
 			new realtimeEditor(editor1);
