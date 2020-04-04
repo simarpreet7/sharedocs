@@ -76,7 +76,9 @@
               <td rowspan="2" style="width: 40px; vertical-align: middle;">
                 <% if(doc_[i].doc_type == 'docs'){ %>
                   <div class="doc-type word" style="width: 30px; height: 40px; font-size: 24px; line-height: 40px; vertical-align: middle;">W</div>
-                <% } %>
+                <% } else{%>
+                  <div class="doc-type sheets" style="width: 30px; height: 40px; font-size: 24px; line-height: 40px; vertical-align: middle;">E</div>
+                  <%}%>
               </td>
               <td>
                 <a href="/word/<%= doc_[i]._id%>"><%= doc_[i].document_name %></a>
@@ -353,6 +355,8 @@
                 <td style="text-align: center;">
                   <% if(doc_[i].doc_type == 'docs'){ %>
                     <div class="doc-type word">W</div>
+                  <% } else{ %>
+                    <div class="doc-type sheets">E</div>
                   <% } %>
                 </td>
                 <td style="text-align: left;" name="d_name"><a href="/word/<%= doc_[i]._id %>"><%= doc_[i].document_name %></a></td>
@@ -370,31 +374,31 @@
                           <% if(JSON.stringify(driver[j].doc_id)==JSON.stringify(doc_[i]._id)){ %>
                           
                               <% if(driver[j].permission=="r"){ %>
-                                <td style="text-align: center;"></tdtext-align: center;>
-                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: left;">&#x2705</td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                               <% } %>    
 
                               <% if(driver[j].permission=="o"){ %>
-                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
-                                <td style="text-align: center;"></tdtext-align: center;>
+                                <td style="text-align: left;">&#x2705</td>
+                                <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                               <% } %> 
                             
                               <% if(driver[j].permission=="w"){ %>
-                                <td style="text-align: center;"></tdtext-align: center;>
                                 <td style="text-align: center;"></td>
-                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: left;">&#x2705</td>
                                 <td style="text-align: center;"></td>
                               <% } %>
 
                               <% if(driver[j].permission=="su"){ %>
-                                <td style="text-align: center;"></tdtext-align: center;>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
-                                <td style="text-align: left;">&#x2705</tdtext-align: center;>
+                                <td style="text-align: center;"></td>
+                                <td style="text-align: left;">&#x2705</td>
                               <% } %> 
                         <% break ;} %>     
                 <% } %>   
