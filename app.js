@@ -26,7 +26,7 @@ var express = require('express');
 
 realtimeEditor.onSave(function (data) {	
   console.log('realtimeEditor.onSave: ', data);
-  //saving these changes in db with corresponding user and document autosave
+  
   //document name after space error
   ///tables layout proper
   ///z-index of toolbar
