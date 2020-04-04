@@ -159,7 +159,7 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
   if (req.params.id == req.user.username) {
     res.render("word", {
       doc_text: {
-        name: "",
+        name: "new document",
         created_by: req.params.id,
         date: Date.now,
         document_name: "untitled",
