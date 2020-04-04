@@ -980,9 +980,9 @@
 									arr[j]+=String(str[i]);
 									
 								}
-							}
-              console.log(creator)
-              console.log(doce_name)
+              }
+              var loca=window.location.pathname;
+              
 							var editor1 = {
 								id: 'editor1',
 								projectId: getHash(creator+doce_name),
@@ -993,12 +993,18 @@
 										author: String,
 										text: String,
 										id: String
-									}],
+                  }],
+                
+                  
 								custom: {
 									referenceId: 111,
                   componentId: 222,
                   user_of_document:usercurrent,
-                  document_name_:doce_name
+                  document_name_:doce_name,
+                  d_id:loca,
+                  created_by:creator ,
+
+                  doc_type:"docs",
 								}
 							};
                

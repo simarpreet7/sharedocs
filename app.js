@@ -30,6 +30,26 @@ realtimeEditor.onSave(function (data) {
   //document name after space error
   ///tables layout proper
   ///z-index of toolbar
+  var x=data.custom.d_id.replace("/word/","");
+  console.log(x)
+  var data_="";
+  for(var i=0;i<data.text.length;++i){
+    data_+=data.text[i].text+"<br>";
+  }
+  _document.findOneAndUpdate({
+    _id: x
+  }, {
+    name: data_,
+    
+  }, {
+    upsert: true
+  },
+  function (err, doc) {
+
+  }
+);
+
+
 });
 
 
