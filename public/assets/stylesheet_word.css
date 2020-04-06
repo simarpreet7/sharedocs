@@ -348,72 +348,8 @@
         table-layout: fixed;
     }
 
-    table thead {
-        font-weight: bold;
-        /* background-color: #37474f; */
-        /* background-color: yellowgreen; */
-        /* background-color: steelblue;
-        color: white; */
-        background-color: white;
-        font-family: 'Varela Round', sans-serif;
-        color: black;
-        font-size: 16px;
-        text-align: left;
-    }
 
-    table thead td {
-        height: 35px;
-        text-align: left;
-        /* border-top: 2px solid #444444; */
-    }
-
-    tbody tr td {
-        padding: 5px;
-        font-size: 16px;
-        height: 35px;
-        font-family: 'Varela Round', sans-serif;
-        text-align: left;
-        /* border-top: 1px solid #aaaaaa; */
-    }
-
-    table thead {
-        font-weight: bold;
-        /* background-color: #37474f; */
-        /* background-color: yellowgreen; */
-        /* background-color: steelblue;
-        color: white; */
-        background-color: white;
-        font-family: 'Roboto', sans-serif;
-        color: black;
-        font-size: 16px;
-        text-align: left;
-    }
-
-    table thead td {
-        height: 35px;
-        text-align: left;
-        padding: 5px;
-        /* border-top: 2px solid #444444; */
-    }
-
-    table tfoot {
-        font-weight: bold;
-        color: white;
-        background-color: skyblue;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-        text-align: center;
-    }
-
-    table tbody tr:last-of-type td {
-        border-bottom: none;
-    }
-
-    table tfoot td {
-        height: 30px;
-        border-bottom: none;
-    }
-
+    /* 
     table thead td:first-of-type {
         border-top-left-radius: 10px;
     }
@@ -428,7 +364,7 @@
 
     table tfoot td:last-of-type {
         border-bottom-right-radius: 10px;
-    }
+    } */
 
     #share-selection-pane table {
         width: 90%;
@@ -436,11 +372,6 @@
         margin-top: 10px;
         padding: none;
         font-size: 18px;
-    }
-
-    #share-selection-pane thead td {
-        background-color: #0277bd;
-        color: white;
     }
 
     #footer {
@@ -474,6 +405,7 @@
         padding: 5px;
         padding-bottom: 8px;
         margin: 0;
+        z-index: 50;
         background-color: white;
         color: black;
         position: fixed;
@@ -764,5 +696,53 @@
         white-space: pre-line;
         word-wrap: normal;
         overflow: auto;
+    }
+
+    .sharing-material-table {
+        background-color: whitesmoke;
+        border: 1px solid #aaaaaa;
+        border-radius: 3px;
+        border-collapse: collapse;
+        border-spacing: 0;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19);
+        /* font-family: 'Varela Round', sans-serif; */
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
+
+    .sharing-material-table th {
+        border-top: 1px solid #aaaaaa;
+        border-bottom: 1px solid #aaaaaa;
+        /* background-color: #4CAF50; */
+        background-color: #9c27b0;
+        height: 36px;
+        color: white;
+        text-align: left;
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+
+    /* .sharing-material-table tr:nth-of-type(2) {
+          visibility: hidden;
+          This takes up space of the element block, and shows a gap.
+          
+          Whereas the diplay:none property does not take up the space of the element.
+          display: none;
+      } */
+
+    .sharing-material-table tr td:first-of-type {
+        height: 32px;
+        text-align: left;
+        text-overflow: ellipsis;
+        padding: 0px 10px;
+    }
+
+    .sharing-material-table tbody td,
+    .sharing-material-table tfoot td {
+        border: 0.1px solid #dddddd;
+        font-size: 12px;
+        /* border-top: 1px solid #aaaaaa; */
+        /* border-bottom: 1px solid #aaaaaa; */
     }
 }

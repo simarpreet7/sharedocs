@@ -1,19 +1,18 @@
-
 //rename issue
 //reload issue after share //i.e. you save theen share
 
 
 var express = require('express');
-	app = express(),
-	http = require('http').Server(app),
-	io = require('socket.io')(http),
+app = express(),
+  http = require('http').Server(app),
+  io = require('socket.io')(http),
   realtimeEditor = require('realtime-editor');
-  
 
-  var mongoose = require("mongoose"),
+
+var mongoose = require("mongoose"),
   passport = require("passport"),
   bodyParser = require("body-parser"),
-  
+
   User = require("./models/user"),
   drivemodel = require("./models/drivemodel"),
   LocalStrategy = require("passport-local"),
@@ -24,30 +23,30 @@ var express = require('express');
 
 
 
-realtimeEditor.onSave(function (data) {	
+realtimeEditor.onSave(function (data) {
   console.log('realtimeEditor.onSave: ', data);
-  
+
   //document name after space error
   ///tables layout proper
   ///z-index of toolbar
-  var x=data.custom.d_id.replace("/word/","");
+  var x = data.custom.d_id.replace("/word/", "");
   console.log(x)
-  var data_="";
-  for(var i=0;i<data.text.length;++i){
-    data_+=data.text[i].text+"<br>";
+  var data_ = "";
+  for (var i = 0; i < data.text.length; ++i) {
+    data_ += data.text[i].text + "<br>";
   }
   _document.findOneAndUpdate({
-    _id: x
-  }, {
-    name: data_,
-    
-  }, {
-    upsert: true
-  },
-  function (err, doc) {
+      _id: x
+    }, {
+      name: data_,
 
-  }
-);
+    }, {
+      upsert: true
+    },
+    function (err, doc) {
+
+    }
+  );
 
 
 });
@@ -120,60 +119,62 @@ app.get("/drive", isLoggedIn, function (req, res) {
 
 app.get("/drive/:id", isLoggedIn, function (req, res) {
   drivemodel.find({
-    user_id: req.params.id
-  },
-  function (err, docs) {
-    var c = docs;
-    if (err) {
-      res.send("error1");
-    }
-    // _document.find({ _id: c[0].doc_id }, (err, docs) => {
-    //   if (err)
-    //     res.send("error2")
-    //   else {
-    //     res.render("drive", {user_name: req.params.id, doc_: docs});
-    //   }
-    // });
-    else {
-      var doca = new Array();
+      user_id: req.params.id
+    },
+    function (err, docs) {
+      var c = docs;
+      if (err) {
+        res.send("error1");
+      }
+      // _document.find({ _id: c[0].doc_id }, (err, docs) => {
+      //   if (err)
+      //     res.send("error2")
+      //   else {
+      //     res.render("drive", {user_name: req.params.id, doc_: docs});
+      //   }
+      // });
+      else {
+        var doca = new Array();
 
-      for (var i = 0; i < c.length; ++i) {
-        _document.find({
-            _id: c[i].doc_id
-          },
-          (err, docs) => {
-            doca.push(docs[0]);
-            if (doca.length == c.length) {
-              res.render("drive", {
-                user_name: req.params.id,
-                doc_: doca,
-                driver: c,
-              });
-              // return res.send(doca)
+        for (var i = 0; i < c.length; ++i) {
+          _document.find({
+              _id: c[i].doc_id
+            },
+            (err, docs) => {
+              doca.push(docs[0]);
+              if (doca.length == c.length) {
+                res.render("drive", {
+                  user_name: req.params.id,
+                  doc_: doca,
+                  driver: c,
+                });
+                // return res.send(doca)
+              }
             }
-          }
-        );
+          );
+        }
       }
     }
-  }
-);
-   
+  );
+
 });
 
 app.get("/drive/delete/:id", isLoggedIn, function (req, res) {
-  
-      _document.deleteOne({
-          _id: req.params.id
+
+  _document.deleteOne({
+      _id: req.params.id
+    },
+    function (err) {
+      drivemodel.deleteMany({
+          doc_id: req.params.id
+
         },
         function (err) {
-          drivemodel.deleteMany({
-            doc_id: req.params.id
-            
-          },
-          function (err) {res.redirect("/drive/" + req.user.username);});
-        }
-      );
-      
+          res.redirect("/drive/" + req.user.username);
+        });
+    }
+  );
+
 });
 
 app.get("/sheets/:id", isLoggedIn, function (req, res) {
@@ -198,10 +199,12 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
     //unsafe code the id
 
 
-      
 
 
 
+    //d.find(dr())
+    //dr.fing(f1())
+    //f1(){res.redner(d var)}
 
     _document.find({
         _id: req.params.id
@@ -211,14 +214,14 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
           drivemodel.find({
             doc_id: req.params.id
           }, function (err, share) {
-            
+
             // io.on('connection',function(socket){
-          
+
             //       socket.on('boom',(data)=>{
             //         io.emit('btoc',data)
-                    
+
             //       })
-                
+
             //   });
 
 
@@ -242,13 +245,13 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
 
 
 
-                                      //   io.on('connection',function(socket){
-                                  
-                                      //     socket.on('boom',(data)=>{
-                                      //       io.emit('btoc',data)
-                                            
-                                      //     })
-                                      // });
+                //   io.on('connection',function(socket){
+
+                //     socket.on('boom',(data)=>{
+                //       io.emit('btoc',data)
+
+                //     })
+                // });
 
 
 
@@ -409,25 +412,25 @@ app.post("/word/add/:id", isLoggedIn, function (req, res) {
   User.find({
     username: req.body.etext
   }, function (err, d) {
-        if (_.isEmpty(d)) {
-          return res.send("username does not exists");
-        }
-        var new__drive = new drivemodel({
-          doc_id: req.params.id,
-          user_id: req.body.etext,
-          document_name: req.body.ki,
-          permission: req.body.accesspermission
-          //  date:Date.now,
-        });
+    if (_.isEmpty(d)) {
+      return res.send("username does not exists");
+    }
+    var new__drive = new drivemodel({
+      doc_id: req.params.id,
+      user_id: req.body.etext,
+      document_name: req.body.ki,
+      permission: req.body.accesspermission
+      //  date:Date.now,
+    });
 
-        new__drive.save(function (err) {
-          if (err) {
-            return res.send(req.params.id+" "+req.body.etext+" "+req.body.docame+" "+req.body.accesspermission+" ");
-          }
+    new__drive.save(function (err) {
+      if (err) {
+        return res.send(req.params.id + " " + req.body.etext + " " + req.body.docame + " " + req.body.accesspermission + " ");
+      }
 
-        
-          return res.redirect("/word/" + req.params.id);
-        });
+
+      return res.redirect("/word/" + req.params.id);
+    });
   });
 });
 
@@ -436,16 +439,18 @@ app.post("/word/add/:id", isLoggedIn, function (req, res) {
 
 
 app.get("/word/add/:userd/delete/:id", isLoggedIn, function (req, res) {
- 
-     drivemodel.deleteOne({user_id: req.params.userd,
-      doc_id: req.params.id},function(err){
-        if (err) {
-          return res.send(req.params.id+" "+req.body.etext+" "+req.body.docame+" "+req.body.accesspermission+" ");
-        }
-        return res.redirect("/word/" + req.params.id);
-      });
 
-       
+  drivemodel.deleteOne({
+    user_id: req.params.userd,
+    doc_id: req.params.id
+  }, function (err) {
+    if (err) {
+      return res.send(req.params.id + " " + req.body.etext + " " + req.body.docame + " " + req.body.accesspermission + " ");
+    }
+    return res.redirect("/word/" + req.params.id);
+  });
+
+
 
 });
 
@@ -524,5 +529,5 @@ function isLoggedIn(req, res, next) {
 }
 
 http.listen(3000, function () {
-	console.log('listening on :3000');
+  console.log('listening on :3000');
 });

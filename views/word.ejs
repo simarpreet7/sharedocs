@@ -47,8 +47,8 @@
           type="text"
           name="docame"
           id="docsname"
-          style="height: 30px; font-size: 20px; width:200px; margin: 4px 0 0 5px; border: 0px solid transparent; background-color: transparent; color: black;"
-          value="<%= doc_text.document_name %>"
+          style="height: 30px; font-size: 20px; color: #1565c0; font-family: 'Patua One', cursive; width:200px; margin: 4px 0 0 5px; border: 0px solid transparent; background-color: transparent; color: black;"
+          value="<%= doc_text.document_name %>.doc"
           
         /> 
       </div>
@@ -773,7 +773,7 @@
       >
         <%- doc_text.name %>
       </div> -->
-      <section class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp">
+      <section class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp" style="z-index: 0;">
         <section class="mdl-card mdl-cell mdl-cell--12-col">
           <div class="realtimeWrapper">
             <div id="editor1" class="realtimeEditor is-focused" ondragstart="return false" contenteditable="true" spellcheck="false"><%- doc_text.name %></div></section>
@@ -868,18 +868,16 @@
         <button id="view-existing-groups" onclick="viewGroups()">View Groups</button>
       </form>
       <span class="br"></span>
-      Note: As of now, we haven't integrated the functionality of the groups.
-      User needs to write the name of the sharee and can be done using
-      <table id="share-table-new">
+      <table id="share-table-new" class="sharing-material-table">
         <thead>
-           <tr>
-            <td style="width: auto; padding-left: 10px;">Email</td>
-            <td style="width: 30px; text-align: center;">O</td>
-            <td style="width: 30px; text-align: center;">R</td>
-            <td style="width: 30px; text-align: center;">W</td>
-            <td style="width: 30px; text-align: center;">SU</td>
-            <td style="width: 30px; text-align: center;">delete</td>
-          </tr>
+          <th style="width: auto; padding-left: 10px;">Email</th>
+          <th style="width: 30px; text-align: center;">O</th>
+          <th style="width: 30px; text-align: center;">R</th>
+          <th style="width: 30px; text-align: center;">W</th>
+          <th style="width: 30px; text-align: center;">SU</th>
+          <th style="width: 30px; text-align: center;">
+            <img src="../public/assets/icons_word/delete.png" style="width: 20px; height: 20px"/>
+          </th>
         </thead>
         <tbody>
        
@@ -893,11 +891,12 @@
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
-                <td>                   <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
+                <td style="text-align: center;">                   <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
               <% } %>    
               <% if(_share[i].permission=="o"){ %>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
                 <td style="text-align: center;"></tdtext-align: center;>
+                <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
               <% } %> 
@@ -907,14 +906,14 @@
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
                 <td style="text-align: center;"></td>
-                <td>                   <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
+                <td style="text-align: center;">                   <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
               <% } %>
               <% if(_share[i].permission=="su"){ %>
                 <td style="text-align: center;"></tdtext-align: center;>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;"></td>
                 <td style="text-align: center;">&#x2705</tdtext-align: center;>
-                  <td>      <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
+                  <td style="text-align: center;">      <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/word/add/<%= _share[i].user_id %>/delete/<%= doc_text._id %>">&#x274C</a></td>
               <% } %> 
              
             </tr>
