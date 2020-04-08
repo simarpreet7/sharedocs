@@ -96,15 +96,22 @@
       style="width: 0px; height: 27px; border: 1px solid white; margin: 7px 5px 0 5px; border-radius: 1px;"
     ></span>
       <div class="new">
-        <div class="icon"onmouseover="viewPopup('new-popup')"
-        onmouseout="hidePopup('new-popup')">
-        <span class="popuptext" id="new-popup">New</span>
+        <button
+        class="icon"
+        onclick="downloading();"
+     
+        style="background-color: white;border:0px;"
+        onmouseover="viewPopup('new-popup')"
+        onmouseout="hidePopup('new-popup')"
+      >
+    
+        <span class="popuptext" id="new-popup">download</span>
           <img
             src="../public/assets/icons_word/new.svg"
             width="35px"
             draggable="false"
           />
-        </div>
+        </button>
         <!-- <div class="text">New</div> -->
       </div>
 

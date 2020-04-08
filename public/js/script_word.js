@@ -35,7 +35,43 @@
 
 
 
+function downloading(){
+  var x = document.getElementById("editor1").innerHTML;
+  var str=Array.from(x);
+  var stringa=[];
+   for(var i=0;i<str.length;++i){
+    if(str[i]=='<'&&str[i+1]=='d'&&str[i+2]=='i'&&str[i+3]=='v'){
+    
+      
+      while(str[i]!='>'){
+           i+=1;
+      }
+    }
+   
+      else if(str[i]=='<'&&str[i+1]=='/'&&str[i+2]=='d'&&str[i+3]=='i'&&str[i+4]=='v'){
+    
+        break;
+           
+        }
+      else
+      { 
+        stringa.push(str[i]);
+       
+        
+      }
+   } 
+   x3=stringa.join("")
+ 
 
+
+  var a = document.body.appendChild(
+    document.createElement("a")
+);
+a.download = document.getElementById("saver").value+".html";
+a.href = "data:text/html," + x3;
+a.innerHTML = "";
+
+}
 
 
 function f() {
