@@ -39,7 +39,7 @@ realtimeEditor.onSave(function (data) {
       _id: x
     }, {
       name: data_,
-
+      mdate:new Date()
     }, {
       upsert: true
     },
@@ -143,9 +143,10 @@ app.get("/drive/:id", isLoggedIn, function (req, res) {
             (err, docs) => {
               doca.push(docs[0]);
               if (doca.length == c.length) {
+                const sorteddoca = doca.slice().sort((a, b) => b.mdate - a.mdate)
                 res.render("drive", {
                   user_name: req.params.id,
-                  doc_: doca,
+                  doc_: sorteddoca,
                   driver: c,
                 });
                 // return res.send(doca)
@@ -187,7 +188,7 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
       doc_text: {
         name: "new document",
         created_by: req.params.id,
-        date: Date.now,
+        // date: Date.now,
         document_name: "untitled",
         doc_type: "doc"
       },
@@ -240,7 +241,12 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
             },
             function (err, docsa) {
               if (docsa[0].permission === "r") {
-                res.send(docs[0].name);
+                res.render("word", {
+                  doc_text: docs[0],
+                  x: 0,
+                  y: -1,
+                  user_name: req.user.username
+                });
               } else if (docsa[0].permission === "w") {
 
 
@@ -291,6 +297,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
       name: req.body.fname, //doc data
       created_by: req.user.username,
       document_name: req.body.save_fname
+     
     });
     new__document.save(function (err) {
       var new_drive = new drivemodel({
@@ -320,7 +327,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
                   doc_text: {
                     name: req.body.fname,
                     created_by: req.params.id,
-                    date: Date.now,
+                    // date: Date.now,
                     document_name: req.body.save_fname,
                     doc_type: "doc"
                   },
@@ -393,7 +400,8 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
               _id: req.params.id
             }, {
               name: req.body.fname,
-              document_name: req.body.save_fname
+              document_name: req.body.save_fname,
+               mdate:new Date()
             }, {
               upsert: true
             },

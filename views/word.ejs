@@ -776,7 +776,13 @@
       <section class="mdl-card mdl-cell mdl-cell--12-col mdl-shadow--4dp" style="z-index: 0;">
         <section class="mdl-card mdl-cell mdl-cell--12-col">
           <div class="realtimeWrapper">
-            <div id="editor1" class="realtimeEditor is-focused" ondragstart="return false" contenteditable="true" spellcheck="false"><%- doc_text.name %></div></section>
+            <% if(y==-1){%>
+              <div id="editor1" style="pointer-events: none;" class="realtimeEditor is-focused" ondragstart="return false" contenteditable="false" spellcheck="false"><%- doc_text.name %></div></section>
+              <%}else{%>
+     
+  
+            <div id="editor1" class="realtimeEditor is-focused" ondragstart="return false" contenteditable="false" spellcheck="false"><%- doc_text.name %></div></section>
+            <%}%>
       </section>
   
           

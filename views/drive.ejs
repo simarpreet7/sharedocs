@@ -43,7 +43,13 @@
         <img src="../public/assets/icons_drive/logo.png" width="38px" />
       </div>
       <!-- <div class="logo-text" id="uname"><%= user_name %>'s Drive</div> -->
-      <div class="logo-text" id="uname"><%= user_name %> Drive</div>
+      <div class="logo-text" id="uname">
+        <% var k = 0; %>
+        <% while(user_name[k] != '@') { %>
+          <% k++; %>
+        <% } %>
+        <%= user_name.slice(0, k)%>'s Drive
+      </div>
 
       <div id="utility">
         <input type="text" placeholder="Search..." id="fileSearch" required />
@@ -72,20 +78,20 @@
           
           <table>
           <tbody>
-            <tr style="height: 40px; vertical-align: bottom;">
-              <td rowspan="2" style="width: 40px; vertical-align: middle;">
+            <tr style="height: 25px; vertical-align: bottom;">
+              <td rowspan="2" style="width: 20px; vertical-align: middle;">
                 <% if(doc_[i].doc_type == 'docs'){ %>
-                  <div class="doc-type word" style="width: 30px; height: 40px; font-size: 24px; line-height: 40px; vertical-align: middle;">W</div>
+                  <div class="doc-type word" style="width: 20px; height: 25px; font-size: 16px; line-height: 25px; vertical-align: middle;">W</div>
                 <% } else{%>
-                  <div class="doc-type sheets" style="width: 30px; height: 40px; font-size: 24px; line-height: 40px; vertical-align: middle;">E</div>
+                  <div class="doc-type sheets" style="width: 20px; height: 25px; font-size: 16px; line-height: 25px; vertical-align: middle;">E</div>
                   <%}%>
               </td>
               <td>
                 <a href="/word/<%= doc_[i]._id%>"><%= doc_[i].document_name %></a>
               </td>
             </tr>
-            <tr style="height: 20px;">
-              <td style="font-size: 14px; vertical-align: top;">
+            <tr style="height: 15px;">
+              <td style="font-size: 10px; vertical-align: top;">
                  <%= doc_[i].created_by %>
               </td>
             </tr>
@@ -122,10 +128,28 @@
               draggable="false"
           />
           <span
-            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
           ></span>
           Add Members
-      </div> -->
+        </div> -->
+        <div
+          class="panel-headings"
+          id="label-content-my-docs"
+          onmouseover="onContent(2)"
+          onmouseout="outsideContent(2)"
+          onclick="viewFromPanel(2)"
+        >
+          <img
+            src="../public/assets/icons_drive/my_docs.png"
+            width="20px"
+            style="opacity: 0.7;"
+            draggable="false"
+          />
+          <span
+            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
+          ></span>
+          My Docs
+        </div>
         <div
           class="panel-headings"
           id="label-content-create-doc"
@@ -161,24 +185,6 @@
             style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
           ></span>
           Create Sheets
-        </div>
-        <div
-          class="panel-headings"
-          id="label-content-my-docs"
-          onmouseover="onContent(2)"
-          onmouseout="outsideContent(2)"
-          onclick="viewFromPanel(2)"
-        >
-          <img
-            src="../public/assets/icons_drive/my_docs.png"
-            width="20px"
-            style="opacity: 0.7;"
-            draggable="false"
-          />
-          <span
-            style="width: 0px; height: 27px; border: 1px solid transparent; margin: 7px 5px 0 5px; border-radius: 1px;"
-          ></span>
-          My Docs
         </div>
         <!-- <div
           class="panel-headings"
@@ -333,13 +339,15 @@
               <td style="width: 30px; text-align: center;">No.</td>
               <td style="width: 40px; text-align: center;"></td>
               <td style="width: auto; text-align: left; padding-left: -15px;">Document Name</td>
-              <td style="width: 250px; text-align: left; padding-left: 5px;">Created by</td>
-              <td style="width: 35px; text-align: center;">O</td>
-              <td style="width: 35px; text-align: center;">R</td>
-              <td style="width: 35px; text-align: center;">W</td>
-              <td style="width: 35px; text-align: center;">Su</td>
-              <td style="width: 180px; text-align: center;">Date</td>
-              <td style="width: 60px;text-align: center;">
+              <td style="width: 125px; text-align: left; padding-left: 5px;">Created by</td>
+              <td style="width: 125px; text-align: left; padding-left: 5px;">modified date</td>
+              <td style="width: 125px; text-align: left; padding-left: 5px;">size</td>
+              <td style="width: 30px; text-align: center;">O</td>
+              <td style="width: 30px; text-align: center;">R</td>
+              <td style="width: 30px; text-align: center;">W</td>
+              <td style="width: 30px; text-align: center;">Su</td>
+              <td style="width: 200px; text-align: center;">Date</td>
+              <td style="width: 30px;text-align: center;">
                 <img
                   src="../public/assets/icons_drive/delete.svg"
                   style="width: 20px;"
@@ -364,24 +372,29 @@
                   <% if(user_name==doc_[i].created_by) { %> 
                     Me
                   <% } else { %>
-                    <%= doc_[i].created_by %>
+                    <% var k = 0; %>
+                    <% while(doc_[i].created_by[k] != '@') { %>
+                      <% k++; %>
+                    <% } %>
+                    <%= doc_[i].created_by.slice(0, k)%>
                   <% } %>
                 </td>
 
-
+                <td style="width: 125px; text-align: left; padding-left: 5px;"><%= doc_[i].mdate %></td>
+                <td style="width: 125px; text-align: left; padding-left: 5px;"><%= doc_[i].name.length %> B</td>
 
                  <% for(var j = 0; j < doc_.length; j++) { %>
                           <% if(JSON.stringify(driver[j].doc_id)==JSON.stringify(doc_[i]._id)){ %>
                           
                               <% if(driver[j].permission=="r"){ %>
                                 <td style="text-align: center;"></td>
-                                <td style="text-align: left;">&#x2705</td>
+                                <td style="text-align: center;">&#x2705</td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                               <% } %>    
 
                               <% if(driver[j].permission=="o"){ %>
-                                <td style="text-align: left;">&#x2705</td>
+                                <td style="text-align: center;">&#x2705</td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
@@ -390,7 +403,7 @@
                               <% if(driver[j].permission=="w"){ %>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
-                                <td style="text-align: left;">&#x2705</td>
+                                <td style="text-align: center;">&#x2705</td>
                                 <td style="text-align: center;"></td>
                               <% } %>
 
@@ -398,7 +411,7 @@
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"></td>
-                                <td style="text-align: left;">&#x2705</td>
+                                <td style="text-align: center;">&#x2705</td>
                               <% } %> 
                         <% break ;} %>     
                 <% } %>   
@@ -407,10 +420,19 @@
 
                 <% var monthName = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"] %>
                 <% var daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]; %>
+                <% function addZero(i) { %>
+                  <% if (i < 10) { %>
+                    <% i = "0"+i; %>
+                  <% } %>
+                  <% return i; %>
+                <% } %>
                 <td style="text-align: center;">
-                   <%= daysOfWeek[doc_[i].date.getDay()] %>, <%= doc_[i].date.getDate() %>-<%= monthName[doc_[i].date.getMonth()] %>-<%= doc_[i].date.getFullYear() %>
+                   <!-- <%= daysOfWeek[doc_[i].date.getDay()] %>,  -->
+                   <%= doc_[i].date.getDate() %>-<%= monthName[doc_[i].date.getMonth()] %>-<%= doc_[i].date.getFullYear() %>, 
+                   <%=addZero(doc_[i].date.getUTCHours()) %>:<%=addZero(doc_[i].date.getUTCMinutes())%>:
+                   <%=addZero(doc_[i].date.getUTCSeconds())%>.<%=addZero(doc_[i].date.getUTCMilliseconds())%> hrs
                 </td>
-                <td style="width: 50%;text-align: center;">
+                <td style="width: 50%;text-align: left;">
                   <% if(user_name==doc_[i].created_by) { %>
                     <a id="myAnchor-<%=i%>"  style="text-decoration: none;"  href="/drive/delete/<%= doc_[i]._id %>">&#x274C</a>
                     <script type="text/javascript">

@@ -54,9 +54,9 @@
 
     #header .logo-text {
         padding-left: 0px;
-        padding-top: 8px;
-        padding-bottom: 10px;
-        font-size: 32px;
+        padding-top: 12px;
+        padding-bottom: 14px;
+        font-size: 24px;
         font-family: 'Patua One', cursive;
     }
 
@@ -216,7 +216,7 @@
         height: 100%;
         /* border: 1px solid #dddddd; */
         /* min-width: 200px; */
-        width: 275px;
+        width: 220px;
     }
 
     #panel .panel-headings {
@@ -454,10 +454,10 @@
 
     #quick-access-box {
         width: auto;
-        min-width: 250px;
+        min-width: 150px;
         height: 60px;
         border: none;
-        border-radius: 15px;
+        border-radius: 10px;
         background-color: white;
         display: inline-block;
         margin-top: 13px;
@@ -467,7 +467,7 @@
     #content {
         margin-top: 154px;
         margin-bottom: 35px;
-        margin-left: 275px;
+        margin-left: 220px;
         color: black;
         padding-top: 15px;
         padding-bottom: 15px;
@@ -545,7 +545,7 @@
         margin-top: 0px;
         background-color: white;
         box-shadow: 0px 4px 4px 0px #ccc;
-        border-radius: 10px;
+        border-radius: 4px;
         table-layout: fixed;
     }
 
@@ -569,18 +569,18 @@
 
     #quick-access-box table {
         width: auto;
-        min-width: 250px;
+        min-width: 175px;
         margin-top: 0;
         margin-left: 0;
-        height: 60px;
+        /* height: 40px; */
         border: none;
-        border-radius: 15px;
+        border-radius: 10px;
         box-shadow: 0 0 0 0 transparent;
     }
 
     #quick-access-box table tr td {
         border-top: none;
-        height: 30px;
+        /* height: 30px; */
         padding: auto;
     }
 
@@ -593,11 +593,11 @@
     }
 
     #quick-access-box table tr td a {
-        height: 40px;
+        /* height: 40px; */
         border-top: none;
         padding: auto;
         text-decoration: none;
-        font-size: 24px;
+        font-size: 16px;
     }
 
     #quick-access-box table tr td a:hover {
@@ -634,7 +634,7 @@
     table tr td button,
     table tr td a {
         border: none;
-        font-size: 16px;
+        font-size: 12px;
         background-color: transparent;
         color: black;
         text-align: center;
@@ -658,8 +658,8 @@
 
     tbody tr td {
         padding: 5px;
-        font-size: 16px;
-        height: 50px;
+        font-size: 12px;
+        height: 32px;
         font-family: 'Varela Round', sans-serif;
         text-align: left;
         border-top: 1px solid #aaaaaa;
@@ -671,17 +671,28 @@
         /* background-color: yellowgreen; */
         /* background-color: steelblue;
         color: white; */
-        background-color: white;
+        /* background-color: white; */
         font-family: 'Roboto', sans-serif;
         color: black;
-        font-size: 16px;
+        /* color: white; */
+        /* background-color: lightskyblue; */
+        font-size: 14px;
         text-align: left;
     }
 
     table thead td {
-        height: 35px;
+        height: 36px;
         text-align: left;
+        text-overflow: ellipsis;
         /* border-top: 2px solid #444444; */
+    }
+
+    table thead td:first-of-type {
+        border-top-left-radius: 4px;
+    }
+
+    table thead td:last-of-type {
+        border-top-right-radius: 4px;
     }
 
     #access-level-data thead td {
@@ -751,7 +762,7 @@
     table tfoot {
         font-weight: bold;
         color: white;
-        background-color: skyblue;
+        /* background-color: #3498db; */
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
         text-align: center;
@@ -777,7 +788,7 @@
     #colour-patch {
         position: fixed;
         top: 154px;
-        left: 277px;
+        left: 222px;
         width: 100%;
         height: 125px;
         /* background-color: #43a047; */
@@ -805,15 +816,15 @@
 
     .doc-type {
         padding: auto;
-        margin: auto;
-        width: 20px;
-        height: 25px;
-        font-size: 16px;
+        /* margin: auto; */
+        width: 16px;
+        height: 20px;
+        font-size: 12px;
         text-align: center;
-        line-height: 30px;
+        line-height: 20px;
         vertical-align: middle;
         color: white;
-        border-radius: 5px;
+        border-radius: 3px;
     }
 
     .doc-type.word {

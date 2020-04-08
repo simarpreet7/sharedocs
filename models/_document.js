@@ -7,6 +7,7 @@ var shareschema = new Schema({
   name: String,
   created_by: String,
   date: { type: Date, default: Date.now },
+  mdate: { type: Date, default: Date.now },
   document_name: String,
   doc_type:{type:String,default:"docs"},
 
