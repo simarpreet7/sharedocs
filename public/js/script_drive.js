@@ -30,7 +30,7 @@ var previousLockIndex = 0;
 // var onContentSwitch = 0;
 
 function styleViewFromPanel(id) {
-  document.getElementById(id).style.fontSize = 20;
+  document.getElementById(id).style.fontSize = 16;
   document.getElementById(id).style.backgroundColor = "#e6e6e6";
   document.getElementById(id).style.borderRadius = "0 20px 20px 0";
   document.getElementById(id).style.border = "2px solid #e6e6e6";
@@ -207,55 +207,6 @@ function onContent(a) {
     outsideContent(previousHoverIndex);
     switch (a) {
       case 0:
-        document.getElementById("label-content-create-doc").style.fontSize = 20;
-        previousHoverIndex = 0;
-        break;
-      case 1:
-        document.getElementById("label-content-create-sheets").style.fontSize = 20;
-        previousHoverIndex = 1;
-        break;
-      case 2:
-        document.getElementById("label-content-my-docs").style.fontSize = 20;
-        previousHoverIndex = 2;
-        break;
-      case 3:
-        document.getElementById(
-          "label-content-create-group"
-        ).style.fontSize = 20;
-        previousHoverIndex = 3;
-        break;
-      case 4:
-        document.getElementById("label-content-my-groups").style.fontSize = 20;
-        previousHoverIndex = 4;
-        break;
-      case 5:
-        document.getElementById("label-content-recent").style.fontSize = 20;
-        previousHoverIndex = 5;
-        break;
-      case 6:
-        document.getElementById("label-content-important").style.fontSize = 20;
-        previousHoverIndex = 6;
-        break;
-      case 7:
-        document.getElementById(
-          "label-content-recycle-bin"
-        ).style.fontSize = 20;
-        previousHoverIndex = 7;
-        break;
-      case 8:
-        document.getElementById("label-add-members").style.fontSize = 20;
-        previousHoverIndex = 8;
-        break;
-      default:
-        previousHoverIndex = 99;
-    }
-  }
-}
-
-function outsideContent(a) {
-  if (a != previousLockIndex) {
-    switch (a) {
-      case 0:
         document.getElementById("label-content-create-doc").style.fontSize = 16;
         previousHoverIndex = 0;
         break;
@@ -292,9 +243,58 @@ function outsideContent(a) {
         previousHoverIndex = 7;
         break;
       case 8:
+        document.getElementById("label-add-members").style.fontSize = 16;
+        previousHoverIndex = 8;
+        break;
+      default:
+        previousHoverIndex = 99;
+    }
+  }
+}
+
+function outsideContent(a) {
+  if (a != previousLockIndex) {
+    switch (a) {
+      case 0:
+        document.getElementById("label-content-create-doc").style.fontSize = 14;
+        previousHoverIndex = 0;
+        break;
+      case 1:
+        document.getElementById("label-content-create-sheets").style.fontSize = 14;
+        previousHoverIndex = 1;
+        break;
+      case 2:
+        document.getElementById("label-content-my-docs").style.fontSize = 14;
+        previousHoverIndex = 2;
+        break;
+      case 3:
+        document.getElementById(
+          "label-content-create-group"
+        ).style.fontSize = 14;
+        previousHoverIndex = 3;
+        break;
+      case 4:
+        document.getElementById("label-content-my-groups").style.fontSize = 14;
+        previousHoverIndex = 4;
+        break;
+      case 5:
+        document.getElementById("label-content-recent").style.fontSize = 14;
+        previousHoverIndex = 5;
+        break;
+      case 6:
+        document.getElementById("label-content-important").style.fontSize = 14;
+        previousHoverIndex = 6;
+        break;
+      case 7:
+        document.getElementById(
+          "label-content-recycle-bin"
+        ).style.fontSize = 14;
+        previousHoverIndex = 7;
+        break;
+      case 8:
         document.getElementById(
           "label-add-members"
-        ).style.fontSize = 16;
+        ).style.fontSize = 14;
         previousHoverIndex = 8;
         break;
       default:

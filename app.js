@@ -30,7 +30,7 @@ realtimeEditor.onSave(function (data) {
   ///tables layout proper
   ///z-index of toolbar
   var x = data.custom.d_id.replace("/word/", "");
-  console.log(x)
+   
   var data_ = "";
   for (var i = 0; i < data.text.length; ++i) {
     data_ += data.text[i].text + "<br>";
@@ -39,7 +39,7 @@ realtimeEditor.onSave(function (data) {
       _id: x
     }, {
       name: data_,
-      mdate:new Date()
+      mdate: new Date()
     }, {
       upsert: true
     },
@@ -50,9 +50,16 @@ realtimeEditor.onSave(function (data) {
 
 
 });
+// io.on('connection', function (socket) {
+//   console.log(socket.id)
+// socket.on('disconnect', () => {
+         
+ 
+//   console.log(socket.id);
+  
 
-
-
+//  });
+// });
 
 
 path = require("path");
@@ -193,7 +200,7 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
         doc_type: "doc"
       },
       x: 0,
-      y: 0,
+      y: 0,newd:1,
       user_name: req.user.username
     });
   } else {
@@ -202,10 +209,6 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
 
 
 
-
-    //d.find(dr())
-    //dr.fing(f1())
-    //f1(){res.redner(d var)}
 
     _document.find({
         _id: req.params.id
@@ -216,21 +219,14 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
             doc_id: req.params.id
           }, function (err, share) {
 
-            // io.on('connection',function(socket){
-
-            //       socket.on('boom',(data)=>{
-            //         io.emit('btoc',data)
-
-            //       })
-
-            //   });
+        
 
 
             res.render("word", {
               doc_text: docs[0],
               x: 0,
               _share: share,
-              y: 1,
+              y: 1,newd:0,
               user_name: req.user.username
             });
           });
@@ -245,6 +241,7 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
                   doc_text: docs[0],
                   x: 0,
                   y: -1,
+                  newd:0,
                   user_name: req.user.username
                 });
               } else if (docsa[0].permission === "w") {
@@ -264,7 +261,7 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
                 res.render("word", {
                   doc_text: docs[0],
                   x: 0,
-                  y: 0,
+                  y: 0,newd:0,
                   user_name: req.user.username
                 });
               } else {
@@ -278,7 +275,7 @@ app.get("/word/:id", isLoggedIn, function (req, res) {
                     doc_text: docs[0],
                     x: 0,
                     _share: share,
-                    y: 1,
+                    y: 1,newd:0,
                     user_name: req.user.username
                   });
                 });
@@ -297,7 +294,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
       name: req.body.fname, //doc data
       created_by: req.user.username,
       document_name: req.body.save_fname
-     
+
     });
     new__document.save(function (err) {
       var new_drive = new drivemodel({
@@ -332,7 +329,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
                     doc_type: "doc"
                   },
                   x: 1,
-                  y: 0,
+                  y: 0,newd:0,
                   user_name: req.user.username
                 });
                 //  res.send("doc already exists"); //doc already exist
@@ -391,7 +388,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
               doc_type: "doc"
             },
             x: 1,
-            y: 0,
+            y: 0,newd:0,
             user_name: req.user.username
           });
         } else {
@@ -401,7 +398,7 @@ app.post("/word/:id", isLoggedIn, function (req, res) {
             }, {
               name: req.body.fname,
               document_name: req.body.save_fname,
-               mdate:new Date()
+              mdate: new Date()
             }, {
               upsert: true
             },

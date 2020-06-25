@@ -24,7 +24,7 @@ realtimeEditor.prototype.init = function () {
 	var that = this;
 
 	io.sockets.on('connection', function (socket) {
-
+		// console.log(socket.id+" connect")
 		socket.on('rtEditorSync', function (data, callback) {
 			that.syncText(data, function (res) {
 				socket.broadcast.to(data.room).emit('rtEditorBroadcast', res);
@@ -92,7 +92,8 @@ realtimeEditor.prototype.init = function () {
 				console.log('clear cursor from this:', socket.rtEditor[editor]);
 
 				socket.broadcast.to(data.room).emit('rtEditorBroadcast', {});
-			}*/			
+			}*/		
+			// console.log(socket.id+" disconnect")	
 		});
 
 	});

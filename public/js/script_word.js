@@ -6,11 +6,11 @@
 // socket.emit('boom',{change:document.getElementById("editor1").innerHTML});
 // }
 // socket.on('btoc',(data)=>{
- 
+
 //   document.getElementById("editor1").innerHTML=data.change
 
- 
-  
+
+
 // })
 
 // document.getElementById("editor1").addEventListener("keydown")
@@ -35,42 +35,45 @@
 
 
 
-function downloading(){
+var LinksCounter = -1;
+
+function downloading() {
   var x = document.getElementById("editor1").innerHTML;
-  var str=Array.from(x);
-  var stringa=[];
-   for(var i=0;i<str.length;++i){
-    if(str[i]=='<'&&str[i+1]=='d'&&str[i+2]=='i'&&str[i+3]=='v'){
-    
-      
-      while(str[i]!='>'){
-           i+=1;
+  var str = Array.from(x);
+  var stringa = [];
+  for (var i = 0; i < str.length; ++i) {
+    if (str[i] == '<' && str[i + 1] == 'd' && str[i + 2] == 'i' && str[i + 3] == 'v') {
+
+
+      while (str[i] != '>') {
+        i += 1;
       }
+    } else if (str[i] == '<' && str[i + 1] == '/' && str[i + 2] == 'd' && str[i + 3] == 'i' && str[i + 4] == 'v') {
+
+      break;
+
+    } else {
+      stringa.push(str[i]);
+
+
     }
-   
-      else if(str[i]=='<'&&str[i+1]=='/'&&str[i+2]=='d'&&str[i+3]=='i'&&str[i+4]=='v'){
-    
-        break;
-           
-        }
-      else
-      { 
-        stringa.push(str[i]);
-       
-        
-      }
-   } 
-   x3=stringa.join("")
- 
+  }
+  x3 = stringa.join("")
 
-
-  var a = document.body.appendChild(
-    document.createElement("a")
-);
-a.download = document.getElementById("saver").value+".html";
-a.href = "data:text/html," + x3;
-a.innerHTML = "";
-
+  LinksCounter++;
+  if (LinksCounter == 0) {
+    var a = document.getElementById("download-button").appendChild(
+      document.createElement("a")
+    );
+    a.download = document.getElementById("saver").value + ".html";
+    a.href = "data:text/html," + x3;
+    a.innerHTML = "Download file";
+  }
+  if (LinksCounter % 2 == 0) {
+    document.getElementById("download-button").style.visibility = "visible";
+  } else {
+    document.getElementById("download-button").style.visibility = "hidden";
+  }
 }
 
 
@@ -88,33 +91,29 @@ function f() {
   }
 
   var x = document.getElementById("editor1").innerHTML;
-  var str=Array.from(x);
-  var stringa=[];
-   for(var i=0;i<str.length;++i){
-    if(str[i]=='<'&&str[i+1]=='d'&&str[i+2]=='i'&&str[i+3]=='v'){
-    
-      
-      while(str[i]!='>'){
-           i+=1;
+  var str = Array.from(x);
+  var stringa = [];
+  for (var i = 0; i < str.length; ++i) {
+    if (str[i] == '<' && str[i + 1] == 'd' && str[i + 2] == 'i' && str[i + 3] == 'v') {
+
+
+      while (str[i] != '>') {
+        i += 1;
       }
+    } else if (str[i] == '<' && str[i + 1] == '/' && str[i + 2] == 'd' && str[i + 3] == 'i' && str[i + 4] == 'v') {
+
+      break;
+
+    } else {
+      stringa.push(str[i]);
+
+
     }
-   
-      else if(str[i]=='<'&&str[i+1]=='/'&&str[i+2]=='d'&&str[i+3]=='i'&&str[i+4]=='v'){
-    
-        break;
-           
-        }
-      else
-      { 
-        stringa.push(str[i]);
-       
-        
-      }
-   } 
-   x3=stringa.join("")
-   console.log(x)
- 
-   console.log(x3)
+  }
+  x3 = stringa.join("")
+  console.log(x)
+
+  console.log(x3)
   document.getElementById("h").value = x3;
   document.getElementById("saver").value = p;
 }
